@@ -10,7 +10,7 @@ description = "Sharing my knowledge via this blog."
   [[params.social]]
   icon = "brand-github"
   name = "Github"
-  url = "https://github.com/headintheclouduk"
+  url = "https://github.com/oli-kwski"
   [[params.social]]
   icon = "brand-linkedin"
   name = "Linkedin"

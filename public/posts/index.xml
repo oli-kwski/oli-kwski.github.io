@@ -6,28 +6,7 @@
     <description>Recent content in Posts on Head In The Cloud</description>
     <generator>Hugo</generator>
     <language>en-uk</language>
-    <lastBuildDate>Tue, 13 May 2025 21:33:59 +0100</lastBuildDate>
+    <lastBuildDate></lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Automate email notifications when adding/removing users to a group using a Logic app</title>
-      <link>http://localhost:1313/posts/la-notifications-add-remove-users-from-group/</link>
-      <pubDate>Tue, 13 May 2025 21:33:59 +0100</pubDate>
-      <guid>http://localhost:1313/posts/la-notifications-add-remove-users-from-group/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; output is not perfectly refined it displays a key value pair e.g {&amp;ldquo;email&amp;rdquo;:&amp;ldquo;&lt;a href=&#34;mailto:joe.bloggs@email.com&#34;&gt;joe.bloggs@email.com&lt;/a&gt;&amp;rdquo;} with a blank key, however, this met my desired outcome, when I have time I will refine and update this post.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h1&gt;&#xA;&lt;p&gt;You will need the following to implement this Logic app.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;A resource group or permissions to create a new resource group&lt;/li&gt;&#xA;&lt;li&gt;A storage account or permissions to create a storage account&lt;/li&gt;&#xA;&lt;li&gt;Permissions to write to the storage account&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;steps&#34;&gt;Steps&lt;/h1&gt;&#xA;&lt;p&gt;Log in to &lt;a href=&#34;https://portal.azure.com&#34;&gt;portal.azure.com&lt;/a&gt;, search for and click on &amp;lsquo;Logic app&amp;rsquo;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Creating an Enterprise App for SSO</title>
-      <link>http://localhost:1313/posts/creating-an-enterprise-app-for-sso/</link>
-      <pubDate>Tue, 29 Apr 2025 08:58:03 +0100</pubDate>
-      <guid>http://localhost:1313/posts/creating-an-enterprise-app-for-sso/</guid>
-      <description>&lt;p&gt;In this blog post I&amp;rsquo;ll walk you through the below&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Creation of a Entra ID so tick the 2nd option and then click &amp;lsquo;Create&amp;rsquo;. assiged security group.&lt;/li&gt;&#xA;&lt;li&gt;Creation of an Enterprise Application.&lt;/li&gt;&#xA;&lt;li&gt;Creation of a Logic App to automatically send emails when a user is added or removed from an EntraID security group.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;creation-of-an-entra-id-so-tick-the-2nd-option-and-then-click-create-assigned-security-group&#34;&gt;Creation of an Entra ID so tick the 2nd option and then click &amp;lsquo;Create&amp;rsquo;. assigned security group&lt;/h2&gt;&#xA;&lt;p&gt;Using groups to reduce administrative overhead is good practice. We will create an assigned security group from within Entra ID so tick the 2nd option and then click &amp;lsquo;Create&amp;rsquo;. which we will link to the Enterprise App we will create later in this post.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Deploying Azure Local 23H2 via the Azure Portal</title>
-      <link>http://localhost:1313/posts/deploying-azure-local-23h2/</link>
-      <pubDate>Mon, 24 Mar 2025 21:45:12 +0000</pubDate>
-      <guid>http://localhost:1313/posts/deploying-azure-local-23h2/</guid>
-      <description>&lt;p&gt;Recently I had the task of deploying an Azure Local 23H2 cluster and when searching for a clear &amp;ldquo;how to&amp;rdquo; stumbled across many outdated deployment guides and a rabbit warren of Microsoft Learn links so here i&amp;rsquo;m writing this for anyone like my past self who would have saved hours of time if i&amp;rsquo;d had a guide like this to read pre-deployment.&lt;/p&gt;&#xA;&lt;p&gt;In this post I am assuming that you know how to install a Windows OS and how to install firmware and drivers.&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>
