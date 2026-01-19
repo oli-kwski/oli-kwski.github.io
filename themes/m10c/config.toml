@@ -4,8 +4,8 @@
     min = "0.128.0"
 [params]
 author = "Oliver Bates"
-avatar = "/images/my_avatar_8-bit.png"
-favicon = "/images/my_avatar_8-bit.png"
+avatar = "/images/my_avatar_cropped.png"
+favicon = "/images/my_avatar_cropped.png"
 description = "Sharing my knowledge via this blog."
   [[params.social]]
   icon = "brand-github"
