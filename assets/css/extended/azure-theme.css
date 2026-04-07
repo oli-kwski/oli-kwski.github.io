@@ -1,0 +1,391 @@
+/*
+ * Azure-inspired theme for Head in the Cloud
+ * Colour palette is drawn from the Microsoft Azure brand:
+ *   Primary blue  : #0078D4
+ *   Bright cyan   : #50E6FF
+ *   Deep navy     : #002050
+ *   Surface grey  : #F3F2F1 (Fluent UI neutral)
+ *   Dark surface  : #1B1B2F
+ */
+
+/* =========================================================
+   CSS custom properties — Light mode
+   ========================================================= */
+:root {
+  /* Brand colours */
+  --azure-blue:       #0078D4;
+  --azure-blue-hover: #106EBE;
+  --azure-blue-light: #C7E0F4;
+  --azure-cyan:       #50E6FF;
+  --azure-navy:       #002050;
+  --azure-surface:    #F3F2F1;
+  --azure-border:     #D2D0CE;
+
+  /* Override PaperMod theme colours */
+  --theme:         #ffffff;
+  --entry:         #ffffff;
+  --primary:       #1a1a2e;        /* body text */
+  --secondary:     #505050;        /* muted text */
+  --border:        var(--azure-border);
+  --content:       #2c2c2c;
+
+  /* Link colours */
+  --hljs-bg:       #1e1e2e;
+}
+
+/* =========================================================
+   CSS custom properties — Dark mode
+   ========================================================= */
+.dark {
+  --theme:         #1B1B2F;
+  --entry:         #24243e;
+  --primary:       #e8e8f0;
+  --secondary:     #9999bb;
+  --border:        #3a3a5c;
+  --content:       #d0d0e8;
+  --azure-surface: #24243e;
+  --azure-border:  #3a3a5c;
+}
+
+/* =========================================================
+   Global link colour
+   ========================================================= */
+a {
+  color: var(--azure-blue);
+}
+
+a:hover {
+  color: var(--azure-blue-hover);
+}
+
+.dark a {
+  color: var(--azure-cyan);
+}
+
+.dark a:hover {
+  color: #7eedff;
+}
+
+/* =========================================================
+   Header / navigation bar — seamless with theme background
+   ========================================================= */
+.nav {
+  border-bottom: 2px solid var(--azure-blue);
+}
+
+/* Site title */
+.logo a,
+.logo a:visited {
+  color: var(--azure-blue) !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.dark .logo a,
+.dark .logo a:visited {
+  color: var(--azure-cyan) !important;
+}
+
+.logo a:hover {
+  color: var(--azure-blue-hover) !important;
+}
+
+.dark .logo a:hover {
+  color: #7eedff !important;
+}
+
+/* Nav menu links */
+#menu-btn,
+.menu a {
+  color: var(--primary) !important;
+}
+
+.menu a:hover {
+  color: var(--azure-blue) !important;
+}
+
+.dark .menu a:hover {
+  color: var(--azure-cyan) !important;
+}
+
+/* =========================================================
+   Home info / hero block
+   ========================================================= */
+.home-info .entry-content {
+  color: var(--secondary);
+}
+
+/* =========================================================
+   Post list entries
+   ========================================================= */
+.post-entry {
+  border: 1px solid var(--azure-border);
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+  border-color: var(--azure-blue);
+  box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
+}
+
+.dark .post-entry:hover {
+  border-color: var(--azure-cyan);
+  box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
+}
+
+/* =========================================================
+   Post header (title, date, reading time)
+   ========================================================= */
+.post-title a:hover {
+  color: var(--azure-blue) !important;
+}
+
+.dark .post-title a:hover {
+  color: var(--azure-cyan) !important;
+}
+
+/* Reading time & word count chips */
+.post-meta,
+.post-meta span {
+  color: var(--secondary);
+  font-size: 0.82rem;
+}
+
+/* =========================================================
+   Tags & categories
+   ========================================================= */
+.post-tags a,
+.terms-tags a {
+  background: var(--azure-blue-light);
+  color: var(--azure-navy) !important;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.post-tags a:hover,
+.terms-tags a:hover {
+  background: var(--azure-blue);
+  color: #ffffff !important;
+  border-color: var(--azure-blue);
+}
+
+.dark .post-tags a,
+.dark .terms-tags a {
+  background: rgba(80, 230, 255, 0.12);
+  color: var(--azure-cyan) !important;
+  border-color: rgba(80, 230, 255, 0.25);
+}
+
+.dark .post-tags a:hover,
+.dark .terms-tags a:hover {
+  background: rgba(80, 230, 255, 0.25);
+  color: #ffffff !important;
+  border-color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Table of Contents
+   ========================================================= */
+.toc {
+  background: var(--azure-surface);
+  border-left: 4px solid var(--azure-blue);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+.dark .toc {
+  background: #1e1e38;
+  border-left-color: var(--azure-cyan);
+}
+
+.toc details summary {
+  font-weight: 600;
+  color: var(--azure-blue);
+  cursor: pointer;
+}
+
+.dark .toc details summary {
+  color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Buttons (read more, etc.)
+   ========================================================= */
+.button,
+button.button {
+  background: var(--azure-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  transition: background 0.15s;
+}
+
+.button:hover {
+  background: var(--azure-blue-hover);
+}
+
+/* =========================================================
+   Search box
+   ========================================================= */
+#searchbox input {
+  border: 2px solid var(--azure-border);
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+#searchbox input:focus {
+  border-color: var(--azure-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+.dark #searchbox input:focus {
+  border-color: var(--azure-cyan);
+  box-shadow: 0 0 0 3px rgba(80, 230, 255, 0.15);
+}
+
+/* =========================================================
+   Code blocks — syntax highlighting wrapper
+   ========================================================= */
+.highlight pre {
+  border-radius: 6px;
+  border: 1px solid var(--azure-border);
+}
+
+.dark .highlight pre {
+  border-color: #3a3a5c;
+}
+
+/* Inline code */
+code {
+  background: var(--azure-surface);
+  color: #005a9e;
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.88em;
+}
+
+.dark code {
+  background: #1e1e38;
+  color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Blockquotes (use as info callouts)
+   ========================================================= */
+blockquote {
+  border-left: 4px solid var(--azure-blue);
+  background: var(--azure-surface);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 4px 4px 0;
+  color: var(--content);
+}
+
+.dark blockquote {
+  background: #1e1e38;
+  border-left-color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer {
+  border-top: 2px solid var(--azure-blue);
+}
+
+.dark .footer {
+  border-top-color: #3a3a5c;
+}
+
+/* =========================================================
+   Dark-mode toggle button
+   ========================================================= */
+#theme-toggle svg {
+  fill: #d8eaf8;
+  transition: fill 0.2s;
+}
+
+#theme-toggle:hover svg {
+  fill: var(--azure-cyan);
+}
+
+/* =========================================================
+   Breadcrumbs
+   ========================================================= */
+.breadcrumbs a {
+  color: var(--azure-blue);
+}
+
+.dark .breadcrumbs a {
+  color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Post navigation (prev / next)
+   ========================================================= */
+.post-nav a {
+  border: 1px solid var(--azure-border);
+  border-radius: 6px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.post-nav a:hover {
+  border-color: var(--azure-blue);
+  background: var(--azure-surface);
+}
+
+.dark .post-nav a:hover {
+  border-color: var(--azure-cyan);
+  background: #1e1e38;
+}
+
+/* =========================================================
+   Giscus comments container
+   ========================================================= */
+.giscus-frame {
+  margin-top: 2rem;
+}
+
+.comments-section {
+  border-top: 2px solid var(--azure-border);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.dark .comments-section {
+  border-top-color: #3a3a5c;
+}
+
+/* =========================================================
+   Scrollbar (Chromium only) — subtle Azure tint
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--azure-blue-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--azure-blue);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a5c;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--azure-blue);
+}

@@ -1,0 +1,69 @@
+<!-- Giscus comments — https://giscus.app
+     Setup steps:
+       1. Visit https://giscus.app and point it at your repo
+       2. Enable GitHub Discussions (Settings → Features → Discussions)
+       3. Install the giscus GitHub App: https://github.com/apps/giscus
+       4. Paste the repo, repo-id, category, and category-id values below
+-->
+{{- if (.Params.comments | default .Site.Params.comments) }}
+<div class="comments-section">
+  <h3 style="margin-bottom:1rem;">Discussion</h3>
+
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="oli-kwski/oli-kwski.github.io"
+    data-repo-id="R_kgDOR8DloQ"
+    data-category="General"
+    data-category-id="DIC_kwDOR8Dloc4C6Snx"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+
+  <script>
+    (function () {
+      function giscusTheme() {
+        var t = document.documentElement.getAttribute('data-theme');
+        if (t === 'dark') return 'dark_dimmed';
+        if (t === 'light') return 'light';
+        // fallback: respect system preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark_dimmed'
+          : 'light';
+      }
+
+      function applyTheme() {
+        var iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme() } } },
+          'https://giscus.app'
+        );
+      }
+
+      // Apply correct theme as soon as Giscus finishes loading
+      window.addEventListener('message', function onLoad(e) {
+        if (e.origin !== 'https://giscus.app') return;
+        if (e.data && e.data.giscus) {
+          applyTheme();
+          window.removeEventListener('message', onLoad);
+        }
+      });
+
+      // Re-apply whenever PaperMod switches data-theme
+      new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName === 'data-theme') applyTheme();
+        });
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+  </script>
+</div>
+{{- end }}

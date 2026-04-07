@@ -1,3 +1,130 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://headinthecloud.uk/'
+languageCode = 'en-gb'
+title = 'Head in the Cloud'
+theme = 'PaperMod'
+[pagination]
+  pagerSize = 10
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+# Required for search and JSON output
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
+# ---------------------------------------------------------------------------
+# Site parameters
+# ---------------------------------------------------------------------------
+[params]
+  env = "production"
+  title = "Head in the Cloud"
+  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and cloud-native development."
+  keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform"]
+  author = "Oli"
+  # Reading time
+  ShowReadingTime = true
+
+  # Sharing / post meta
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  ShowToc = true
+  TocOpen = false
+
+  # Comments — powered by Giscus (see layouts/partials/comments.html)
+  comments = true
+
+  # Dark mode: "auto" | "light" | "dark"
+  # "auto" uses system preference; the toggle lets users override
+  defaultTheme = "auto"
+  disableThemeToggle = false
+
+  # Search
+  fuseOpts = { isCaseSensitive = false, shouldSort = true, location = 0, distance = 1000, threshold = 0.4, minMatchCharLength = 0, limit = 10, keys = ["title", "permalink", "summary", "content"] }
+
+  # Social links shown in the footer
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/oli-kwski"
+
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/oli-k/"
+
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # Cover image defaults
+  [params.cover]
+    hidden = false
+    hiddenInList = false
+    hiddenInSingle = false
+
+  # Home page info block
+  [params.homeInfoParams]
+    Title = "Head in the Cloud ☁️"
+    Content = "A technical blog covering Microsoft Azure — architecture, DevOps, cloud-native development, and everything in between."
+
+# ---------------------------------------------------------------------------
+# Navigation menu
+# ---------------------------------------------------------------------------
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "categories"
+  name = "Categories"
+  url = "/categories/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  url = "/archives/"
+  weight = 40
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 50
+
+# ---------------------------------------------------------------------------
+# Taxonomy
+# ---------------------------------------------------------------------------
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+# ---------------------------------------------------------------------------
+# Markup
+# ---------------------------------------------------------------------------
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true          # allows raw HTML in markdown (needed for callout shortcodes etc.)
+  [markup.highlight]
+    noClasses = false        # use external CSS classes so we can theme syntax highlighting
+    anchorLineNos = true
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    style = "github-dark"   # will be overridden by our custom CSS in dark mode
