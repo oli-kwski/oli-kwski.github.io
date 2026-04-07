@@ -129,6 +129,3 @@ buildExpired = false
     lineNos = true
     style = "github-dark"   # will be overridden by our custom CSS in dark mode
 
-[caches]
-  [caches.images]
-    dir = ':cacheDir/images'
