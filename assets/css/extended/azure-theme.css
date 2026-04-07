@@ -306,11 +306,15 @@ blockquote {
 .footer-social {
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-top: 0.1rem;
 }
 
-.footer-social .social-icons a {
+.footer-social .social-icons a,
+.footer-social .social-icons a:hover {
   color: var(--secondary);
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
   transition: color 0.2s;
 }
 
