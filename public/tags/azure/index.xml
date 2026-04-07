@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Azure on Head in the Cloud</title>
-    <link>https://headinthecloud.uk/tags/azure/</link>
+    <link>http://localhost:1313/tags/azure/</link>
     <description>Recent content in Azure on Head in the Cloud</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
     <lastBuildDate>Tue, 07 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://headinthecloud.uk/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Welcome to Head in the Cloud</title>
-      <link>https://headinthecloud.uk/posts/welcome-to-head-in-the-cloud/</link>
+      <link>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</link>
       <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://headinthecloud.uk/posts/welcome-to-head-in-the-cloud/</guid>
+      <guid>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</guid>
       <description>An introduction to the blog and what to expect.</description>
     </item>
   </channel>
