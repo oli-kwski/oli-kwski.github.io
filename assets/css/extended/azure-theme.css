@@ -303,6 +303,25 @@ blockquote {
   border-top-color: #3a3a5c;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.footer-social .social-icons a {
+  color: var(--secondary);
+  transition: color 0.2s;
+}
+
+.footer-social .social-icons a:hover {
+  color: var(--azure-blue);
+}
+
+.dark .footer-social .social-icons a:hover {
+  color: var(--azure-cyan);
+}
+
 /* =========================================================
    Dark-mode toggle button
    ========================================================= */
