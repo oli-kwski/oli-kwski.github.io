@@ -6,6 +6,7 @@ summary: "About Oli — Azure architect, engineer, and the person behind Head in
 ShowReadingTime: false
 ShowBreadCrumbs: true
 ShowToc: false
+comments: false
 ---
 
 I'm Oli, a cloud architect and engineer specialising in Microsoft Azure. I work across architecture, infrastructure-as-code, DevOps, security, and governance — with a particular focus on building secure, scalable landing zones and platform engineering practises.
