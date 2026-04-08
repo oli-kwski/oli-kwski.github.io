@@ -2,14 +2,14 @@
 title: "About"
 layout: "page"
 url: "/about/"
-summary: "About Oli — Azure architect, engineer, and the person behind Head in the Cloud."
+summary: "About Oli — cloud consulant specialising in Microsoft Azure, and the person behind Head in the Cloud."
 ShowReadingTime: false
 ShowBreadCrumbs: true
 ShowToc: false
 comments: false
 ---
 
-I'm Oli, a cloud architect and engineer specialising in Microsoft Azure. I work across architecture, infrastructure-as-code, DevOps, security, and governance — with a particular focus on building secure, scalable landing zones and platform engineering practises.
+I'm Oli, a cloud consultant specialising in Microsoft Azure. I work across architecture, infrastructure-as-code, DevOps, security, and governance — with a particular focus on building secure, scalable landing zones without losing sight of the bill.
 
 This blog is where I document things I've built, problems I've solved, and ideas worth sharing. If something here saves you an hour of head-scratching, it's done its job.
 
@@ -162,6 +162,3 @@ Find me on [LinkedIn](https://www.linkedin.com/in/oli-k/) or [GitHub](https://gi
     <span class="cert-name">Power Platform Fundamentals</span>
     <span class="cert-code">PL-900</span>
   </a>
-
-  </div>
-</div>
