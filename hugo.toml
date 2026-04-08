@@ -23,8 +23,8 @@ buildExpired = false
 [params]
   env = "production"
   title = "Head in the Cloud"
-  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and cloud-native development."
-  keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform"]
+  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and cost optimisation."
+  keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform", "IaC"]
   author = "Oli"
   # Reading time
   ShowReadingTime = true
@@ -61,6 +61,12 @@ buildExpired = false
   [[params.socialIcons]]
     name = "rss"
     url = "/index.xml"
+
+  # Navbar logo
+  [params.label]
+    text = "Head in the Cloud"
+    icon = "/hitc-logo.png"
+    iconHeight = 35
 
   # Cover image defaults
   [params.cover]
