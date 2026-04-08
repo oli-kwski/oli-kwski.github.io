@@ -23,7 +23,7 @@ buildExpired = false
 [params]
   env = "production"
   title = "Head in the Cloud"
-  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and cost optimisation."
+  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and everyting in between."
   keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform", "IaC"]
   author = "Oli"
   # Reading time
@@ -78,7 +78,7 @@ buildExpired = false
   # Home page info block
   [params.homeInfoParams]
     Title = "Head in the Cloud ☁️"
-    Content = "A technical blog covering Microsoft Azure — architecture, DevOps, cloud-native development, and everything in between."
+    Content = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and everything in between."
 
 # ---------------------------------------------------------------------------
 # Navigation menu
@@ -140,5 +140,4 @@ buildExpired = false
     codeFences = true
     guessSyntax = true
     lineNos = true
-    style = "github-dark"   # will be overridden by our custom CSS in dark mode
-
+    style = "github-dark"   # will be overridden by our custom CSS in dark mod
