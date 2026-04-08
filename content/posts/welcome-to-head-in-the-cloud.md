@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Head in the Cloud"
-date: 2026-04-07
+date: 2026-04-08
 draft: false
 description: "An introduction to the blog and what to expect."
 
@@ -17,17 +17,17 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ---
 
-Welcome! This blog covers all things **Microsoft Azure** — from architecture patterns and infrastructure-as-code to DevOps pipelines, security hardening, and cost optimisation.
+Welcome! This blog covers all things **Microsoft Azure** - from architecture patterns and infrastructure-as-code to DevOps pipelines, security hardening, and cost optimisation.
 
 ## What to expect
 
 Posts here will be practical and hands-on. Expect deep dives into topics like:
 
-- **Azure infrastructure** — Virtual Networks, Private Endpoints, Hub-and-Spoke topologies.
-- **Infrastructure as Code** — Terraform, Bicep and accelerators.
-- **DevOps & CI/CD** — Azure DevOps, GitHub Actions, and pipelines.
-- **Security & Governance** — Azure Policy, Entra ID, and zero-trust principles.
-- **Cost optimisation** — Reserved Instances, Spot VMs, and FinOps practices.
+- **Azure infrastructure** - Virtual Networks, Private Endpoints, Hub-and-Spoke topologies.
+- **Infrastructure as Code** - Terraform, Bicep and accelerators.
+- **DevOps & CI/CD** - Azure DevOps, GitHub Actions, and pipelines.
+- **Security & Governance** - Azure Policy, Entra ID, and zero-trust principles.
+- **Cost optimisation** - Reserved Instances, Spot VMs, and FinOps practices.
 
 ## A note on comments
 
