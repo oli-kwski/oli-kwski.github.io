@@ -31,12 +31,8 @@ Posts here will be practical and hands-on. Expect deep dives into topics like:
 
 ## A note on comments
 
-Every post has a **Giscus** comment section at the bottom, backed by GitHub Discussions. You'll need a GitHub account to leave a comment.
+Every post has a Giscus comment section at the bottom, backed by GitHub Discussions. You'll need a GitHub account to leave a comment.
 
 ## Stay in touch
 
 Connect on [LinkedIn](https://www.linkedin.com/in/oli-k/), follow along on [GitHub](https://github.com/oli-kwski) or Subscribe via [RSS](/index.xml).
-
----
-
-*Thanks for visiting — let's get our head in the cloud.*
