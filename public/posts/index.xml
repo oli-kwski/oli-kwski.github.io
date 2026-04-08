@@ -9,18 +9,18 @@
     <lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Welcome to Head in the Cloud</title>
+      <link>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</guid>
+      <description>An introduction to the blog and what to expect.</description>
+    </item>
+    <item>
       <title>What Are Private Endpoints and Why You Should Use Them</title>
       <link>http://localhost:1313/posts/azure-private-endpoints-explained/</link>
       <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/azure-private-endpoints-explained/</guid>
       <description>Private Endpoints bring Azure PaaS services onto your virtual network with a private IP address, eliminating exposure to the public internet. Here&amp;#39;s how they work and why they matter.</description>
-    </item>
-    <item>
-      <title>Welcome to Head in the Cloud</title>
-      <link>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</link>
-      <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/welcome-to-head-in-the-cloud/</guid>
-      <description>An introduction to the blog and what to expect.</description>
     </item>
   </channel>
 </rss>

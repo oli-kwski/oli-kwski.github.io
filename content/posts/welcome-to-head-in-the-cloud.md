@@ -9,11 +9,11 @@ tags:
 categories:
   - General
 
-comments: true
-ShowToc: true
+comments: false
+ShowToc: false
 TocOpen: false
 ShowReadingTime: true
-ShowBreadCrumbs: true
+ShowBreadCrumbs: false
 ShowPostNavLinks: true
 ---
 

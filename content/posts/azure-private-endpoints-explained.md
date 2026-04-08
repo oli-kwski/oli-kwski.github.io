@@ -16,7 +16,7 @@ comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
-ShowBreadCrumbs: true
+ShowBreadCrumbs: false
 ShowPostNavLinks: true
 ---
 
