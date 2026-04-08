@@ -26,6 +26,10 @@ buildExpired = false
   description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and everyting in between."
   keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform", "IaC"]
   author = "Oli"
+  # Google Analytics
+  [params.analytics.google]
+    SiteVerificationTag = "G-DRMW566NWT"
+
   # Reading time
   ShowReadingTime = true
 
