@@ -109,13 +109,13 @@ Find me on [LinkedIn](https://www.linkedin.com/in/oli-k/) or [GitHub](https://gi
   <div class="cert-grid">
 
   <a class="cert-card" href="https://learn.microsoft.com/en-gb/credentials/certifications/azure-administrator/" target="_blank" rel="noopener">
-    <img src="https://learn.microsoft.com/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Azure Administrator Associate badge" loading="lazy">
+    <img src="/Azure-Administrator-Associate.png" alt="Azure Administrator Associate badge" loading="lazy">
     <span class="cert-name">Azure Administrator Associate</span>
     <span class="cert-code">AZ-104</span>
   </a>
 
   <a class="cert-card" href="https://learn.microsoft.com/en-gb/credentials/certifications/azure-security-engineer/" target="_blank" rel="noopener">
-    <img src="/Azure-Administrator-Associate.png" alt="Azure Security Engineer Associate badge" loading="lazy">
+    <img src="/Azure-Security-Engineer-Associate.png" alt="Azure Security Engineer Associate badge" loading="lazy">
     <span class="cert-name">Azure Security Engineer Associate</span>
     <span class="cert-code">AZ-500</span>
   </a>
