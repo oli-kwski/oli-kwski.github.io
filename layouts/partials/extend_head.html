@@ -8,3 +8,8 @@
   [data-theme="dark"] figure.diagram { background-color: rgb(126, 127, 133); }
   [data-theme="dark"] figure.diagram figcaption { color: #1a1a1a; }
 </style>
+
+{{- /* Cloudflare Web Analytics is now in "Automatic" mode and injected at
+       the edge for proxied (orange-cloud) responses — no manual beacon
+       needed. Re-add a conditional <script> here if you ever go back to
+       the JS-snippet path for a non-proxied environment. */ -}}

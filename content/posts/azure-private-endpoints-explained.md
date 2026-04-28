@@ -12,6 +12,8 @@ tags:
 categories:
   - Azure
   - Networking
+series:
+  - Private Endpoints
 
 comments: true
 ShowToc: true
@@ -31,7 +33,7 @@ Private endpoints are one of the most impactful networking features within Azure
 
 ## The problem they solve
 
-Consider a VM hosted in Azure that needs to read files from a storage account. Without a private endpoint, the VM's traffic leaves the vNet in which the VMs NIC is attached and hits the public IP of `yourstorageaccount.blob.core.windows.net`.
+Consider a VM hosted in Azure that needs to read files from a storage account. Without a private endpoint, the VM's traffic leaves the vnet in which the VMs NIC is attached and hits the public IP of `yourstorageaccount.blob.core.windows.net`.
 
 This creates a few issues:
 
@@ -41,17 +43,17 @@ This creates a few issues:
 
 ## What is a Private Endpoint?
 
-A private endpoint is a network interface with a private IP address inside your vNet mapped to a specific Azure PaaS resource. Imagine it just like the NIC on a VM.
+A private endpoint is a network interface with a private IP address inside your vnet mapped to a specific Azure PaaS resource. Imagine it just like the NIC on a VM.
 
-When you create a private endpoint for your storage account, Azure allocates a private IP in your chosen subnet and associates it with your storage account. Traffic from within your vNet to that IP goes directly to the storage account over the Microsoft backbone, no longer traversing the internet.
+When you create a private endpoint for your storage account, Azure allocates a private IP in your chosen subnet and associates it with your storage account. Traffic from within your vnet to that IP goes directly to the storage account over the Microsoft backbone, no longer traversing the internet.
 
 Once you've confirmed your PaaS resource is available over its private endpoint you can disable the public endpoint on the storage account, making it completely unreachable from the internet.
 
 ## Private DNS — the piece everyone forgets
 
-Here's the part that trips people up. After creating a private endpoint, if you resolve `yourstorageaccount.blob.core.windows.net` from inside the vNet you'll still get the public IP.
+Here's the part that trips people up. After creating a private endpoint, if you resolve `yourstorageaccount.blob.core.windows.net` from inside the vnet you'll still get the public IP.
 
-Azure handles this with private DNS zones. When you create a private endpoint, Azure can automatically create a DNS record in a private DNS zone linked to your vNet:
+Azure handles this with private DNS zones. When you create a private endpoint, Azure can automatically create a DNS record in a private DNS zone linked to your vnet:
 
 | Service | Private DNS Zone |
 |---|---|
@@ -59,23 +61,23 @@ Azure handles this with private DNS zones. When you create a private endpoint, A
 | Azure SQL Database | `privatelink.database.windows.net` |
 | Azure Key Vault | `privatelink.vaultcore.azure.net` |
 
-Without a private DNS zone, name resolution from inside the vNet still returns the public IP:
+Without a private DNS zone, name resolution from inside the vnet still returns the public IP:
 
 <figure class="diagram">
-  <img src="/azure-private-endpoints-explained/sa-public-dns.png" alt="Diagram showing a VM inside a vNet resolving a storage account hostname through public Azure DNS, receiving the public IP address" style="display: block; width: 100%; height: auto;" />
+  <img src="/azure-private-endpoints-explained/sa-public-dns.png" alt="Diagram showing a VM inside a vnet resolving a storage account hostname through public Azure DNS, receiving the public IP address" style="display: block; width: 100%; height: auto;" />
   <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">Public DNS resolution</figcaption>
 </figure>
 
-The DNS zone contains an A record which maps your storage account's hostname to the private IP. When a VM in the linked vNet resolves `yourstorageaccount.blob.core.windows.net`, it gets the CNAME `yourstorageaccount.privatelink.blob.core.windows.net`, which the Private DNS Zone resolves to the private endpoints IP address.
+The DNS zone contains an A record which maps your storage account's hostname to the private IP. When a VM in the linked vnet resolves `yourstorageaccount.blob.core.windows.net`, it gets the CNAME `yourstorageaccount.privatelink.blob.core.windows.net`, which the Private DNS Zone resolves to the private endpoints IP address.
 
 <figure class="diagram">
-  <img src="/azure-private-endpoints-explained/sa-private-dns.png" alt="Diagram showing a VM inside a vNet resolving a storage account hostname through a Private DNS Zone, receiving the private IP of the Private Endpoint" style="display: block; width: 100%; height: auto;" />
+  <img src="/azure-private-endpoints-explained/sa-private-dns.png" alt="Diagram showing a VM inside a vnet resolving a storage account hostname through a Private DNS Zone, receiving the private IP of the Private Endpoint" style="display: block; width: 100%; height: auto;" />
   <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">Private DNS resolution</figcaption>
 </figure>
 
-From outside the vNet, the same hostname resolves to the public IP as normal. The magic is that vNet-linked DNS zones take precedence for resources inside the vnet.
+From outside the vnet, the same hostname resolves to the public IP as normal. The magic is that vnet-linked DNS zones take precedence for resources inside the vnet.
 
-> **Important:** If you're using a hub-and-spoke topology with centralised DNS, you need to link the Private DNS Zones to the hub vNet — not just the spoke. Otherwise your spoke VMs, routing through the hub's DNS, won't get the private IP responses.
+> **Important:** If you're using a hub-and-spoke topology with centralised DNS, you need to link the Private DNS Zones to the hub vnet — not just the spoke. Otherwise your spoke VMs, routing through the hub's DNS, won't get the private IP responses.
 
 ## When to use them
 
@@ -106,6 +108,6 @@ Private endpoints aren't free - at time of writing they're around £5–6/month 
 
 ## Summary
 
-Private endpoints are the right way to connect to Azure PaaS services from within a vNet. They replace a public internet hop with internal connectivity, they allow you to disable public access entirely, and integrate cleanly with private DNS zones for seamless name resolution. The DNS configuration is the fiddly bit, get that right and the rest is straightforward.
+Private endpoints are the right way to connect to Azure PaaS services from within a vnet. They replace a public internet hop with internal connectivity, they allow you to disable public access entirely, and integrate cleanly with private DNS zones for seamless name resolution. The DNS configuration is the fiddly bit, get that right and the rest is straightforward.
 
 If you're building anything resembling a production landing zone, private endpoints should be part of your standard pattern from day one.

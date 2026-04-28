@@ -3,9 +3,13 @@ languageCode = 'en-gb'
 title = 'Head in the Cloud'
 theme = 'PaperMod'
 
-[services]
-  [services.googleAnalytics]
-    ID = "G-DRMW566NWT"
+# Google Analytics removed — replaced by Cloudflare Web Analytics (cookieless,
+# no PECR/UK-GDPR consent banner required). Token is set under [params] below
+# and injected by layouts/partials/extend_head.html when env = "production".
+# [services]
+#   [services.googleAnalytics]
+#     ID = "G-DRMW566NWT"
+
 [pagination]
   pagerSize = 10
 enableRobotsTXT = true
@@ -26,8 +30,10 @@ buildExpired = false
 # ---------------------------------------------------------------------------
 [params]
   env = "production"
+  # Analytics: Cloudflare Web Analytics in "Automatic" mode — injected at
+  # the edge for proxied responses, no token or beacon script required here.
   title = "Head in the Cloud"
-  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and everyting in between."
+  description = "A technical blog covering Microsoft Azure - Architecture, DevOps, infrastructure, and everything in between."
   keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform", "IaC"]
   author = "Oli"
   # Reading time
@@ -42,6 +48,7 @@ buildExpired = false
   ShowRssButtonInSectionTermList = true
   ShowToc = true
   TocOpen = false
+  ShowRelated = true
 
   # Comments — powered by Giscus (see layouts/partials/comments.html)
   comments = true
@@ -132,6 +139,30 @@ buildExpired = false
   series = "series"
 
 # ---------------------------------------------------------------------------
+# Related posts — drives the "Related" block PaperMod renders under each post
+# ---------------------------------------------------------------------------
+[related]
+  threshold = 80
+  includeNewer = true
+  toLower = false
+
+  [[related.indices]]
+    name = "series"
+    weight = 100
+
+  [[related.indices]]
+    name = "tags"
+    weight = 80
+
+  [[related.indices]]
+    name = "categories"
+    weight = 40
+
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
+# ---------------------------------------------------------------------------
 # Markup
 # ---------------------------------------------------------------------------
 [markup]
@@ -140,8 +171,10 @@ buildExpired = false
       unsafe = true          # allows raw HTML in markdown (needed for callout shortcodes etc.)
   [markup.highlight]
     noClasses = false        # use external CSS classes so we can theme syntax highlighting
-    anchorLineNos = true
+    anchorLineNos = false
     codeFences = true
     guessSyntax = true
-    lineNos = true
-    style = "github-dark"   # will be overridden by our custom CSS in dark mod
+    lineNos = false          # off by default — re-enable per-fence with {linenos=table} when needed
+    style = "github-dark"    # will be overridden by our custom CSS in dark mode
+    # Bicep is supported natively by Chroma 2.10+ (shipped with Hugo 0.160).
+    # Use ```bicep fences — no extra config required.

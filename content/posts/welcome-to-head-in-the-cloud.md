@@ -4,8 +4,6 @@ date: 2026-04-08
 draft: false
 description: "An introduction to the blog and what to expect."
 
-tags:
-
 categories:
   - General
 

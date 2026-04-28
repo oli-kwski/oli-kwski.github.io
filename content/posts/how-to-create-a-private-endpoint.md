@@ -13,6 +13,8 @@ tags:
   - IaC
 categories:
   - Networking
+series:
+  - Private Endpoints
 
 comments: true
 ShowToc: true
@@ -31,7 +33,7 @@ This post walks through creating a Private Endpoint for an Azure Storage account
 Before deploying, you'll need:
 
 - An existing virtual network and subnet to host the Private Endpoint
-- An existing Private DNS Zone for `privatelink.blob.core.windows.net` linked to your vNet (or you can create one as part of this deployment)
+- An existing Private DNS Zone for `privatelink.blob.core.windows.net` linked to your vnet (or you can create one as part of this deployment)
 - An existing Storage account
 
 ## The Bicep
@@ -105,19 +107,19 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-Setting `publicNetworkAccess: 'Disabled'` takes precedence over all firewall rules — the public endpoint is completely closed regardless of what IP allowlists or vNet service endpoint rules exist.
+Setting `publicNetworkAccess: 'Disabled'` takes precedence over all firewall rules — the public endpoint is completely closed regardless of what IP allowlists or vnet service endpoint rules exist.
 
 ## Verifying it works
 
-From a VM or other resource inside the linked vNet, check that the storage hostname resolves to the private IP:
+From a VM or other resource inside the linked vnet, check that the storage hostname resolves to the private IP:
 
 ```bash
 nslookup yourstorageaccount.blob.core.windows.net
 ```
 
-You should see the response chain through `privatelink.blob.core.windows.net` and resolve to a private IP in your subnet — not the public IP. If you still see the public IP, the Private DNS Zone is either not linked to the vNet or the DNS zone group wasn't created correctly.
+You should see the response chain through `privatelink.blob.core.windows.net` and resolve to a private IP in your subnet — not the public IP. If you still see the public IP, the Private DNS Zone is either not linked to the vnet or the DNS zone group wasn't created correctly.
 
-For hub-and-spoke topologies using a centralised DNS server or Azure Firewall DNS proxy, ensure the Private DNS Zone is linked to the **hub** vNet, not just the spoke.
+For hub-and-spoke topologies using a centralised DNS server or Azure Firewall DNS proxy, ensure the Private DNS Zone is linked to the **hub** vnet, not just the spoke.
 
 ## Common gotchas
 
@@ -142,4 +144,4 @@ Private Endpoints cost around £5–6/month per endpoint plus a small per-GB dat
 
 ## Summary
 
-Deploying a Private Endpoint with Bicep is straightforward once the DNS wiring is understood. Create the `privateEndpoints` resource, attach a `privateDnsZoneGroups` child resource to register the A record automatically, then disable the public endpoint on the storage account. Verify with `nslookup` from inside the vNet before considering the job done.
+Deploying a Private Endpoint with Bicep is straightforward once the DNS wiring is understood. Create the `privateEndpoints` resource, attach a `privateDnsZoneGroups` child resource to register the A record automatically, then disable the public endpoint on the storage account. Verify with `nslookup` from inside the vnet before considering the job done.

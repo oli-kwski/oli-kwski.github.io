@@ -1,13 +1,5 @@
-{{- /* Google Analytics — add your Measurement ID to hugo.toml to enable:
-       [params]
-         googleAnalytics = "G-XXXXXXXXXX"
-*/ -}}
-{{- with .Site.Config.Services.GoogleAnalytics.ID }}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '{{ . }}');
-</script>
-{{- end }}
+{{- /* Google Analytics partial intentionally left empty.
+       The site uses Cloudflare Web Analytics instead — see
+       layouts/partials/extend_head.html and the cloudflareAnalyticsToken
+       parameter in hugo.toml. PaperMod still calls this partial during
+       render, so the file must exist; emitting nothing is the goal. */ -}}

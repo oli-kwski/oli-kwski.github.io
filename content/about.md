@@ -2,7 +2,7 @@
 title: "About"
 layout: "page"
 url: "/about/"
-summary: "About Oli — cloud consulant specialising in Microsoft Azure, and the person behind Head in the Cloud."
+summary: "About Oli — cloud consultant specialising in Microsoft Azure, and the person behind Head in the Cloud."
 ShowReadingTime: false
 ShowBreadCrumbs: true
 ShowToc: false
