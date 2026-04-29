@@ -19,60 +19,6 @@ Find me on [LinkedIn](https://www.linkedin.com/in/oli-k/) or [GitHub](https://gi
 
 ## Microsoft Certifications
 
-<style>
-.cert-section { margin: 2rem 0; }
-.cert-tier-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--secondary);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.4rem;
-  margin-bottom: 1.25rem;
-}
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-.cert-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.25rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--entry);
-  transition: border-color 0.2s, transform 0.2s;
-  text-decoration: none !important;
-  color: inherit !important;
-}
-.cert-card:hover {
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-.cert-card img {
-  width: 90px;
-  height: 90px;
-  object-fit: contain;
-  margin-bottom: 0.85rem;
-}
-.cert-name {
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--primary);
-}
-.cert-code {
-  font-size: 0.7rem;
-  color: var(--secondary);
-  margin-top: 0.25rem;
-}
-</style>
-
 <div class="cert-section">
   <div class="cert-tier-label">Expert</div>
   <div class="cert-grid">

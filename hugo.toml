@@ -3,6 +3,10 @@ languageCode = 'en-gb'
 title = 'Head in the Cloud'
 theme = 'PaperMod'
 
+# Pull lastmod from git commit history so PaperMod can show "updated"
+# dates without you maintaining a frontmatter field per post.
+enableGitInfo = true
+
 # Google Analytics removed — replaced by Cloudflare Web Analytics (cookieless,
 # no PECR/UK-GDPR consent banner required). Token is set under [params] below
 # and injected by layouts/partials/extend_head.html when env = "production".
@@ -49,6 +53,7 @@ buildExpired = false
   ShowToc = true
   TocOpen = false
   ShowRelated = true
+  ShowLastMod = true
 
   # Comments — powered by Giscus (see layouts/partials/comments.html)
   comments = true
