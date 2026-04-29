@@ -388,6 +388,83 @@ blockquote {
 }
 
 /* =========================================================
+   Related posts panel — rendered by layouts/partials/related.html
+   ========================================================= */
+.related-posts {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--azure-border);
+}
+
+[data-theme="dark"] .related-posts {
+  border-top-color: #3a3a5c;
+}
+
+.related-posts h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--azure-blue);
+}
+
+[data-theme="dark"] .related-posts h2 {
+  color: var(--azure-cyan);
+}
+
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.related-posts li {
+  margin: 0;
+}
+
+.related-posts a {
+  display: block;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--azure-border);
+  border-radius: 6px;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.related-posts a:hover {
+  border-color: var(--azure-blue);
+  box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
+}
+
+[data-theme="dark"] .related-posts a:hover {
+  border-color: var(--azure-cyan);
+  box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
+}
+
+.related-title {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.related-desc {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--content);
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.related-meta {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--secondary);
+}
+
+/* =========================================================
    Diagrams — figure.diagram pattern used in posts
    ========================================================= */
 figure.diagram {
@@ -403,12 +480,12 @@ figure.diagram figcaption {
 }
 
 [data-theme="dark"] figure.diagram {
-  background-color: #2a2a44;
+  background-color: #7171a8;
   border: 1px solid var(--border);
 }
 
 [data-theme="dark"] figure.diagram figcaption {
-  color: var(--secondary);
+  color: #1a1a1a;
 }
 
 /* =========================================================

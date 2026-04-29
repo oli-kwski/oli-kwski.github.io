@@ -1,0 +1,31 @@
+{{- /* related.html — "Related posts" panel for single posts.
+
+       PaperMod doesn't ship related-posts logic, so this is a custom
+       partial using Hugo's built-in `.Site.RegularPages.Related .` API.
+       Index weights live in [related] in hugo.toml (series 100, tags
+       80, categories 40, date 10). The threshold there gates which
+       pages qualify; this partial just renders the top N.
+*/ -}}
+
+{{- $related := first 3 (.Site.RegularPages.Related .) -}}
+{{- with $related }}
+<section class="related-posts">
+  <h2>Related posts</h2>
+  <ul>
+    {{- range . }}
+    <li>
+      <a href="{{ .Permalink }}">
+        <span class="related-title">{{ .Title }}</span>
+        {{- with .Description }}
+        <span class="related-desc">{{ . }}</span>
+        {{- end }}
+        <span class="related-meta">
+          {{- .Date.Format "2 January 2006" -}}
+          {{- if and .ReadingTime (gt .ReadingTime 0) }} · {{ .ReadingTime }} min read{{ end -}}
+        </span>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
