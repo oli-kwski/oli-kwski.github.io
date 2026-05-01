@@ -231,6 +231,20 @@ button.button {
 }
 
 /* =========================================================
+   Pagination buttons (prev / next on home / post list)
+   PaperMod uses background: var(--primary) which inverts in
+   dark mode to a plain grey — override to stay on-brand.
+   ========================================================= */
+[data-theme="dark"] .pagination a {
+  background: var(--azure-blue);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .pagination a:hover {
+  background: var(--azure-blue-hover);
+}
+
+/* =========================================================
    Search box
    ========================================================= */
 #searchbox input {

@@ -13,8 +13,10 @@ tags:
   - IaC
 categories:
   - Networking
+  - Security
 series:
   - Private Endpoints
+  - Bicep
 
 comments: true
 ShowToc: true
