@@ -12,7 +12,7 @@ categories:
   - Azure
   - Storage
 series:
-  - Storage Accounts
+  - Azure Fundamentals
 
 comments: true
 ShowToc: true

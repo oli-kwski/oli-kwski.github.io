@@ -55,6 +55,16 @@ buildExpired = false
   ShowRelated = true
   ShowLastMod = true
 
+  # Favicon — explicitly wire PaperMod's asset params to the generated files.
+  # Setting safari_pinned_tab to "" suppresses the mask-icon tag so browsers
+  # don't 404 on the missing safari-pinned-tab.svg.
+  [params.assets]
+    favicon           = "favicon.ico"
+    favicon16x16      = "favicon-16x16.png"
+    favicon32x32      = "favicon-32x32.png"
+    apple_touch_icon  = "apple-touch-icon.png"
+    safari_pinned_tab = ""
+
   # Comments — powered by Giscus (see layouts/partials/comments.html)
   comments = true
 

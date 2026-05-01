@@ -13,7 +13,7 @@ categories:
   - Azure
   - Networking
 series:
-  - Private Endpoints
+  - Azure Fundamentals
 
 comments: true
 ShowToc: true
