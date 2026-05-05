@@ -92,17 +92,13 @@ They're less necessary for public-facing services (App Services, API Management 
 
 ## Common gotchas
 
-**1. NSGs on the Private Endpoint subnet**
-Network Security Groups apply to Private Endpoint NICs from API version `2021-02-01` onwards, but you need to explicitly enable it on the subnet, prior to this, NSG rules were silently ignored on Private Endpoint subnets, which confused a lot of people.
+**1. NSGs on the Private Endpoint subnet** - Network Security Groups apply to Private Endpoint NICs from API version `2021-02-01` onwards, but you need to explicitly enable it on the subnet, prior to this, NSG rules were silently ignored on Private Endpoint subnets, which confused a lot of people.
 
-**2. Cross-region Private Endpoints**
-You can create a private endpoint in a different region from the target resource. Traffic still stays on the Microsoft backbone, but latency will be higher than a same-region deployment.
+**2. Cross-region Private Endpoints** - You can create a private endpoint in a different region from the target resource. Traffic still stays on the Microsoft backbone, but latency will be higher than a same-region deployment.
 
-**3. Approval workflows**
-If the target resource is in a different subscription or tenant, the private endpoint connection needs to be manually approved by the resource owner. You can automate this with `autoApproval` policies in Azure policy if your organisation controls both sides.
+**3. Approval workflows** - If the target resource is in a different subscription or tenant, the private endpoint connection needs to be manually approved by the resource owner. You can automate this with `autoApproval` policies in Azure policy if your organisation controls both sides.
 
-**4. Cost**
-Private endpoints aren't free - at time of writing they're around £5–6/month per endpoint plus a small per-GB data processing charge. For production workloads this is negligible, but worth bearing in mind if you're creating many of them.
+**4. Cost** - Private endpoints aren't free - at time of writing they're around £5–6/month per endpoint plus a small per-GB data processing charge. For production workloads this is negligible, but worth bearing in mind if you're creating many of them.
 
 ---
 

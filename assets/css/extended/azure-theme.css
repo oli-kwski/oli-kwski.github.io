@@ -36,8 +36,8 @@
 /* =========================================================
    CSS custom properties — Dark mode
    ========================================================= */
-[data-theme="dark"] {
-  --theme:         #1B1B2F;
+:root[data-theme="dark"] {
+  --theme:         #050709;
   --entry:         #24243e;
   --primary:       #e8e8f0;
   --secondary:     #9999bb;
@@ -137,6 +137,9 @@ a:hover {
 /* =========================================================
    Post header (title, date, reading time)
    ========================================================= */
+.post-description {
+  color: var(--content);
+}
 .post-title a:hover {
   color: var(--azure-blue) !important;
 }
@@ -494,12 +497,12 @@ figure.diagram figcaption {
 }
 
 [data-theme="dark"] figure.diagram {
-  background-color: #7171a8;
+  background-color: #ebebeb;
   border: 1px solid var(--border);
 }
 
 [data-theme="dark"] figure.diagram figcaption {
-  color: #1a1a1a;
+  color: #555;
 }
 
 /* =========================================================
