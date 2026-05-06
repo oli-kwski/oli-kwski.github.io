@@ -13,7 +13,14 @@ categories:
   - Azure
   - Networking
 series:
-  - Azure Fundamentals
+  - Private Endpoints
+
+pinned: true
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
 
 comments: true
 ShowToc: true
@@ -21,6 +28,7 @@ TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: true
+weight: 1
 ---
 
 When you deploy a Storage account, a Key Vault or any other PaaS service, by default they're reachable over the public internet. While protected by authentication and firewall rules the traffic still traverses Microsoft's public endpoints and the internet. For many organisations, especially those with compliance requirements or a zero-trust security posture, that's not acceptable.
@@ -106,4 +114,4 @@ They're less necessary for public-facing services (App Services, API Management 
 
 Private endpoints are the right way to connect to Azure PaaS services from within a vnet. They replace a public internet hop with internal connectivity, they allow you to disable public access entirely, and integrate cleanly with private DNS zones for seamless name resolution. The DNS configuration is the fiddly bit, get that right and the rest is straightforward.
 
-If you're building anything resembling a production landing zone, private endpoints should be part of your standard pattern from day one.
+If you're building anything resembling a p

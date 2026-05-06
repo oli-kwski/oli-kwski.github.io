@@ -15,6 +15,13 @@ categories:
 series:
   - Network Security Groups
 
+pinned: true
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+
 comments: true
 ShowToc: true
 TocOpen: false
@@ -22,6 +29,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+weight: 1
 ---
 
 Once you have a VNet and subnets, the next question is how to control what traffic can flow between them. Network Security Groups (NSGs) are the answer for most scenarios — the lightweight, stateful firewall you attach to subnets or individual NICs to allow or deny traffic.
@@ -122,4 +130,4 @@ NSG flow logs (for Network Watcher) capture allowed and denied flows — essenti
 
 ## Summary
 
-NSGs are stateful, rule-based access control at the subnet or NIC level. Attach them to subnets, use service tags and ASGs instead of raw IP ranges where possible, and explicitly enable NSG policies on Private Endpoint subnets. Enable flow logs in production — you'll need them when something unexpected gets blocked or allowed.
+NSGs are stateful, rule-based access control at the subnet or NIC level. Attach them to subnets, use service tags and ASGs instead of raw IP ranges where possible, and explicitly enable NSG policies on Private Endpoint subnets. Enable 

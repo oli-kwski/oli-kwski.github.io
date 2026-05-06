@@ -1,0 +1,64 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Storage">
+  <defs>
+    <linearGradient id="bg-sto" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-sto" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-sto)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-sto)"/>
+
+  <!-- Storage stack icon (right side) -->
+  <!-- Three stacked cylinders -->
+  <!-- Bottom cylinder -->
+  <ellipse cx="610" cy="295" rx="80" ry="18" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <rect x="530" y="240" width="160" height="55" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <ellipse cx="610" cy="240" rx="80" ry="18" fill="#1a5a9e" stroke="#0078d4" stroke-width="1.5"/>
+
+  <!-- Mid cylinder -->
+  <ellipse cx="610" cy="225" rx="80" ry="18" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <rect x="530" y="170" width="160" height="55" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <ellipse cx="610" cy="170" rx="80" ry="18" fill="#1a5a9e" stroke="#0078d4" stroke-width="1.5"/>
+
+  <!-- Top cylinder -->
+  <ellipse cx="610" cy="155" rx="80" ry="18" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <rect x="530" y="100" width="160" height="55" fill="#0d3060" stroke="#0078d4" stroke-width="1.5"/>
+  <ellipse cx="610" cy="100" rx="80" ry="18" fill="#50a0e8" stroke="#7bb8f5" stroke-width="1.5"/>
+
+  <!-- Highlight line on top -->
+  <ellipse cx="610" cy="100" rx="50" ry="10" fill="none" stroke="#7bb8f5" stroke-width="1" opacity="0.5"/>
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Azure</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Storage</text>
+  <text x="50" y="260" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">Blobs · Files · Queues · Tables</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

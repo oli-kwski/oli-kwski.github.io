@@ -1,0 +1,38 @@
+{{- $seriesTerms := .GetTerms "series" }}
+{{- if $seriesTerms }}
+  {{- $currentSeries := index $seriesTerms 0 }}
+  {{- $seriesPages := $currentSeries.Pages.ByWeight }}
+  {{- $total := len $seriesPages }}
+  {{- if gt $total 1 }}
+    {{- $currentIndex := 0 }}
+    {{- range $i, $p := $seriesPages }}
+      {{- if eq $p.RelPermalink $.RelPermalink }}
+        {{- $currentIndex = $i }}
+      {{- end }}
+    {{- end }}
+<div class="series-nav">
+  <div class="series-nav-header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+    <span class="series-nav-title">
+      <a href="{{ $currentSeries.Permalink }}">{{ $currentSeries.Title }}</a>
+    </span>
+    <span class="series-nav-count">{{ add $currentIndex 1 }} of {{ $total }}</span>
+  </div>
+  <ol class="series-nav-list">
+    {{- range $i, $p := $seriesPages }}
+    <li class="series-nav-item{{ if eq $p.RelPermalink $.RelPermalink }} current{{ end }}">
+      {{- if eq $p.RelPermalink $.RelPermalink }}
+      <span class="series-nav-link">{{ $p.Title }}</span>
+      {{- else }}
+      <a class="series-nav-link" href="{{ $p.Permalink }}">{{ $p.Title }}</a>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ol>
+</div>
+  {{- end }}
+{{- end }}

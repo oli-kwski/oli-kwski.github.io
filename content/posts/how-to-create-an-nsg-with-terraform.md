@@ -16,7 +16,6 @@ categories:
   - Networking
 series:
   - Network Security Groups
-  - Terraform
 
 comments: true
 ShowToc: true
@@ -25,6 +24,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+weight: 3
 ---
 
 If you haven't read [What Is an Azure Network Security Group?](/posts/what-is-a-network-security-group), start there. This post covers deploying an NSG and attaching it to a subnet using Terraform.

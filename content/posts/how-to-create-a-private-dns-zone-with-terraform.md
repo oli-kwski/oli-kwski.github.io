@@ -16,7 +16,6 @@ categories:
   - Networking
 series:
   - Private DNS Zones
-  - Terraform
 
 comments: true
 ShowToc: true
@@ -25,6 +24,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+weight: 3
 ---
 
 If you haven't read [What Is an Azure Private DNS Zone and Why Do You Need One?](/posts/what-is-a-private-dns-zone), start there. This post covers deploying a Private DNS Zone and VNet link with Terraform.

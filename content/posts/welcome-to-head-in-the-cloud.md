@@ -7,6 +7,11 @@ description: "An introduction to the blog and what to expect."
 categories:
   - General
 
+cover:
+  image: /covers/general.svg
+  alt: Head in the Cloud
+  relative: false
+
 comments: false
 ShowToc: false
 TocOpen: false

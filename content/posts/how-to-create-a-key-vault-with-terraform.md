@@ -15,7 +15,6 @@ categories:
   - Security
 series:
   - Key Vault
-  - Terraform
 
 comments: true
 ShowToc: true
@@ -24,6 +23,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/security.svg
+  alt: Azure Security
+  relative: false
+weight: 3
 ---
 
 If you haven't read [What Is Azure Key Vault and Why Should You Use It?](/posts/what-is-azure-key-vault), start there. This post covers deploying one with Terraform using a production-ready baseline.

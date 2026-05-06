@@ -14,8 +14,7 @@ categories:
   - Azure
   - Networking
 series:
-  - VNets
-  - Bicep
+  - Virtual Networks
 
 comments: true
 ShowToc: true
@@ -24,6 +23,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+weight: 2
 ---
 
 If you haven't read [What Is an Azure Virtual Network?](/posts/what-is-a-vnet), start there. This post assumes you know what a VNet is and focuses on deploying one with Bicep.

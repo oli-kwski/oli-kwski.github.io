@@ -12,7 +12,14 @@ categories:
   - Azure
   - Storage
 series:
-  - Azure Fundamentals
+  - Storage Accounts
+
+pinned: true
+
+cover:
+  image: /covers/storage.svg
+  alt: Azure Storage
+  relative: false
 
 comments: true
 ShowToc: true
@@ -21,6 +28,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+weight: 1
 ---
 
 Almost every Azure workload interacts with a storage account at some point. Whether you're storing VM disks, application logs, static websites, or file shares, storage accounts are likely involved. Understanding what a storage account is and which service to pick saves you a lot of rework later.
@@ -129,4 +137,4 @@ For any storage account holding non-public data:
 
 ## Summary
 
-Storage accounts are deceptively simple on the surface but have a lot of configuration options that matter for production workloads. If in doubt, pick General-purpose V2, ZRS for production redundancy, and establish a security baseline (no public access, private endpoints, Entra ID / managed identity auth) from the start. The options that can't be changed after creation are; account type, performance tier and hierarchical namespace which deserve particular attention at design time, picking the wrong options can cause your future self huge headaches!
+Storage accounts are deceptively simple on the surface but have a lot of configuration options that matter for production workloads. If in doubt, pick General-purpose V2, ZRS for production redundancy, and establish a security baseline (no public access, private endpoints, Entra ID / managed identity auth) from the start. The options that can't be changed after creation are; account type, performance tier and hierarchical namespace which deserve particular atten

@@ -15,7 +15,6 @@ categories:
   - Storage
 series:
   - Storage Accounts
-  - Terraform
 
 comments: true
 ShowToc: true
@@ -24,6 +23,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/storage.svg
+  alt: Azure Storage
+  relative: false
+weight: 3
 ---
 
 If you haven't read [What Is an Azure Storage Account and When Should You Use One?](/posts/what-is-a-storage-account), start there. This post covers deploying one with Terraform using a production-ready security baseline.

@@ -1,0 +1,68 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Security">
+  <defs>
+    <linearGradient id="bg-sec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-sec" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5a9e"/>
+      <stop offset="100%" style="stop-color:#0d3060"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-sec)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-sec)"/>
+
+  <!-- Shield icon (right side) -->
+  <!-- Outer glow -->
+  <path d="M610,80 L710,115 L710,215 Q710,300 610,330 Q510,300 510,215 L510,115 Z"
+        fill="#0078d4" opacity="0.1"/>
+  <!-- Shield body -->
+  <path d="M610,88 L702,120 L702,212 Q702,290 610,318 Q518,290 518,212 L518,120 Z"
+        fill="url(#shield-grad)" stroke="#0078d4" stroke-width="2"/>
+  <!-- Shield inner highlight -->
+  <path d="M610,100 L690,128 L690,212 Q690,278 610,303 Q530,278 530,212 L530,128 Z"
+        fill="none" stroke="#1a5a9e" stroke-width="1" opacity="0.7"/>
+  <!-- Key icon inside shield -->
+  <!-- Key circle -->
+  <circle cx="600" cy="185" r="28" fill="none" stroke="#7bb8f5" stroke-width="4"/>
+  <circle cx="600" cy="185" r="18" fill="none" stroke="#7bb8f5" stroke-width="2" opacity="0.5"/>
+  <!-- Key shaft -->
+  <rect x="620" y="181" width="48" height="8" rx="4" fill="#7bb8f5"/>
+  <!-- Key teeth -->
+  <rect x="648" y="189" width="8" height="10" rx="2" fill="#7bb8f5"/>
+  <rect x="634" y="189" width="8" height="14" rx="2" fill="#7bb8f5"/>
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Azure</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Security</text>
+  <text x="50" y="260" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">Key Vault · Entra ID · Policy · RBAC</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

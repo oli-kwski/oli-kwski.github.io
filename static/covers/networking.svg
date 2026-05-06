@@ -1,0 +1,81 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Networking">
+  <defs>
+    <linearGradient id="bg-net" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-net" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-net)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-net)"/>
+
+  <!-- Network diagram (right side) -->
+  <!-- Connection lines -->
+  <g stroke="#0078d4" stroke-width="1.5" opacity="0.6">
+    <line x1="590" y1="200" x2="660" y2="140"/>
+    <line x1="590" y1="200" x2="660" y2="200"/>
+    <line x1="590" y1="200" x2="660" y2="260"/>
+    <line x1="590" y1="200" x2="520" y2="140"/>
+    <line x1="590" y1="200" x2="520" y2="260"/>
+    <line x1="660" y1="140" x2="730" y2="110"/>
+    <line x1="660" y1="260" x2="730" y2="290"/>
+  </g>
+
+  <!-- Outer nodes -->
+  <g fill="#0078d4" opacity="0.35">
+    <circle cx="520" cy="140" r="16"/>
+    <circle cx="660" cy="140" r="16"/>
+    <circle cx="660" cy="200" r="16"/>
+    <circle cx="660" cy="260" r="16"/>
+    <circle cx="520" cy="260" r="16"/>
+    <circle cx="730" cy="110" r="12"/>
+    <circle cx="730" cy="290" r="12"/>
+  </g>
+  <g fill="#50a0e8" opacity="0.7">
+    <circle cx="520" cy="140" r="8"/>
+    <circle cx="660" cy="140" r="8"/>
+    <circle cx="660" cy="200" r="8"/>
+    <circle cx="660" cy="260" r="8"/>
+    <circle cx="520" cy="260" r="8"/>
+    <circle cx="730" cy="110" r="6"/>
+    <circle cx="730" cy="290" r="6"/>
+  </g>
+
+  <!-- Hub node -->
+  <circle cx="590" cy="200" r="28" fill="#0078d4" opacity="0.25"/>
+  <circle cx="590" cy="200" r="18" fill="#0078d4" opacity="0.6"/>
+  <circle cx="590" cy="200" r="10" fill="#7bb8f5"/>
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Azure</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Networking</text>
+  <text x="50" y="260" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">VNets · NSGs · Private Endpoints · DNS</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

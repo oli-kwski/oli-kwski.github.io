@@ -16,6 +16,13 @@ categories:
 series:
   - Private DNS Zones
 
+pinned: true
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+
 comments: true
 ShowToc: true
 TocOpen: false
@@ -23,6 +30,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+weight: 1
 ---
 
 If you've deployed a Private Endpoint and wondered why your VM is still hitting the public IP of a storage account, the answer is almost always DNS. Private DNS Zones are the piece that ties Private Endpoints together — and the piece most people get wrong the first time.
@@ -96,4 +104,4 @@ If you enable auto-registration on a zone that also receives Private Endpoint A 
 
 ## Summary
 
-Private DNS Zones are not optional when using Private Endpoints in any serious environment. They intercept name resolution for linked VNets and return the private IP instead of the public one. Create one zone per service type, link it to the right VNets (hub in a hub-and-spoke), and verify resolution with `nslookup` from inside the VNet before calling a deployment done.
+Private DNS Zones are not optional when using Private Endpoints in any serious environment. They intercept name resolution for linked VNets and return the private IP instead of the public one. Create one zone per service type, link it to the right VNets (hub in a hub-and-spoke

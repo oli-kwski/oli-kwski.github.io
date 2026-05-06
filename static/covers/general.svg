@@ -1,0 +1,67 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Head in the Cloud">
+  <defs>
+    <linearGradient id="bg-gen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-gen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-gen)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-gen)"/>
+
+  <!-- Cloud icon (right side) -->
+  <!-- Cloud shadow/glow -->
+  <ellipse cx="618" cy="215" rx="110" ry="30" fill="#0078d4" opacity="0.08"/>
+  <!-- Cloud body -->
+  <path d="M530,220 Q530,190 560,185 Q558,155 585,148 Q595,120 630,125 Q655,108 680,128 Q710,125 718,155 Q740,158 740,185 Q755,188 755,210 Q755,230 735,230 L535,230 Q515,230 515,210 Q515,195 530,190 Z"
+        fill="#0d3060" stroke="#0078d4" stroke-width="2"/>
+  <!-- Cloud highlight -->
+  <path d="M545,200 Q545,182 565,178 Q572,160 590,158"
+        fill="none" stroke="#7bb8f5" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Dots underneath cloud (data flow) -->
+  <g fill="#0078d4" opacity="0.7">
+    <circle cx="570" cy="248" r="5"/>
+    <circle cx="590" cy="258" r="4"/>
+    <circle cx="612" cy="263" r="5"/>
+    <circle cx="634" cy="258" r="4"/>
+    <circle cx="654" cy="248" r="5"/>
+    <circle cx="570" cy="272" r="3"/>
+    <circle cx="590" cy="280" r="4"/>
+    <circle cx="612" cy="284" r="3"/>
+    <circle cx="634" cy="280" r="4"/>
+    <circle cx="654" cy="272" r="3"/>
+  </g>
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Head in</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">the Cloud</text>
+  <text x="50" y="260" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">Microsoft Azure · Architecture · DevOps</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

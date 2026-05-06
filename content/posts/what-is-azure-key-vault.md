@@ -15,6 +15,13 @@ categories:
 series:
   - Key Vault
 
+pinned: true
+
+cover:
+  image: /covers/security.svg
+  alt: Azure Security
+  relative: false
+
 comments: true
 ShowToc: true
 TocOpen: false
@@ -22,6 +29,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+weight: 1
 ---
 
 At some point, every application needs to store a secret — a database connection string, an API key, a TLS certificate. Storing these in code, environment variables, or config files creates risk. Azure Key Vault is where secrets belong instead.
@@ -122,4 +130,4 @@ If a workload in one tenant needs to access a Key Vault in another tenant (commo
 
 ## Summary
 
-Key Vault centralises secret, key, and certificate management with audit logging, soft delete, and RBAC. Use managed identities to access it — no credentials in code. Enable soft delete and purge protection on every production vault. Deploy a Private Endpoint and disable public access. Cache secret values in your application rather than calling Key Vault on every operation. And use Azure RBAC over vault access policies — it gives you the granularity you need as your workload grows.
+Key Vault centralises secret, key, and certificate management with audit logging, soft delete, and RBAC. Use managed identities to access it — no credentials in code. Enable soft delete and purge protection on every production vault. Deploy a Private Endpoint and disable public access. Cache secret values in your application rather than calling Key Vault on every operation. And use Azure RBAC o

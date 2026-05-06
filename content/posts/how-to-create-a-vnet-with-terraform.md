@@ -14,8 +14,7 @@ categories:
   - Azure
   - Networking
 series:
-  - VNets
-  - Terraform
+  - Virtual Networks
 
 comments: true
 ShowToc: true
@@ -24,6 +23,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+weight: 3
 ---
 
 If you haven't read [What Is an Azure Virtual Network?](/posts/what-is-a-vnet), start there. This post covers deploying a VNet with Terraform using the AzureRM provider.

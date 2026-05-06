@@ -16,7 +16,6 @@ categories:
   - Security
 series:
   - Private Endpoints
-  - Bicep
 
 comments: true
 ShowToc: true
@@ -24,6 +23,12 @@ TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: true
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
+weight: 2
 ---
 
 This post walks through creating a Private Endpoint for an Azure Storage account using Bicep. If you're not familiar with what Private Endpoints are and why you'd want one, start with [What Are Private Endpoints and Why You Should Use Them](/posts/azure-private-endpoints-explained).

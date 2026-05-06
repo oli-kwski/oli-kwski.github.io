@@ -6,18 +6,20 @@ summary: "About Oli — cloud consultant specialising in Microsoft Azure, and th
 ShowReadingTime: false
 ShowBreadCrumbs: true
 ShowToc: false
+ShowLastMod: false
 comments: false
 ---
 
-I'm Oli, a cloud consultant specialising in Microsoft Azure. I work across architecture, infrastructure-as-code, DevOps, security, and governance — with a particular focus on building secure, scalable landing zones without losing sight of the bill.
-
-This blog is where I document things I've built, problems I've solved, and ideas worth sharing. If something here saves you an hour of head-scratching, it's done its job.
-
-Find me on [LinkedIn](https://www.linkedin.com/in/oli-k/) or [GitHub](https://github.com/oli-kwski).
-
----
-
-## Microsoft Certifications
+<div class="about-bio">
+  <div class="about-avatar-wrap">
+    <img src="/my_avatar.png" alt="Oli">
+  </div>
+  <div class="about-text">
+    <p>I'm Oli, a cloud consultant specialising in Microsoft Azure.</p>
+    <p>This blog is where I document things I've built, problems I've solved, and ideas worth sharing. If something here saves you an hour of head-scratching, it's done its job.</p>
+    <p>Each <a href="/series/">series</a> starts with a <em>What Is...</em> explainer before getting into the practical how-to — a good place to start if you're new to a topic, or jump straight to <a href="/posts/">all posts</a>. You can see my certifications below they reflect what I work with day to day.</p>
+  </div>
+</div>
 
 <div class="cert-section">
   <div class="cert-tier-label">Expert</div>

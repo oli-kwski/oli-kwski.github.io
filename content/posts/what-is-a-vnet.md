@@ -12,7 +12,14 @@ categories:
   - Azure
   - Networking
 series:
-  - Azure Fundamentals
+  - Virtual Networks
+
+pinned: true
+
+cover:
+  image: /covers/networking.svg
+  alt: Azure Networking
+  relative: false
 
 comments: true
 ShowToc: true
@@ -21,6 +28,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: false
+weight: 1
 ---
 
 Every resource you deploy in Azure needs to communicate with other resources. VNets make this possible. Before you can connect VMs, deploy private endpoints, or route traffic through a firewall, you need a VNet.
@@ -103,4 +111,4 @@ Azure **reserves 5 IP addresses in every subnet** — the first four and the las
 
 ## Summary
 
-VNets are the starting point for almost everything in Azure networking. Get the address space right at the outset, it's the one thing that's genuinely painful to change after resources are deployed. Size subnets generously, plan for peering from day one if you're building a landing zone.
+VNets are the starting point for almost everything in Azure networking. Get the address space right at the outset, it's the one thing that's genuinely painful to change after resources are depl
