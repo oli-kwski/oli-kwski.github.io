@@ -4,7 +4,7 @@
 {{- partial "index_profile.html" . }}
 {{- else }} {{/* if not profileMode */}}
 
-{{- if not .IsHome | and .Title }}
+{{- if and (not .IsHome) .Title (eq .Kind "term") }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
   <h1>

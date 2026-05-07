@@ -10,16 +10,8 @@
 {{- $scratch := newScratch }}
 
 {{- if not .Date.IsZero -}}
-{{- $scratch.Add "meta" (slice (printf "<span title='%s'>Posted: %s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
 {{- end }}
-
-{{- /* === Begin local addition: lastmod ============================ */ -}}
-{{- if (.Param "ShowLastMod") -}}
-{{- if and (not .Lastmod.IsZero) (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) -}}
-{{- $scratch.Add "meta" (slice (printf "<span title='Last modified: %s'>Updated: %s</span>" (.Lastmod) (.Lastmod | time.Format (default ":date_long" site.Params.DateFormat)))) }}
-{{- end -}}
-{{- end -}}
-{{- /* === End local addition ======================================= */ -}}
 
 {{- if (.Param "ShowReadingTime") -}}
 {{- $scratch.Add "meta" (slice (printf "<span>Read time: %s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}

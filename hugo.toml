@@ -70,7 +70,7 @@ buildExpired = false
 
   # Dark mode: "auto" | "light" | "dark"
   # "auto" uses system preference; the toggle lets users override
-  defaultTheme = "auto"
+  defaultTheme = "dark"
   disableThemeToggle = false
 
   # Search
@@ -85,15 +85,10 @@ buildExpired = false
     name = "linkedin"
     url = "https://www.linkedin.com/in/oli-k/"
 
-  [[params.socialIcons]]
-    name = "rss"
-    url = "/index.xml"
 
   # Navbar logo
   [params.label]
-    text = "Head in the Cloud"
-    icon = "/hitc-logo.png"
-    iconHeight = 35
+    text = "HITC"
 
   # Cover image defaults
   [params.cover]
@@ -106,7 +101,7 @@ buildExpired = false
     enabled  = true
     title    = "Head in the Cloud"
     subtitle = "Azure focused - things built, problems solved, ideas worth sharing."
-    imageUrl = "/my_avatar.png"
+    imageUrl = "/my_avatar_profile.png"
     imageWidth  = 200
     imageHeight = 200
     imageTitle  = "Head in the Cloud"

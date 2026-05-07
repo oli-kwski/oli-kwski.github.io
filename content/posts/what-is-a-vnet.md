@@ -111,4 +111,4 @@ Azure **reserves 5 IP addresses in every subnet** — the first four and the las
 
 ## Summary
 
-VNets are the starting point for almost everything in Azure networking. Get the address space right at the outset, it's the one thing that's genuinely painful to change after resources are depl
+VNets are the starting point for almost everything in Azure networking. Get the address space right at the outset, it's the one thing that's genuinely painful to change after resources are deployed.

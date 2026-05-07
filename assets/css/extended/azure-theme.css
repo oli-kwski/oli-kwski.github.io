@@ -8,6 +8,17 @@
  *   Dark surface  : #1B1B2F
  */
 
+/* Clip horizontal overflow caused by full-width pseudo-elements (e.g. footer
+   border) without breaking position:sticky on the header. */
+body {
+  overflow-x: clip;
+}
+
+/* Align header nav with main content width */
+.header-nav {
+  max-width: calc(var(--main-width) + var(--gap) * 2);
+}
+
 /* =========================================================
    CSS custom properties — Light mode
    ========================================================= */
@@ -67,45 +78,96 @@ a:hover {
 }
 
 /* =========================================================
-   Header / navigation bar — seamless with theme background
+   Header / navigation bar — techy glass effect
    ========================================================= */
-.nav {
-  border-bottom: 2px solid var(--azure-blue);
+.header {
+  background: var(--theme);
+}
+
+[data-theme="dark"] .header {
+  background: rgba(5, 7, 9, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header {
+  border-bottom: 1px solid rgba(0, 120, 212, 0.35);
+}
+
+[data-theme="dark"] .header {
+  border-bottom: 1px solid rgba(80, 230, 255, 0.2);
 }
 
 /* Site title */
 .logo a,
 .logo a:visited {
-  color: var(--azure-blue) !important;
+  font-size: 0.9rem !important;
   font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-[data-theme="dark"] .logo a,
-[data-theme="dark"] .logo a:visited {
-  color: var(--azure-cyan) !important;
+  color: var(--secondary) !important;
+  opacity: 0.75;
+  transition: color 0.15s, opacity 0.15s;
 }
 
 .logo a:hover {
-  color: var(--azure-blue-hover) !important;
+  color: var(--azure-blue) !important;
+  opacity: 1;
 }
 
 [data-theme="dark"] .logo a:hover {
-  color: #7eedff !important;
+  color: var(--azure-cyan) !important;
+  opacity: 1;
 }
 
-/* Nav menu links */
-#menu-btn,
+/* Nav menu links — dimmed by default */
 .menu a {
-  color: var(--primary) !important;
+  font-size: 0.9rem !important;
+  color: var(--secondary) !important;
+  opacity: 0.75;
+  transition: color 0.15s, opacity 0.15s;
 }
 
 .menu a:hover {
   color: var(--azure-blue) !important;
+  opacity: 1;
 }
 
 [data-theme="dark"] .menu a:hover {
   color: var(--azure-cyan) !important;
+  opacity: 1;
+}
+
+/* Active page — full brightness in Azure blue */
+.menu a .active {
+  color: var(--azure-blue) !important;
+  font-weight: 600;
+  opacity: 1;
+}
+
+[data-theme="dark"] .menu a .active {
+  color: var(--azure-cyan) !important;
+}
+
+/* Active nav item — colour only, no pseudo-content */
+
+/* =========================================================
+   Profile image — display:block removes the inline baseline
+   gap that causes the apparent flat bottom on the circle.
+   ========================================================= */
+.profile img,
+.profile-avatar-wrap img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-avatar-wrap {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* =========================================================
@@ -116,21 +178,36 @@ a:hover {
 }
 
 /* =========================================================
+   List page background — override PaperMod's grey so it
+   matches the white header/footer in light mode.
+   ========================================================= */
+.list {
+  background: var(--theme);
+}
+
+[data-theme="dark"] .list {
+  background: var(--theme);
+}
+
+/* =========================================================
    Post list entries
    ========================================================= */
 .post-entry {
   border: 1px solid var(--azure-border);
+  border-left: 3px solid transparent;
   border-radius: 6px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, border-left-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .post-entry:hover {
-  border-color: var(--azure-blue);
+  border-color: var(--azure-border);
+  border-left-color: var(--azure-blue);
   box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
 }
 
 [data-theme="dark"] .post-entry:hover {
-  border-color: var(--azure-cyan);
+  border-color: #3a3a5c;
+  border-left-color: var(--azure-cyan);
   box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
 }
 
@@ -153,42 +230,75 @@ a:hover {
 .post-meta span {
   color: var(--secondary);
   font-size: 0.82rem;
+  font-family: ui-monospace, Consolas, "Cascadia Code", "Fira Code", monospace;
+  opacity: 0.8;
 }
 
 /* =========================================================
    Tags & categories
    ========================================================= */
-.post-tags a,
-.terms-tags a {
-  background: var(--azure-blue-light);
-  color: var(--azure-navy) !important;
-  border-radius: 4px;
-  padding: 2px 8px;
+/* Tags on individual posts — outlined monospace with # prefix */
+.post-tags a {
   font-size: 0.78rem;
-  font-weight: 500;
-  border: 1px solid transparent;
+  color: var(--azure-blue) !important;
+  background: transparent;
+  border: 1px solid rgba(0, 120, 212, 0.4);
+  border-radius: 3px;
+  padding: 2px 8px;
   transition: background 0.15s, border-color 0.15s;
 }
 
-.post-tags a:hover,
-.terms-tags a:hover {
-  background: var(--azure-blue);
-  color: #ffffff !important;
+
+.post-tags a:hover {
+  background: rgba(0, 120, 212, 0.08);
   border-color: var(--azure-blue);
+  color: var(--azure-blue) !important;
 }
 
-[data-theme="dark"] .post-tags a,
-[data-theme="dark"] .terms-tags a {
-  background: rgba(80, 230, 255, 0.12);
+[data-theme="dark"] .post-tags a {
   color: var(--azure-cyan) !important;
-  border-color: rgba(80, 230, 255, 0.25);
+  background: transparent;
+  border-color: rgba(80, 230, 255, 0.3);
 }
 
-[data-theme="dark"] .post-tags a:hover,
-[data-theme="dark"] .terms-tags a:hover {
-  background: rgba(80, 230, 255, 0.25);
-  color: #ffffff !important;
+[data-theme="dark"] .post-tags a:hover {
+  background: rgba(80, 230, 255, 0.08);
   border-color: var(--azure-cyan);
+  color: var(--azure-cyan) !important;
+}
+
+/* Terms pages (tags, categories, series) — card style matching post entries */
+.terms-tags a {
+  display: block;
+  background: var(--entry);
+  border: 1px solid var(--azure-border);
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  color: var(--primary) !important;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: border-color 0.2s, border-left-color 0.2s, box-shadow 0.2s;
+  text-decoration: none !important;
+}
+
+.terms-tags a:hover {
+  border-color: var(--azure-border);
+  border-left-color: var(--azure-blue);
+  box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
+  color: var(--primary) !important;
+}
+
+[data-theme="dark"] .terms-tags a {
+  background: var(--entry);
+  border-color: var(--azure-border);
+  color: var(--primary) !important;
+}
+
+[data-theme="dark"] .terms-tags a:hover {
+  border-color: #3a3a5c;
+  border-left-color: var(--azure-cyan);
+  box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
 }
 
 /* =========================================================
@@ -216,21 +326,41 @@ a:hover {
   color: var(--azure-cyan);
 }
 
+.toc .inner a {
+  font-size: 0.81rem;
+}
+
 /* =========================================================
    Buttons (read more, etc.)
    ========================================================= */
 .button,
 button.button {
-  background: var(--azure-blue);
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--azure-blue) !important;
+  border: 1px solid var(--azure-blue);
+  border-radius: 3px;
   padding: 0.4rem 1rem;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
 
-.button:hover {
-  background: var(--azure-blue-hover);
+.button:hover,
+button.button:hover {
+  background: var(--azure-blue);
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .button,
+[data-theme="dark"] button.button {
+  color: var(--azure-cyan) !important;
+  border-color: rgba(80, 230, 255, 0.4);
+}
+
+[data-theme="dark"] .button:hover,
+[data-theme="dark"] button.button:hover {
+  background: rgba(80, 230, 255, 0.12);
+  color: var(--azure-cyan) !important;
+  border-color: var(--azure-cyan);
 }
 
 /* =========================================================
@@ -238,13 +368,30 @@ button.button {
    PaperMod uses background: var(--primary) which inverts in
    dark mode to a plain grey — override to stay on-brand.
    ========================================================= */
+.pagination a {
+  font-family: ui-monospace, Consolas, "Cascadia Code", "Fira Code", monospace;
+  font-size: 0.82rem;
+  background: transparent;
+  color: var(--azure-blue);
+  border: 1px solid rgba(0, 120, 212, 0.4);
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.pagination a:hover {
+  background: rgba(0, 120, 212, 0.08);
+  border-color: var(--azure-blue);
+}
+
 [data-theme="dark"] .pagination a {
-  background: var(--azure-blue);
-  color: #ffffff;
+  background: transparent;
+  color: var(--azure-cyan);
+  border-color: rgba(80, 230, 255, 0.3);
 }
 
 [data-theme="dark"] .pagination a:hover {
-  background: var(--azure-blue-hover);
+  background: rgba(80, 230, 255, 0.08);
+  border-color: var(--azure-cyan);
 }
 
 /* =========================================================
@@ -315,46 +462,100 @@ blockquote {
    Footer
    ========================================================= */
 .footer {
-  border-top: 2px solid var(--azure-blue);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  background: var(--theme);
+  padding: 0 var(--gap);
+  height: 44px;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: rgba(0, 120, 212, 0.35);
 }
 
 [data-theme="dark"] .footer {
-  border-top-color: #3a3a5c;
+  background: rgba(5, 7, 9, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.footer-social {
+[data-theme="dark"] .footer::before {
+  background: rgba(80, 230, 255, 0.2);
+}
+
+.footer .footer-text {
+  font-size: 0.78rem;
+  color: var(--secondary);
+  opacity: 0.85;
+  flex: 1;
+}
+
+.footer-social-icons {
   display: flex;
-  justify-content: center;
-  margin-top: 0.1rem;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.25rem;
 }
 
-.footer-social .social-icons a,
-.footer-social .social-icons a:hover {
+.footer-social-icons a {
   color: var(--secondary);
   text-decoration: none !important;
-  box-shadow: none !important;
-  border-bottom: none !important;
+  padding: 4px 6px;
   transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
 }
 
-.footer-social .social-icons a:hover {
-  color: var(--azure-blue);
+.footer-social-icons a:hover {
+  color: var(--azure-blue) !important;
 }
 
-[data-theme="dark"] .footer-social .social-icons a:hover {
-  color: var(--azure-cyan);
+[data-theme="dark"] .footer-social-icons a:hover {
+  color: var(--azure-cyan) !important;
 }
+
+.footer-social-icons svg {
+  height: 18px;
+  width: 18px;
+  display: block;
+}
+
 
 /* =========================================================
    Dark-mode toggle button
    ========================================================= */
+#theme-toggle {
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
 #theme-toggle svg {
-  fill: #d8eaf8;
-  transition: fill 0.2s;
+  stroke: var(--secondary);
+  fill: none;
+  transition: stroke 0.15s;
+}
+
+#theme-toggle:hover {
+  opacity: 1;
 }
 
 #theme-toggle:hover svg {
-  fill: var(--azure-cyan);
+  stroke: var(--azure-blue);
+}
+
+[data-theme="dark"] #theme-toggle:hover svg {
+  stroke: var(--azure-cyan);
 }
 
 /* =========================================================
@@ -508,8 +709,15 @@ figure.diagram figcaption {
 /* =========================================================
    Certifications grid — used on the About page
    ========================================================= */
+.cert-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 2rem 0 0.5rem;
+}
+
 .cert-section {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .cert-tier-label {
@@ -580,6 +788,7 @@ figure.diagram figcaption {
   background: var(--theme);
 }
 
+
 ::-webkit-scrollbar-thumb {
   background: var(--azure-blue-light);
   border-radius: 4px;
@@ -648,7 +857,7 @@ figure.diagram figcaption {
 }
 
 .series-nav-count {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--secondary);
   white-space: nowrap;
 }
@@ -704,6 +913,7 @@ figure.diagram figcaption {
 }
 
 .series-nav-link {
+  font-size: 0.82rem;
   color: var(--primary);
   text-decoration: none;
   line-height: 1.4;
@@ -740,12 +950,19 @@ a.series-nav-link:hover {
   margin-bottom: 2.5rem;
 }
 
+.about-avatar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.75rem;
+}
+
 .about-avatar-wrap {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .about-avatar-wrap img {
@@ -757,6 +974,36 @@ a.series-nav-link:hover {
 
 .about-text {
   flex: 1;
+}
+
+.about-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.about-social-icons a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--secondary);
+  text-decoration: none !important;
+  padding: 4px 6px;
+  transition: color 0.2s;
+}
+
+.about-social-icons a:hover {
+  color: var(--azure-blue) !important;
+}
+
+[data-theme="dark"] .about-social-icons a:hover {
+  color: var(--azure-cyan) !important;
+}
+
+.about-social-icons svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .about-text p {
@@ -774,5 +1021,9 @@ a.series-nav-link:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .about-avatar-col {
+    align-items: center;
   }
 }
