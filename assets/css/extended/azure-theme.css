@@ -194,7 +194,7 @@ a:hover {
    ========================================================= */
 .post-entry {
   border: 1px solid var(--azure-border);
-  border-left: 3px solid transparent;
+  border-left: 3px solid var(--azure-border);
   border-radius: 6px;
   transition: border-color 0.2s ease, border-left-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -272,7 +272,7 @@ a:hover {
   display: block;
   background: var(--entry);
   border: 1px solid var(--azure-border);
-  border-left: 3px solid transparent;
+  border-left: 3px solid var(--azure-border);
   border-radius: 6px;
   padding: 0.35rem 0.75rem;
   color: var(--primary) !important;
@@ -336,31 +336,33 @@ a:hover {
 .button,
 button.button {
   font-size: 0.85rem;
-  background: transparent;
-  color: var(--azure-blue) !important;
+  background: var(--azure-blue);
+  color: #ffffff !important;
   border: 1px solid var(--azure-blue);
   border-radius: 3px;
   padding: 0.4rem 1rem;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .button:hover,
 button.button:hover {
-  background: var(--azure-blue);
+  background: var(--azure-blue-hover);
+  border-color: var(--azure-blue-hover);
   color: #ffffff !important;
 }
 
 [data-theme="dark"] .button,
 [data-theme="dark"] button.button {
+  background: rgba(80, 230, 255, 0.15);
+  border-color: rgba(80, 230, 255, 0.5);
   color: var(--azure-cyan) !important;
-  border-color: rgba(80, 230, 255, 0.4);
 }
 
 [data-theme="dark"] .button:hover,
 [data-theme="dark"] button.button:hover {
-  background: rgba(80, 230, 255, 0.12);
-  color: var(--azure-cyan) !important;
+  background: rgba(80, 230, 255, 0.25);
   border-color: var(--azure-cyan);
+  color: var(--azure-cyan) !important;
 }
 
 /* =========================================================
@@ -986,14 +988,14 @@ a.series-nav-link:hover {
 .about-social-icons a {
   display: inline-flex;
   align-items: center;
-  color: var(--secondary);
+  color: var(--azure-blue);
   text-decoration: none !important;
   padding: 4px 6px;
   transition: color 0.2s;
 }
 
 .about-social-icons a:hover {
-  color: var(--azure-blue) !important;
+  color: var(--azure-blue-hover) !important;
 }
 
 [data-theme="dark"] .about-social-icons a:hover {
