@@ -5,12 +5,16 @@ draft: true
 description: "Private DNS Zones are the often-overlooked half of Private Endpoint deployments. Here's how they work, why they matter, and the mistakes that trip people up."
 
 tags:
+  - Azure
   - Networking
   - DNS
   - Private DNS
   - Private Endpoints
+categories:
+  - Azure
+  - Networking
 series:
-  - Private DNS
+  - Private DNS Zones
 
 pinned: true
 

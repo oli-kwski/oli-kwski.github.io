@@ -5,9 +5,13 @@ draft: true
 description: "Azure Key Vault centralises secrets, keys, and certificates management in Azure. Here's how it works, what to store in it, and the access patterns to get right."
 
 tags:
+  - Azure
   - Security
   - Key Vault
   - Secrets Management
+categories:
+  - Azure
+  - Security
 series:
   - Key Vault
 

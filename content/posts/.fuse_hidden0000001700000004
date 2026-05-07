@@ -5,10 +5,14 @@ draft: true
 description: "Practical Terraform for deploying an Azure Key Vault with production-ready security defaults, RBAC, and Private Endpoint integration."
 
 tags:
+  - Azure
   - Security
   - Key Vault
   - Terraform
   - IaC
+categories:
+  - Azure
+  - Security
 series:
   - Key Vault
 

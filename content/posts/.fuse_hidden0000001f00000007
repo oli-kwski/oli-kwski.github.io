@@ -5,13 +5,17 @@ draft: true
 description: "Step-by-step Bicep for deploying a Private DNS Zone, linking it to a VNet, and wiring it up to a Private Endpoint."
 
 tags:
+  - Azure
   - Networking
   - DNS
   - Private DNS
   - Bicep
   - IaC
+categories:
+  - Azure
+  - Networking
 series:
-  - Private DNS
+  - Private DNS Zones
 
 comments: true
 ShowToc: true

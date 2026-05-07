@@ -5,6 +5,7 @@ draft: true
 description: "A step-by-step guide to deploying an Azure Private Endpoint for a Storage account using Bicep, including Private DNS Zone integration."
 
 tags:
+  - Azure
   - Networking
   - Security
   - Private Endpoints

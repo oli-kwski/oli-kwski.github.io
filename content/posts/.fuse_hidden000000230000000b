@@ -5,6 +5,7 @@ draft: true
 description: "A practical guide to deploying an Azure Virtual Network and subnets using Bicep, including parameter patterns and common configuration options."
 
 tags:
+  - Azure
   - Networking
   - VNet
   - Bicep

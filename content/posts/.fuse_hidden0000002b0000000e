@@ -4,6 +4,8 @@ date: 2026-04-08
 draft: false
 description: "An introduction to the blog and what to expect."
 
+categories:
+  - General
 
 cover:
   image: /covers/general.svg
@@ -36,4 +38,4 @@ Every post has a Giscus comment section at the bottom, backed by GitHub Discussi
 
 ## Stay in touch
 
-Connect on [LinkedIn](https://www.linkedin.com/in/oli-k/), follow alo
+Connect on [LinkedIn](https://www.linkedin.com/in/oli-k/), follow along on [GitHub](https://github.com/oli-kwski) or Subscribe via [RSS](/index.xml).

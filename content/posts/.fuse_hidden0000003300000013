@@ -5,6 +5,7 @@ draft: false
 description: "Virtual Networks are fundamental to networking in Azure. Here's how they work, why you need them, and what to watch out for when planning one."
 
 tags:
+  - Azure
   - Networking
   - VNet
 series:

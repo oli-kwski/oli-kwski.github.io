@@ -5,13 +5,17 @@ draft: true
 description: "Step-by-step Terraform for deploying an Azure Private DNS Zone, linking it to a VNet, and integrating it with Private Endpoints."
 
 tags:
+  - Azure
   - Networking
   - DNS
   - Private DNS
   - Terraform
   - IaC
+categories:
+  - Azure
+  - Networking
 series:
-  - Private DNS
+  - Private DNS Zones
 
 comments: true
 ShowToc: true

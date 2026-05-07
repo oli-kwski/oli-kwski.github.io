@@ -5,9 +5,13 @@ draft: false
 description: "Private Endpoints bring Azure PaaS services onto your virtual network with a private IP address, eliminating exposure to the public internet. Here's how they work and why they matter."
 
 tags:
+  - Azure
   - Networking
   - Security
   - Private Endpoints
+categories:
+  - Azure
+  - Networking
 series:
   - Private Endpoints
 

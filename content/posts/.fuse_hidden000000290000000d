@@ -5,11 +5,15 @@ draft: true
 description: "Practical Terraform for deploying an NSG with security rules, attaching it to a subnet, and enabling flow logs."
 
 tags:
+  - Azure
   - Networking
   - NSG
   - Security
   - Terraform
   - IaC
+categories:
+  - Azure
+  - Networking
 series:
   - NSG
 

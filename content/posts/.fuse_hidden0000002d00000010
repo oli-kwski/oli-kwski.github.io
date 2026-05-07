@@ -5,6 +5,7 @@ draft: true
 description: "Network Security Groups are the primary access control mechanism for Azure VNets. Here's how they work, where to attach them, and the rules that catch people out."
 
 tags:
+  - Azure
   - Networking
   - NSG
   - Security

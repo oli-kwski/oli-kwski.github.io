@@ -5,11 +5,15 @@ draft: true
 description: "Practical Bicep for deploying an NSG with security rules and attaching it to a subnet, including flow log configuration."
 
 tags:
+  - Azure
   - Networking
   - NSG
   - Security
   - Bicep
   - IaC
+categories:
+  - Azure
+  - Networking
 series:
   - NSG
 

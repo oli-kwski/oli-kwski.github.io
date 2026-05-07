@@ -961,8 +961,8 @@ a.series-nav-link:hover {
 }
 
 .about-avatar-wrap {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -998,8 +998,12 @@ a.series-nav-link:hover {
   color: var(--azure-blue-hover) !important;
 }
 
+[data-theme="dark"] .about-social-icons a {
+  color: var(--azure-cyan);
+}
+
 [data-theme="dark"] .about-social-icons a:hover {
-  color: var(--azure-cyan) !important;
+  color: #7eedff !important;
 }
 
 .about-social-icons svg {

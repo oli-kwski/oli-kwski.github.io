@@ -5,10 +5,14 @@ draft: true
 description: "A practical Terraform configuration for deploying a production-ready Azure Storage account with security defaults baked in."
 
 tags:
+  - Azure
   - Storage
   - Storage Account
   - Terraform
   - IaC
+categories:
+  - Azure
+  - Storage
 series:
   - Storage Accounts
 

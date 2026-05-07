@@ -5,10 +5,14 @@ draft: true
 description: "A practical guide to deploying an Azure Virtual Network and subnets using Terraform, with the AzureRM provider."
 
 tags:
+  - Azure
   - Networking
   - VNet
   - Terraform
   - IaC
+categories:
+  - Azure
+  - Networking
 series:
   - VNet
 
