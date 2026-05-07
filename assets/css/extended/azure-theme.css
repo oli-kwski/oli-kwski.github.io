@@ -1027,3 +1027,94 @@ a.series-nav-link:hover {
     align-items: center;
   }
 }
+
+/* =========================================================
+   Posts grid — 3-column layout on the /posts/ page
+   ========================================================= */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.posts-grid .post-entry {
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.posts-grid .entry-content {
+  flex: 1;
+}
+
+.posts-grid .entry-header h2 {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 700px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Tag filter — posts page
+   ========================================================= */
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag-filter-btn {
+  font-size: 0.78rem;
+  padding: 3px 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 120, 212, 0.4);
+  background: transparent;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--azure-blue);
+  color: var(--azure-blue);
+}
+
+.tag-filter-btn.active {
+  background: var(--azure-blue);
+  border-color: var(--azure-blue);
+  color: #fff;
+}
+
+[data-theme="dark"] .tag-filter-btn {
+  border-color: rgba(80, 230, 255, 0.3);
+}
+
+[data-theme="dark"] .tag-filter-btn:hover {
+  border-color: var(--azure-cyan);
+  color: var(--azure-cyan);
+}
+
+[data-theme="dark"] .tag-filter-btn.active {
+  background: var(--azure-cyan);
+  border-color: var(--azure-cyan);
+  color: var(--azure-navy);
+}
+
+.tag-filter-empty {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+  text-align: center;
+}

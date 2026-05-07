@@ -38,6 +38,87 @@
 </div>
 {{- end }}
 
+{{- if and (eq .Kind "section") (eq .Section "posts") }}
+
+{{/* ---- Tag-filtered posts list (no pagination) ---- */}}
+{{- $allPages := .Pages.ByDate.Reverse }}
+{{- $allTags := slice }}
+{{- range $allPages }}
+  {{- range .GetTerms "tags" }}
+    {{- $allTags = $allTags | append .Title }}
+  {{- end }}
+{{- end }}
+{{- $allTags = $allTags | uniq | sort }}
+
+<div class="tag-filter" id="tag-filter">
+  <button class="tag-filter-btn active" data-tag="all">All</button>
+  {{- range $allTags }}
+  <button class="tag-filter-btn" data-tag="{{ . | urlize }}">{{ . }}</button>
+  {{- end }}
+</div>
+
+<div class="posts-grid">
+{{- range $allPages }}
+{{- $tagSlugs := slice }}
+{{- range .GetTerms "tags" }}
+  {{- $tagSlugs = $tagSlugs | append (.Title | urlize) }}
+{{- end }}
+<article class="post-entry" data-tags="{{ delimit $tagSlugs " " }}">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      {{- .Title }}
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h2>
+  </header>
+  {{- if not (.Param "hideMeta") }}
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" . -}}
+  </footer>
+  {{- end }}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+</div>{{/* end posts-grid */}}
+
+<div class="tag-filter-empty" id="tag-filter-empty" style="display:none">
+  <p>No posts match this filter.</p>
+</div>
+
+<script>
+(function () {
+  const btns = document.querySelectorAll('.tag-filter-btn');
+  const posts = document.querySelectorAll('.posts-grid .post-entry');
+  const empty = document.getElementById('tag-filter-empty');
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      let visible = 0;
+      posts.forEach(function (post) {
+        const tags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
+        const show = tag === 'all' || tags.includes(tag);
+        post.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      empty.style.display = visible === 0 ? '' : 'none';
+    });
+  });
+}());
+</script>
+
+{{- else }}
+
+{{/* ---- Normal paginated list for all other sections ---- */}}
 {{- $pages := union .RegularPages .Sections }}
 
 {{- if .IsHome }}
@@ -114,6 +195,8 @@
   </nav>
 </footer>
 {{- end }}
+
+{{- end }}{{/* end posts section / paginator branch */}}
 
 {{- end }}{{/* end profileMode */}}
 
