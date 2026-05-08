@@ -39,7 +39,7 @@ If you haven't read [What Is an Azure Virtual Network?](/posts/what-is-a-vnet), 
 
 ## The Bicep
 
-A VNet with two subnets — one for workloads, one for private endpoints:
+A VNet with two subnets - one for workloads, one for private endpoints:
 
 ```bicep
 @description('Azure region for the VNet.')
