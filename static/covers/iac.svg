@@ -1,0 +1,114 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Infrastructure as Code">
+  <defs>
+    <linearGradient id="bg-iac" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-iac" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-iac)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-iac)"/>
+
+  <!-- Code terminal window (right side) -->
+  <!-- Window frame -->
+  <rect x="460" y="80" width="295" height="230" rx="8" ry="8"
+        fill="#0a1e3d" stroke="#0078d4" stroke-width="1.5" opacity="0.95"/>
+
+  <!-- Title bar -->
+  <rect x="460" y="80" width="295" height="30" rx="8" ry="8" fill="#0d2a4a"/>
+  <rect x="460" y="94" width="295" height="16" fill="#0d2a4a"/>
+
+  <!-- Traffic lights -->
+  <circle cx="480" cy="95" r="5" fill="#ff5f57" opacity="0.8"/>
+  <circle cx="496" cy="95" r="5" fill="#ffbd2e" opacity="0.8"/>
+  <circle cx="512" cy="95" r="5" fill="#28ca41" opacity="0.8"/>
+
+  <!-- Terminal text — Bicep-style -->
+  <!-- Line 1: prompt -->
+  <text x="476" y="133" fill="#50e6ff" font-size="11" font-family="Cascadia Code, Consolas, monospace">$</text>
+  <text x="486" y="133" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace"> az deploy</text>
+
+  <!-- Line 2: resource keyword -->
+  <text x="476" y="152" fill="#0078d4" font-size="11" font-family="Cascadia Code, Consolas, monospace">resource</text>
+  <text x="530" y="152" fill="#ffffff" font-size="11" font-family="Cascadia Code, Consolas, monospace"> vnet</text>
+  <text x="554" y="152" fill="#50e6ff" font-size="11" font-family="Cascadia Code, Consolas, monospace"> 'Microsoft</text>
+  <text x="476" y="166" fill="#50e6ff" font-size="11" font-family="Cascadia Code, Consolas, monospace">  .Network/vn@2024'</text>
+
+  <!-- Line 3: property -->
+  <text x="476" y="185" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace">  name:</text>
+  <text x="514" y="185" fill="#28ca41" font-size="11" font-family="Cascadia Code, Consolas, monospace"> 'prod-vnet'</text>
+
+  <!-- Line 4 -->
+  <text x="476" y="200" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace">  location:</text>
+  <text x="524" y="200" fill="#28ca41" font-size="11" font-family="Cascadia Code, Consolas, monospace"> location</text>
+
+  <!-- Line 5 -->
+  <text x="476" y="215" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace">  properties: </text>
+  <text x="549" y="215" fill="#ffffff" font-size="11" font-family="Cascadia Code, Consolas, monospace">{</text>
+
+  <!-- Line 6 -->
+  <text x="476" y="230" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace">    addressSpace:</text>
+  <text x="560" y="230" fill="#ffffff" font-size="11" font-family="Cascadia Code, Consolas, monospace">{</text>
+
+  <!-- Line 7 -->
+  <text x="476" y="245" fill="#7bb8f5" font-size="11" font-family="Cascadia Code, Consolas, monospace">      prefixes:</text>
+  <text x="530" y="245" fill="#28ca41" font-size="11" font-family="Cascadia Code, Consolas, monospace"> ['10.0.0.0/16']</text>
+
+  <!-- Line 8: closing + cursor -->
+  <text x="476" y="260" fill="#ffffff" font-size="11" font-family="Cascadia Code, Consolas, monospace">  }}</text>
+  <rect x="502" y="263" width="7" height="11" fill="#50e6ff" opacity="0.8"/>
+
+  <!-- Deploy arrow -->
+  <line x1="390" y1="200" x2="455" y2="200" stroke="#0078d4" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+  <polygon points="453,195 463,200 453,205" fill="#0078d4" opacity="0.8"/>
+
+  <!-- Resource boxes (left of arrow) -->
+  <!-- VNet box -->
+  <rect x="310" y="158" width="72" height="34" rx="4" fill="#0a1e3d" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="346" y="178" fill="#50e6ff" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle">VNet</text>
+
+  <!-- NSG box -->
+  <rect x="310" y="204" width="72" height="34" rx="4" fill="#0a1e3d" stroke="#0078d4" stroke-width="1.5"/>
+  <text x="346" y="224" fill="#50e6ff" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle">NSG</text>
+
+  <!-- Subnet box -->
+  <rect x="310" y="112" width="72" height="34" rx="4" fill="#0a1e3d" stroke="#005a9e" stroke-width="1" opacity="0.7"/>
+  <text x="346" y="132" fill="#7bb8f5" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle">Subnet</text>
+
+  <!-- Connecting lines between boxes -->
+  <line x1="346" y1="146" x2="346" y2="158" stroke="#0078d4" stroke-width="1" opacity="0.5"/>
+  <line x1="346" y1="192" x2="346" y2="204" stroke="#0078d4" stroke-width="1" opacity="0.5"/>
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Infra</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">as Code</text>
+  <text x="50" y="258" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">Bicep · Terraform · ARM</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

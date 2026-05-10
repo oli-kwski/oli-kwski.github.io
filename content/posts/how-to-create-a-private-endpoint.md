@@ -21,8 +21,8 @@ ShowBreadCrumbs: false
 ShowPostNavLinks: true
 
 cover:
-  image: /covers/networking.svg
-  alt: Azure Networking
+  image: /covers/iac.svg
+  alt: Infrastructure as Code
   relative: false
 weight: 2
 ---

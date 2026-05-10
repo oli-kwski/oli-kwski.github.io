@@ -21,8 +21,8 @@ ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
-  image: /covers/storage.svg
-  alt: Azure Storage
+  image: /covers/iac.svg
+  alt: Infrastructure as Code
   relative: false
 weight: 3
 ---

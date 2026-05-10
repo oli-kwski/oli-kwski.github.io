@@ -8,6 +8,7 @@
          /covers/networking.svg → og-template-networking.png
          /covers/security.svg  → og-template-security.png
          /covers/storage.svg   → og-template-storage.png
+         /covers/iac.svg       → og-template-iac.png
          anything else         → og-template-general.png
 
        Returns the resource so the caller can use .Permalink for meta
@@ -24,6 +25,7 @@
 {{- if strings.Contains $coverImg "networking" -}}{{- $tplName = "images/og-template-networking.png" -}}{{- end -}}
 {{- if strings.Contains $coverImg "security"   -}}{{- $tplName = "images/og-template-security.png"   -}}{{- end -}}
 {{- if strings.Contains $coverImg "storage"    -}}{{- $tplName = "images/og-template-storage.png"    -}}{{- end -}}
+{{- if strings.Contains $coverImg "iac"        -}}{{- $tplName = "images/og-template-iac.png"        -}}{{- end -}}
 {{- $tpl := resources.Get $tplName -}}
 {{- $font := resources.Get "fonts/Lato-Black.ttf" -}}
 {{- $title := .Title | default .Site.Title -}}

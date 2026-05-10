@@ -17,7 +17,6 @@ enableGitInfo = true
 [pagination]
   pagerSize = 10
 enableRobotsTXT = true
-disableScrollToTop = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
@@ -72,6 +71,9 @@ buildExpired = false
 
   # Comments — powered by Giscus (see layouts/partials/comments.html)
   comments = true
+
+  # Scroll-to-top arrow — disabled; sticky header makes it redundant
+  disableScrollToTop = true
 
   # Dark mode: "auto" | "light" | "dark"
   # "auto" uses system preference; the toggle lets users override
