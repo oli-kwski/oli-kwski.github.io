@@ -1,1 +1,42 @@
-{{- /* extend_footer.html — intentionally empty, social icons are in footer.html */ -}}
+{{- /* Reading progress bar — posts only */}}
+{{- if eq .Kind "page" }}
+<script>
+(function () {
+  var bar = document.getElementById('reading-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function () {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = Math.min(pct, 100) + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+  }, { passive: true });
+})();
+</script>
+{{- end }}
+
+{{- /* Code block language labels */}}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
+<script>
+(function () {
+  var skip = ['text', 'plain', 'plaintext', 'fallback'];
+  document.querySelectorAll('.highlight').forEach(function (block) {
+    var code = block.querySelector('code[data-lang]');
+    if (!code) return;
+    var lang = code.getAttribute('data-lang').toLowerCase();
+    if (skip.indexOf(lang) !== -1) return;
+    block.setAttribute('data-lang', lang);
+  });
+})();
+</script>
+{{- end }}
+
+{{- /* Escape key closes mobile hamburger menu */}}
+<script>
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    var toggle = document.getElementById('menu-toggle');
+    if (toggle && toggle.checked) toggle.checked = false;
+  }
+});
+</script>
