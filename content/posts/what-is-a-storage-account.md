@@ -133,4 +133,4 @@ For any storage account holding non-public data:
 
 ## Summary
 
-Storage accounts are deceptively simple on the surface but have a lot of configuration options that matter for production workloads. If in doubt, pick General-purpose V2, ZRS for production redundancy, and establish a security baseline (no public access, private endpoints, Entra ID / managed identity auth) from the start. The options that can't be changed after creation are; account type, performance tier and hierarchical namespace which deserve particular atten
+Storage accounts are deceptively simple on the surface but have a lot of configuration options that matter for production workloads. If in doubt, pick General-purpose V2, ZRS for production redundancy, and establish a security baseline (no public access, private endpoints, Entra ID / managed identity auth) from the start. The options that can't be changed after creation - account type, performance tier, and hierarchical namespace - deserve particular attention before you deploy.

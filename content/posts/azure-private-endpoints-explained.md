@@ -110,4 +110,4 @@ They're less necessary for public-facing services (App Services, API Management 
 
 Private endpoints are the right way to connect to Azure PaaS services from within a VNet. They replace a public internet hop with internal connectivity, they allow you to disable public access entirely, and integrate cleanly with private DNS zones for seamless name resolution. The DNS configuration is the fiddly bit, get that right and the rest is straightforward.
 
-If you're building anything resembling a p
+If you're building anything resembling a production workload in Azure, private endpoints should be your default for PaaS connectivity.

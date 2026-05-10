@@ -36,4 +36,4 @@ Every post has a Giscus comment section at the bottom, backed by GitHub Discussi
 
 ## Stay in touch
 
-Connect on [LinkedIn](https://www.linkedin.com/in/oli-k/), follow alo
+Connect on [LinkedIn](https://www.linkedin.com/in/oli-k/), follow along for new posts, or drop a comment below.
