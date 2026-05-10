@@ -17,6 +17,7 @@ enableGitInfo = true
 [pagination]
   pagerSize = 10
 enableRobotsTXT = true
+disableScrollToTop = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
