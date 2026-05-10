@@ -1,8 +1,14 @@
 {{- /* og-image.html
 
        Generates a 1200x630 OG card per page by overlaying the page's
-       title onto assets/images/og-template.png at build time using
+       title onto a category-specific template at build time using
        Hugo's images.Text filter.
+
+       Template selection is driven by the post's cover.image frontmatter:
+         /covers/networking.svg → og-template-networking.png
+         /covers/security.svg  → og-template-security.png
+         /covers/storage.svg   → og-template-storage.png
+         anything else         → og-template-general.png
 
        Returns the resource so the caller can use .Permalink for meta
        tags (or .RelPermalink if you ever need a relative URL).
@@ -13,7 +19,12 @@
        to 60px so they still fit.
 */ -}}
 
-{{- $tpl := resources.Get "images/og-template.png" -}}
+{{- $coverImg  := .Params.cover.image | default "" -}}
+{{- $tplName   := "images/og-template-general.png" -}}
+{{- if strings.Contains $coverImg "networking" -}}{{- $tplName = "images/og-template-networking.png" -}}{{- end -}}
+{{- if strings.Contains $coverImg "security"   -}}{{- $tplName = "images/og-template-security.png"   -}}{{- end -}}
+{{- if strings.Contains $coverImg "storage"    -}}{{- $tplName = "images/og-template-storage.png"    -}}{{- end -}}
+{{- $tpl := resources.Get $tplName -}}
 {{- $font := resources.Get "fonts/Lato-Black.ttf" -}}
 {{- $title := .Title | default .Site.Title -}}
 
