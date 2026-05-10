@@ -1124,3 +1124,77 @@ a.series-nav-link:hover {
   padding: 2rem 0;
   text-align: center;
 }
+
+/* =========================================================
+   Mobile hamburger menu
+   ========================================================= */
+
+/* Always hide the checkbox itself */
+.menu-toggle-input {
+  display: none;
+}
+
+/* Hide the hamburger label and close icon on desktop */
+.menu-toggle-label {
+  display: none;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  color: var(--primary);
+  align-items: center;
+  line-height: var(--header-height);
+}
+
+.menu-toggle-label .close-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Show hamburger button */
+  .menu-toggle-label {
+    display: flex;
+  }
+
+  /* Collapse menu by default on mobile, overriding PaperMod's display:flex */
+  .menu {
+    display: none !important;
+    flex-direction: column !important;
+    flex-basis: 100%;
+    width: 100%;
+    padding: 0.25rem 0 0.75rem;
+    column-gap: 0;
+    overflow-x: unset;
+    white-space: normal;
+    border-top: 1px solid var(--border);
+  }
+
+  .menu li {
+    width: 100%;
+    line-height: 1;
+  }
+
+  .menu a {
+    padding: 0.75rem 0 !important;
+    font-size: 1rem !important;
+    opacity: 1 !important;
+    display: block;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .menu li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Reveal menu when toggle is checked */
+  .menu-toggle-input:checked ~ .menu {
+    display: flex !important;
+  }
+
+  /* Swap hamburger icon for close icon when open */
+  .menu-toggle-input:checked ~ .menu-toggle-label .hamburger-icon {
+    display: none;
+  }
+
+  .menu-toggle-input:checked ~ .menu-toggle-label .close-icon {
+    display: flex;
+  }
+}

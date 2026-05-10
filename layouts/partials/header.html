@@ -84,6 +84,22 @@
             </div>
             {{- end }}
         </div>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle-input" aria-hidden="true">
+        <label for="menu-toggle" class="menu-toggle-label" aria-label="Toggle navigation">
+            <span class="hamburger-icon">
+                <svg width="22" height="16" viewBox="0 0 22 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0" width="22" height="2" rx="1"/>
+                    <rect y="7" width="22" height="2" rx="1"/>
+                    <rect y="14" width="22" height="2" rx="1"/>
+                </svg>
+            </span>
+            <span class="close-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </label>
         {{- $currentPage := . }}
         <ul id="menu" class="menu">
             {{- range site.Menus.main }}
