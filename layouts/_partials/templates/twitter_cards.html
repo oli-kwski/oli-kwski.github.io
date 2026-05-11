@@ -1,0 +1,25 @@
+{{- /* Override of PaperMod's twitter_cards.html.
+       twitter:card and twitter:image are intentionally omitted — extend_head.html
+       outputs those tags with the generated PNG card, avoiding a duplicate SVG tag.
+*/ -}}
+
+{{- with or .Title site.Title site.Params.title | plainify }}
+  <meta name="twitter:title" content="{{ . }}">
+{{- end }}
+
+{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
+  <meta name="twitter:description" content="{{ trim . "\n\r\t " }}">
+{{- end }}
+
+{{- $twitterSite := "" }}
+{{- with site.Params.social }}
+  {{- if reflect.IsMap . }}
+    {{- with .twitter }}
+      {{- $content := . }}
+      {{- if not (strings.HasPrefix . "@") }}
+        {{- $content = printf "@%v" . }}
+      {{- end }}
+      <meta name="twitter:site" content="{{ $content }}">
+    {{- end }}
+  {{- end }}
+{{- end }}

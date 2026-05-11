@@ -12,9 +12,11 @@
        needed. Re-add a conditional <script> here if you ever go back to
        the JS-snippet path for a non-proxied environment. */ -}}
 
-{{- /* --- OG / Twitter card image + JSON-LD ----------------------------
-       The card is generated at build time per page by og-image.html and
-       reused for both the social meta tags and the BlogPosting schema.
+{{- /* --- OG / Twitter card image ----------------------------------------
+       The card is generated at build time per page by og-image.html.
+       The overridden opengraph.html and twitter_cards.html templates
+       (layouts/_partials/templates/) suppress PaperMod's own image tags
+       so only these appear. JSON-LD is handled by PaperMod's schema_json.html.
 */ -}}
 {{- $card := partial "og-image.html" . -}}
 {{- if $card }}
@@ -26,42 +28,4 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="{{ $card.Permalink }}">
   <meta name="twitter:image:alt" content="{{ .Title | default .Site.Title }} — {{ .Site.Title }}">
-{{- end }}
-
-{{- /* --- JSON-LD structured data (BlogPosting) -------------------------
-       Emitted only on single posts under /posts/. Lifts the post into
-       Google's article carousel and gives AI assistants a clean schema
-       to ground answers about your topics. dateModified pulls from git
-       history (enableGitInfo = true).
-*/ -}}
-{{- if and (eq .Kind "page") (eq .Section "posts") }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ .Description | default .Summary | jsonify }},
-  "image": {{ $card.Permalink | jsonify }},
-  "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | jsonify }},
-  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | jsonify }},
-  "author": {
-    "@type": "Person",
-    "name": {{ .Site.Params.Author | default "Oli" | jsonify }},
-    "url": {{ "/about/" | absURL | jsonify }}
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": {{ .Site.Title | jsonify }},
-    "logo": {
-      "@type": "ImageObject",
-      "url": {{ "/android-chrome-512x512.png" | absURL | jsonify }}
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ .Permalink | jsonify }}
-  }{{ with .Params.tags }},
-  "keywords": {{ delimit . ", " | jsonify }}{{ end }}
-}
-</script>
 {{- end }}
