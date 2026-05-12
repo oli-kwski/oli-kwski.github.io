@@ -55,9 +55,7 @@ buildExpired = false
   ShowRelated = true
   ShowLastMod = true
 
-  # Share buttons — LinkedIn only
   ShowShareButtons = true
-  ShareButtons = ["linkedin"]
 
   # Favicon — explicitly wire PaperMod's asset params to the generated files.
   # Setting safari_pinned_tab to "" suppresses the mask-icon tag so browsers

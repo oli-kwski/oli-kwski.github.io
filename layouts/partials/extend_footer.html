@@ -15,6 +15,28 @@
 </script>
 {{- end }}
 
+{{- /* Wrap content tables in two divs:
+     .table-wrapper — clips to border-radius (overflow: hidden)
+     .table-scroll  — handles horizontal scroll (overflow-x: auto)
+     Two wrappers are required because overflow: hidden and overflow-x: auto
+     on the same element fight each other and break border-radius clipping. */}}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
+<script>
+(function () {
+  document.querySelectorAll('.md-content table').forEach(function (table) {
+    if (table.closest('.highlight') || table.classList.contains('highlighttable')) return;
+    var scroll = document.createElement('div');
+    scroll.className = 'table-scroll';
+    var wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    table.parentNode.insertBefore(wrapper, table);
+    scroll.appendChild(table);
+    wrapper.appendChild(scroll);
+  });
+})();
+</script>
+{{- end }}
+
 {{- /* Code block language labels */}}
 {{- if and (eq .Kind "page") (eq .Section "posts") }}
 <script>

@@ -1,8 +1,8 @@
 ---
-title: "How to Create an Azure VNet with Bicep"
+title: "How to Create a VNet with Bicep"
 date: 2026-04-30
 draft: true
-description: "A practical guide to deploying an Azure Virtual Network and subnets using Bicep, including parameter patterns and common configuration options."
+description: "A practical guide to deploying a Virtual Network and subnets using Bicep in Azure, including parameter patterns and common configuration options."
 
 tags:
   - Networking

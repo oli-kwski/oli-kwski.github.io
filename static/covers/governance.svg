@@ -1,0 +1,99 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Azure Governance">
+  <defs>
+    <linearGradient id="bg-gov" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1624"/>
+      <stop offset="100%" style="stop-color:#0f2540"/>
+    </linearGradient>
+    <linearGradient id="accent-gov" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg-gov)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#1a3358" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="50"  x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="500" y1="0" x2="500" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+    <line x1="700" y1="0" x2="700" y2="400"/>
+  </g>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="5" height="400" fill="url(#accent-gov)"/>
+
+  <!-- Management group hierarchy (right side) -->
+
+  <!-- Hierarchy connecting lines -->
+  <g stroke="#0078d4" stroke-width="1.5" opacity="0.55">
+    <!-- Root to Platform -->
+    <line x1="620" y1="124" x2="540" y2="170"/>
+    <!-- Root to Corp -->
+    <line x1="620" y1="124" x2="700" y2="170"/>
+    <!-- Platform to subs -->
+    <line x1="540" y1="200" x2="495" y2="255"/>
+    <line x1="540" y1="200" x2="578" y2="255"/>
+    <!-- Corp to subs -->
+    <line x1="700" y1="200" x2="662" y2="255"/>
+    <line x1="700" y1="200" x2="738" y2="255"/>
+  </g>
+
+  <!-- Root MG node -->
+  <circle cx="620" cy="105" r="26" fill="#0078d4" opacity="0.18"/>
+  <circle cx="620" cy="105" r="17" fill="#0078d4" opacity="0.5"/>
+  <circle cx="620" cy="105" r="9"  fill="#7bb8f5"/>
+  <text x="620" y="88" fill="#7bb8f5" font-size="9" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" opacity="0.9">Root MG</text>
+
+  <!-- Platform MG node -->
+  <circle cx="540" cy="185" r="20" fill="#0078d4" opacity="0.18"/>
+  <circle cx="540" cy="185" r="13" fill="#0078d4" opacity="0.5"/>
+  <circle cx="540" cy="185" r="7"  fill="#7bb8f5"/>
+  <text x="540" y="167" fill="#7bb8f5" font-size="9" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" opacity="0.85">Platform</text>
+
+  <!-- Corp MG node -->
+  <circle cx="700" cy="185" r="20" fill="#0078d4" opacity="0.18"/>
+  <circle cx="700" cy="185" r="13" fill="#0078d4" opacity="0.5"/>
+  <circle cx="700" cy="185" r="7"  fill="#7bb8f5"/>
+  <text x="700" y="167" fill="#7bb8f5" font-size="9" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" opacity="0.85">Corp</text>
+
+  <!-- Subscription nodes -->
+  <g fill="#0078d4" opacity="0.25">
+    <circle cx="495" cy="270" r="14"/>
+    <circle cx="578" cy="270" r="14"/>
+    <circle cx="662" cy="270" r="14"/>
+    <circle cx="738" cy="270" r="14"/>
+  </g>
+  <g fill="#50a0e8" opacity="0.6">
+    <circle cx="495" cy="270" r="8"/>
+    <circle cx="578" cy="270" r="8"/>
+    <circle cx="662" cy="270" r="8"/>
+    <circle cx="738" cy="270" r="8"/>
+  </g>
+  <g fill="#4a7fb5" font-size="8" font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" opacity="0.8">
+    <text x="495" y="289">Sub</text>
+    <text x="578" y="289">Sub</text>
+    <text x="662" y="289">Sub</text>
+    <text x="738" y="289">Sub</text>
+  </g>
+
+
+  <!-- Text content -->
+  <text x="50" y="155" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Azure</text>
+  <text x="50" y="215" fill="#ffffff" font-size="46" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" letter-spacing="-0.5">Governance</text>
+  <text x="50" y="260" fill="#7bb8f5" font-size="20" font-family="Segoe UI, system-ui, sans-serif" font-weight="400">Policy · Compliance · RBAC</text>
+
+  <!-- Blog name -->
+  <text x="50" y="370" fill="#3a6090" font-size="15" font-family="Segoe UI, system-ui, sans-serif">headinthecloud.uk</text>
+</svg>

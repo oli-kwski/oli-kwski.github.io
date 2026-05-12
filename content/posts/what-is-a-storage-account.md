@@ -5,7 +5,6 @@ draft: false
 description: "Azure Storage accounts are one of the most versatile services in Azure. Here's what's inside them, when to use each service, and the gotchas that bite people in production."
 
 tags:
-  - Storage
   - Storage Account
 series:
   - Storage Accounts

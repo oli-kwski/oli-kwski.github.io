@@ -309,14 +309,15 @@ a:hover {
    ========================================================= */
 .toc {
   background: var(--azure-surface);
-  border-left: 4px solid var(--azure-blue);
+  border: none !important;
+  border-left: 3px solid var(--azure-blue) !important;
   border-radius: 4px;
   padding: 1rem 1.25rem;
 }
 
 [data-theme="dark"] .toc {
   background: #1e1e38;
-  border-left-color: var(--azure-cyan);
+  border-left-color: var(--azure-cyan) !important;
 }
 
 .toc details summary {
@@ -453,7 +454,7 @@ blockquote {
   border-left: 4px solid var(--azure-blue);
   background: var(--azure-surface);
   padding: 0.75rem 1.25rem;
-  border-radius: 0 4px 4px 0;
+  border-radius: 4px;
   color: var(--content);
 }
 
@@ -462,6 +463,36 @@ blockquote {
   border-left-color: var(--azure-cyan);
   color: #9999bb;
 }
+
+/* =========================================================
+   Tables
+   ========================================================= */
+/* Outer: border, radius, and clip. No overflow-x here — that lives on
+   .table-scroll so the two don't conflict and break the radius clipping. */
+.table-wrapper {
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--content-gap);
+  border: 1px solid var(--border);
+}
+
+/* Inner: horizontal scroll only. */
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  margin-bottom: 0 !important;
+  width: 100%;
+}
+
+/* Strip outer cell borders — wrapper provides them */
+.table-wrapper table thead tr:first-child th { border-top: none !important; }
+.table-wrapper table th:first-child,
+.table-wrapper table td:first-child         { border-left: none !important; }
+.table-wrapper table th:last-child,
+.table-wrapper table td:last-child          { border-right: none !important; }
+.table-wrapper table tr:last-child td       { border-bottom: none !important; }
 
 /* =========================================================
    Footer
@@ -1252,37 +1283,72 @@ div.highlight[data-lang] .copy-code {
 }
 
 /* =========================================================
-   Share buttons — LinkedIn only
+   Post nav (paginav) — match TOC box style
    ========================================================= */
+.paginav {
+  background: var(--azure-surface) !important;
+  border: none !important;
+  border-left: 3px solid var(--azure-blue) !important;
+  border-radius: 4px !important;
+}
+
+[data-theme="dark"] .paginav {
+  background: #1e1e38 !important;
+  border-left-color: var(--azure-cyan) !important;
+}
+
+.paginav a:hover {
+  background: rgba(0, 120, 212, 0.08) !important;
+}
+
+[data-theme="dark"] .paginav a:hover {
+  background: rgba(80, 230, 255, 0.06) !important;
+}
+
+/* =========================================================
+   Share buttons
+   ========================================================= */
+
+/* Strip PaperMod's grey box */
 .share-buttons {
+  background: none !important;
+  border: none !important;
   display: flex;
   list-style: none;
-  padding: 0;
+  padding: 0 !important;
   margin: 1.5rem 0 0;
-  gap: 0.5rem;
+  gap: 0.75rem;
   align-items: center;
+  justify-content: flex-start !important;
 }
 
 .share-buttons::before {
-  content: "Share:";
+  content: "Share with your network:";
   font-size: 0.85rem;
   color: var(--secondary);
   margin-right: 0.25rem;
+  white-space: nowrap;
 }
 
 .share-buttons li a {
   display: flex;
   align-items: center;
-  color: var(--secondary);
-  opacity: 0.65;
-  transition: color 0.15s, opacity 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
+  opacity: 0.85;
 }
 
 .share-buttons li a:hover {
-  color: var(--azure-blue);
   opacity: 1;
+  transform: translateY(-1px);
 }
 
-[data-theme="dark"] .share-buttons li a:hover {
-  color: var(--azure-cyan);
-}
+/* Brand colours */
+.share-buttons a[data-network="linkedin"] { color: #0A66C2; }
+.share-buttons a[data-network="x"]        { color: #000000; }
+.share-buttons a[data-network="bluesky"]  { color: #0085FF; }
+.share-buttons a[data-network="whatsapp"] { color: #25D366; }
+.share-buttons a[data-network="telegram"] { color: #26A5E4; }
+.share-buttons a[data-network="reddit"]   { color: #FF4500; }
+.share-buttons a[data-network="email"]    { color: #6b7280; }
+
+[data-theme="dark"] .share-buttons a[data-network="x"] { color: #e7e9ea; }

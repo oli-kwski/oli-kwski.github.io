@@ -5,7 +5,6 @@ draft: true
 description: "A practical Bicep template for deploying a production-ready Azure Storage account with sensible security defaults."
 
 tags:
-  - Storage
   - Storage Account
   - Bicep
   - IaC
