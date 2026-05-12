@@ -35,8 +35,8 @@ This post assumes you know what a VNet is and focuses on deploying a VNet with B
 
 - Azure CLI installed and authenticated (`az login`)
 - Bicep CLI (`az bicep install` if not present)
-- VsCode installed
-- Bicep VsCode extension installed
+- VS Code installed
+- Bicep VS Code extension installed
 
 ## The code
 
