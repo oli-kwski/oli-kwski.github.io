@@ -124,7 +124,7 @@ az deployment sub create --location uksouth --template-file main.bicep
 
 Check the deployed VNet and its subnets:
 
-```yaml
+```bash
 az network vnet show `
   --resource-group rg-demo-dev-uksouth-001 `
   --name vnet-demo-dev-uksouth-001 `
