@@ -83,12 +83,12 @@ buildExpired = false
 
   # Social links shown in the footer
   [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/oli-kwski"
-
-  [[params.socialIcons]]
     name = "linkedin"
     url = "https://www.linkedin.com/in/oli-k/"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/oli-kwski"
 
 
   # Navbar logo

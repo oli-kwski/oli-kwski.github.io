@@ -2,7 +2,7 @@
 title: "Setting Up a Bicep Development Environment on Windows"
 date: 2026-05-13
 draft: false
-description: "Everything you need to write and deploy Bicep templates on Windows - VS Code, the Bicep extension, and the Azure CLI - installed and verified in one go."
+description: "Everything you need to write and deploy Bicep templates on Windows - VS Code, the Bicep extension, and Azure CLI - installed and verified in one go."
 
 tags:
   - Bicep
@@ -23,7 +23,7 @@ ShowWordCount: false
 weight: 2
 ---
 
-Before writing your first Bicep template you need three things on your machine: VS Code, the Bicep extension, and the Azure CLI (which includes Bicep). This post walks through installing and verifying all of them on Windows.
+Before writing your first Bicep template you need three things on your machine: VS Code, the Bicep extension, and Azure CLI (which includes Bicep). This post walks through installing and verifying all of them on Windows.
 
 ---
 
@@ -34,7 +34,7 @@ Before writing your first Bicep template you need three things on your machine: 
 | **VS Code** | Editor with first-class Bicep support |
 | **Bicep extension** | Syntax highlighting, IntelliSense, inline errors, and type-checking |
 | **Azure CLI** | Deploys templates, manages subscriptions and resource groups |
-| **Bicep** | Installed via the Azure CLI - compiles `.bicep` files to ARM JSON |
+| **Bicep** | Installed via Azure CLI - compiles `.bicep` files to ARM JSON |
 
 You can write Bicep without VS Code, but you'd be giving up IntelliSense and real-time validation - the two things that make Bicep significantly easier to work with than raw ARM JSON. My advice - don't skip the extension.
 
@@ -60,9 +60,9 @@ What you get:
 
 ---
 
-## 3. Install the Azure CLI
+## 3. Install Azure CLI
 
-The Azure CLI handles authentication, subscription management, resource group creation, and running deployments. Bicep compilation is handled through `az bicep` commands built into the CLI.
+Azure CLI handles authentication, subscription management, resource group creation, and running deployments. Bicep compilation is handled through `az bicep` commands built into the CLI.
 
 **Option 1 - winget (recommended):**
 
@@ -80,13 +80,13 @@ After installing, close and reopen your terminal, then verify:
 az --version
 ```
 
-You should see the Azure CLI version plus a list of installed extensions.
+You should see Azure CLI version plus a list of installed extensions.
 
 ---
 
-## 4. Install Bicep via the Azure CLI
+## 4. Install Bicep via Azure CLI
 
-The Bicep CLI is a self-contained binary managed by the Azure CLI - it's installed separately from the CLI itself and doesn't get added to your PATH. Install it with:
+The Bicep CLI is a self-contained binary managed by Azure CLI - it's installed separately from the CLI itself and doesn't get added to your PATH. Install it with:
 
 ```powershell
 az bicep install
@@ -98,7 +98,7 @@ Verify:
 az bicep version
 ```
 
-To upgrade Bicep later without touching the Azure CLI itself:
+To upgrade Bicep later without touching Azure CLI itself:
 
 ```powershell
 az bicep upgrade
@@ -167,9 +167,9 @@ This produces `test.json` in the same directory. If it runs without errors, your
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-**2. `az` not found after install.** The installer adds the Azure CLI to your PATH, but your current terminal session won't pick it up. Close and reopen the terminal (or restart VS Code's integrated terminal) after installation.
+**2. `az` not found after install.** The installer adds Azure CLI to your PATH, but your current terminal session won't pick it up. Close and reopen the terminal (or restart VS Code's integrated terminal) after installation.
 
-**3. Multiple Azure CLI versions.** If you've previously installed the Azure CLI via pip or another method, you may have conflicting versions. Use `where az` in PowerShell to see which binary is being resolved. Prefer the MSI or winget installation - they're easier to upgrade and uninstall.
+**3. Multiple Azure CLI versions.** If you've previously installed Azure CLI via pip or another method, you may have conflicting versions. Use `where az` in PowerShell to see which binary is being resolved. Prefer the MSI or winget installation - they're easier to upgrade and uninstall.
 
 **4. Bicep extension not activating.** The extension activates on `.bicep` files only. If it's not loading, check the language mode in VS Code's status bar (bottom right) - it should show `Bicep` when a `.bicep` file is open. If it shows something else, click it and select Bicep manually.
 
