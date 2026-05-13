@@ -1,7 +1,7 @@
 ---
 title: "Setting Up a Bicep Development Environment on Windows"
 date: 2026-05-13
-draft: true
+draft: false
 description: "Everything you need to write and deploy Bicep templates on Windows - VS Code, the Bicep extension, and the Azure CLI - installed and verified in one go."
 
 tags:
