@@ -9,16 +9,14 @@ tags:
   - DNS
   - Private DNS
   - Terraform
-  - IaC
 series:
-  - Private DNS
+  - Terraform
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -217,16 +215,16 @@ Expect the response to chain through `privatelink.blob.core.windows.net` and res
 ## Common gotchas
 
 **1. `basename()` may not work as expected for VNet IDs**
-The `basename(var.vnet_id)` trick extracts the VNet name from the resource ID for use in the link name. Test this locally — if the ID format changes or has a trailing slash, `basename` may return an empty string. A safer alternative: pass the VNet name as an explicit variable.
+The `basename(var.vnet_id)` trick extracts the VNet name from the resource ID for use in the link name. Test this locally - if the ID format changes or has a trailing slash, `basename` may return an empty string. A safer alternative: pass the VNet name as an explicit variable.
 
 **2. `for_each` on VNet links allows multiple links in one module call**
 Using `for_each` on the link resource means you can link one zone to multiple VNets in a single module call. This is useful in hub-and-spoke where you might link a zone to both the hub and a dedicated DNS resolver VNet.
 
 **3. Destroying the DNS zone removes all A records**
-If you `terraform destroy` a zone (or it's removed from state), all A records go with it. Private Endpoints that registered records in the zone will appear connected but won't resolve. Recreating the zone and zone groups on each endpoint restores the records — but that may mean redeploying endpoints.
+If you `terraform destroy` a zone (or it's removed from state), all A records go with it. Private Endpoints that registered records in the zone will appear connected but won't resolve. Recreating the zone and zone groups on each endpoint restores the records - but that may mean redeploying endpoints.
 
 **4. Zone name uniqueness per subscription**
-Terraform will fail at `plan` time if you try to create a zone with the same name in the same subscription and resource group. If you're using modules that create zones, ensure zone creation is idempotent and centralised — use a data source to reference an existing zone rather than creating it in multiple places.
+Terraform will fail at `plan` time if you try to create a zone with the same name in the same subscription and resource group. If you're using modules that create zones, ensure zone creation is idempotent and centralised - use a data source to reference an existing zone rather than creating it in multiple places.
 
 ```hcl
 data "azurerm_private_dns_zone" "blob" {

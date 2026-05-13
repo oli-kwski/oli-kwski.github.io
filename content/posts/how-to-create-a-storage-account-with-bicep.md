@@ -1,22 +1,20 @@
 ---
-title: "How to Create an Azure Storage Account with Bicep"
-date: 2026-04-30
-draft: true
-description: "A practical Bicep template for deploying a production-ready Azure Storage account with sensible security defaults."
+title: "How to Create a Storage Account with Bicep"
+date: 2026-05-13
+draft: false
+description: "A straightforward Bicep template for deploying an Azure Storage account with a blob container."
 
 tags:
   - Storage Account
   - Bicep
-  - IaC
 series:
-  - Storage Accounts
+  - Bicep
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -26,168 +24,148 @@ cover:
 weight: 2
 ---
 
-If you haven't read [What Is an Azure Storage Account and When Should You Use One?](/posts/what-is-a-storage-account), start there. This post is about deploying one with Bicep with a production-ready security baseline baked in.
+This post assumes you know what a storage account is and focuses on deploying one with Bicep. If you don't, first read [What Is an Azure Storage Account and When Should You Use One?](/posts/what-is-a-storage-account)
 
 ---
 
 ## Prerequisites
 
-- Azure CLI installed and authenticated
-- A target resource group
+- Azure CLI installed and authenticated (`az login`)
+- Bicep CLI (`az bicep install` if not present)
+- VS Code installed
+- Bicep VS Code extension installed
 
-## The Bicep
+If you need to set any of these up, see [Setting Up a Bicep Development Environment on Windows](/posts/bicep-environment-setup-windows).
 
-A StorageV2 account with ZRS redundancy, no public network access, and soft delete enabled:
+## The code
+
+The below bicep code will deploy the following:
+
+- A resource group
+- A storage account with a blob container
+
+The code is split into 2 files, `main.bicep` and a storage module named `storage.bicep`.
+
+### main.bicep
 
 ```bicep
-@description('Azure region.')
-param location string = resourceGroup().location
+targetScope = 'subscription'
 
-@description('Storage account name. Must be 3-24 characters, lowercase alphanumeric only.')
-@minLength(3)
-@maxLength(24)
+param location string = 'uksouth'
+param rgName string = 'rg-demo-dev-uksouth-001'
+
+// uniqueString() produces a deterministic 13-char hash from the resource group ID.
+var storageName = 'st${uniqueString(newRG.id)}'
+
+// 1. Create a resource group
+resource newRG 'Microsoft.Resources/resourceGroups@2025-04-01' = {
+  name: rgName
+  location: location
+}
+
+// 2. Deploy storage into it
+module storageModule './storage.bicep' = {
+  name: 'storageDeploy'
+  scope: resourceGroup(newRG.name)
+  params: {
+    location: location
+    storageAccountName: storageName
+  }
+}
+
+// Output the generated name so you know what was created
+output storageAccountName string = storageName
+```
+
+### storage.bicep
+
+```bicep
+param location string
 param storageAccountName string
 
-@description('Storage account SKU.')
-@allowed([
-  'Standard_LRS'
-  'Standard_ZRS'
-  'Standard_GRS'
-  'Standard_GZRS'
-  'Premium_LRS'
-  'Premium_ZRS'
-])
-param sku string = 'Standard_ZRS'
-
-@description('Enable hierarchical namespace (Data Lake Gen2).')
-param enableHierarchicalNamespace bool = false
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-08-01' = {
   name: storageAccountName
   location: location
   kind: 'StorageV2'
-  sku: {
-    name: sku
-  }
+  sku: { name: 'Standard_LRS' }
   properties: {
-    // Security baseline
     supportsHttpsTrafficOnly: true
     minimumTlsVersion: 'TLS1_2'
     allowBlobPublicAccess: false
-    allowSharedKeyAccess: false        // Require Azure AD auth; disable shared key
-    publicNetworkAccess: 'Disabled'   // Use Private Endpoints for access
-
-    // Data Lake Gen2 (cannot be changed after creation)
-    isHnsEnabled: enableHierarchicalNamespace
-
-    networkAcls: {
-      defaultAction: 'Deny'
-      bypass: 'AzureServices'       // Allows trusted Microsoft services (e.g. Azure Backup)
-      ipRules: []
-      virtualNetworkRules: []
-    }
-
-    // Access tier for blob storage
     accessTier: 'Hot'
   }
 }
 
-// Blob service settings — soft delete and versioning
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01' = {
+resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2025-08-01' = {
   parent: storageAccount
   name: 'default'
   properties: {
-    deleteRetentionPolicy: {
-      enabled: true
-      days: 7
-    }
-    containerDeleteRetentionPolicy: {
-      enabled: true
-      days: 7
-    }
-    isVersioningEnabled: true
+    deleteRetentionPolicy: { enabled: true, days: 7 }
   }
 }
 
-// Optional: a container
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2025-08-01' = {
   parent: blobService
   name: 'data'
-  properties: {
-    publicAccess: 'None'
-  }
 }
 
 output storageAccountId string = storageAccount.id
-output storageAccountName string = storageAccount.name
-output primaryBlobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 ```
+
+{{< important >}}
+Microsoft's Cloud Adoption Framework recommends the pattern `st[workload][environment][region][instance]` - for example `stdemodevuksouth001`. The `st` prefix is correct, but storage accounts have stricter constraints than most Azure resources; 24 characters max, lowercase alphanumeric only, no hyphens. That makes it difficult to fit workload, environment, and region components in and still guarantee global uniqueness.
+
+`uniqueString()` sidesteps this by generating a deterministic 13-character hash from the resource group ID - the same RG always produces the same name, so redeployments are idempotent. The tradeoff is a name that gives you no context at a glance. In production you'd typically combine both approaches: a short readable prefix plus a truncated hash, such as `st${workload}${environment}${take(uniqueString(newRG.id), 6)}`.
+{{< /important >}}
+
+**A few notes on the properties set:**
+
+- `supportsHttpsTrafficOnly: true` and `minimumTlsVersion: 'TLS1_2'` enforce encrypted transport.
+- `allowBlobPublicAccess: false` prevents containers from being made publicly readable, which is the right default. The storage account itself is publicly accessible over the internet - if you need private access only, see the [private endpoint post](/posts/how-to-create-a-private-endpoint).
+- `Standard_LRS` keeps costs low for a demo. For production, use `Standard_ZRS` or higher.
 
 ## Deploying
 
+As the resource group is deployed as part of the template, the deployment targets the subscription rather than an existing resource group.
+
 ```bash
-az deployment group create \
-  --resource-group rg-storage-prod \
-  --template-file storage.bicep \
-  --parameters storageAccountName='stproduksouth001' sku='Standard_ZRS'
-```
-
-## Adding a Private Endpoint
-
-With `publicNetworkAccess: 'Disabled'`, the storage account is unreachable without a Private Endpoint. Deploy one using the Private Endpoint Bicep from the [Creating a Private Endpoint in Azure with Bicep](/posts/how-to-create-a-private-endpoint) post. Reference the storage account resource ID as the `privateLinkServiceId` and use `blob` as the `groupId`.
-
-## Assigning RBAC
-
-With shared key access disabled, you need to assign RBAC roles instead. Assign `Storage Blob Data Contributor` (or Contributor/Reader) to managed identities or users:
-
-```bicep
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: storageAccount
-  name: guid(storageAccount.id, principalId, storageBlobDataContributorRole)
-  properties: {
-    roleDefinitionId: subscriptionResourceId(
-      'Microsoft.Authorization/roleDefinitions',
-      'ba92f5b4-2d11-453d-a403-e96b0029c9fe'  // Storage Blob Data Contributor
-    )
-    principalId: principalId
-    principalType: 'ServicePrincipal'
-  }
-}
+az deployment sub create --location uksouth --template-file main.bicep
 ```
 
 ## Verifying
 
+Since the name is generated, pull it from the deployment output first:
+
 ```bash
-# Check the storage account properties
-az storage account show \
-  --resource-group rg-storage-prod \
-  --name stproduksouth001 \
-  --query '{publicNetworkAccess: publicNetworkAccess, httpsOnly: enableHttpsTrafficOnly, tls: minimumTlsVersion, sharedKey: allowSharedKeyAccess}' \
-  --output table
+az deployment sub show `
+  --name main `
+  --query "properties.outputs.storageAccountName.value" `
+  --output tsv
 ```
 
-From inside the linked VNet, verify the blob endpoint resolves to a private IP:
+Then verify the account:
 
 ```bash
-nslookup stproduksouth001.blob.core.windows.net
+az storage account show `
+  --resource-group rg-demo-dev-uksouth-001 `
+  --name <name from above> `
+  --query "{sku: sku.name, kind: kind, httpsOnly: enableHttpsTrafficOnly, tlsVersion: minimumTlsVersion, blobPublicAccess: allowBlobPublicAccess, accessTier: accessTier}" `
+  --output yaml
 ```
 
 ## Common gotchas
 
-**1. `allowSharedKeyAccess: false` breaks some Azure services**
-Some Azure services — including certain Azure portal operations and Azure Storage Explorer when not using Azure AD — rely on shared key access. Disabling it can break diagnostics logging, Azure Backup for VMs, and some Functions bindings. Test thoroughly in a non-production environment first.
+**1. Storage account names are globally unique and permanent**
+The name becomes the endpoint (`youraccount.blob.core.windows.net`) and cannot be changed after deployment. If you get it wrong you need a new account and a data migration. Plan a naming scheme that includes an org identifier and environment suffix.
 
-**2. `publicNetworkAccess: 'Disabled'` vs `defaultAction: 'Deny'`**
-Setting `publicNetworkAccess: 'Disabled'` is a hard block — no firewall rules can override it. Setting `defaultAction: 'Deny'` with IP or VNet rules is softer — it allows exceptions. Use `'Disabled'` for fully private storage, `'Deny'` with exceptions if you need hybrid access (e.g. an on-premises IP allowlist).
+**2. `allowBlobPublicAccess` is account-level, not container-level**
+Setting it to `false` at the account level blocks all containers from being made public regardless of their individual access settings. Setting it to `true` only allows containers to be made public - it doesn't make them public on its own.
 
-**3. Blob versioning increases storage costs**
-Versioning retains previous blob versions indefinitely until explicitly deleted or a lifecycle policy removes them. Enable a lifecycle policy alongside versioning or storage costs can grow unexpectedly.
-
-**4. Storage account name is permanent**
-You cannot rename a storage account. The name becomes part of the endpoint (`youraccount.blob.core.windows.net`) and cannot be changed. If you get the name wrong in production, you need a new storage account and a data migration.
+**3. `Standard_LRS` is not suitable for production**
+LRS stores three copies within a single datacentre. A zone or regional outage can make data unavailable. Use `Standard_ZRS` as the baseline for production workloads.
 
 ---
 
 ## Summary
 
-A production-ready storage account in Bicep is a few dozen lines of configuration, but the defaults Azure ships are not suitable for production. Disable public access, require HTTPS and TLS 1.2, disable shared key access, enable soft delete and versioning on the blob service, and deploy Private Endpoints for internal access. Sort the security baseline at deploy time — retrofitting it to a storage account with existing clients is painful.
+Two files, one module call, and you have a storage account with a blob container deployed into a fresh resource group. The template enforces HTTPS and TLS 1.2 and disables blob public access, but otherwise keeps things simple. From here you can layer on redundancy, network restrictions, and RBAC as needed.

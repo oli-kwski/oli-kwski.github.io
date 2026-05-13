@@ -10,7 +10,6 @@ tags:
   - Private Endpoints
   - Hub-and-Spoke
 series:
-  - Private Endpoints
 
 cover:
   image: /covers/networking.svg
@@ -22,7 +21,6 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
-ShowPostNavLinks: true
 weight: 2
 ---
 
@@ -40,7 +38,7 @@ Azure resolves private DNS zones only for VNets to which the zone is **linked**.
 
 <figure class="diagram">
   <img src="/private-endpoint-dns-hub-spoke/broken-dns.png" alt="Diagram showing a VM in a spoke VNet querying a custom DNS server in the hub VNet. The private DNS zone is only linked to the spoke. The hub resolver forwards to Azure DNS and returns the public IP." style="display: block; width: 100%; height: auto;" />
-  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">Zone linked to spoke, resolution happening in hub — returns public IP</figcaption>
+  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">Zone linked to spoke, resolution happening in hub - returns public IP</figcaption>
 </figure>
 
 The fix is to link private DNS zones to the **hub VNet** - whichever VNet contains the resolver - not the spokes.
@@ -60,7 +58,7 @@ For private endpoint resolution within Azure, you only need the inbound endpoint
 
 <figure class="diagram">
   <img src="/private-endpoint-dns-hub-spoke/dns-private-resolver.png" alt="Diagram showing a spoke VM querying the DNS Private Resolver inbound endpoint in the hub VNet. The private DNS zones are linked to the hub VNet. The resolver returns the private IP of the private endpoint." style="display: block; width: 100%; height: auto;" />
-  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">DNS Private Resolver with zones linked to hub VNet — correct pattern</figcaption>
+  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">DNS Private Resolver with zones linked to hub VNet - correct pattern</figcaption>
 </figure>
 
 ### Custom DNS forwarder
@@ -108,7 +106,7 @@ Machines on-premises query your on-prem DNS server first. Without a conditional 
 
 <figure class="diagram">
   <img src="/private-endpoint-dns-hub-spoke/on-prem-forwarding.png" alt="Diagram showing on-premises DNS server with a conditional forwarder for privatelink.blob.core.windows.net pointing to the DNS Private Resolver inbound endpoint in the hub VNet, which then returns the private IP." style="display: block; width: 100%; height: auto;" />
-  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">On-premises conditional forwarder for privatelink zones — required for hybrid resolution</figcaption>
+  <figcaption style="margin-top: 0.75rem; font-size: 0.875rem;">On-premises conditional forwarder for privatelink zones - required for hybrid resolution</figcaption>
 </figure>
 
 **4. Multiple regional hubs**

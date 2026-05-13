@@ -8,6 +8,7 @@ ShowBreadCrumbs: true
 ShowToc: false
 ShowLastMod: false
 comments: false
+disableShare: true
 hideTitle: true
 ---
 

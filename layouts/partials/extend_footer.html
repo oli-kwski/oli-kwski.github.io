@@ -62,3 +62,129 @@ document.addEventListener('keydown', function (e) {
   }
 });
 </script>
+
+{{- /* Nav search — Fuse.js powered inline search against /index.json.
+     Results are appended to <body> and positioned with fixed coords so they
+     escape the nav's overflow/stacking context and render above the page. */}}
+<script>
+(function () {
+  var input = document.getElementById('nav-search-input');
+  if (!input) return;
+
+  /* Move results list out of the nav and into <body> */
+  var resultsEl = document.getElementById('nav-search-results');
+  document.body.appendChild(resultsEl);
+
+  var fuse, indexLoaded = false;
+
+  function positionResults() {
+    var rect = input.getBoundingClientRect();
+    resultsEl.style.top  = (rect.bottom + 6) + 'px';
+    resultsEl.style.left = Math.max(0, rect.right - 300) + 'px';
+  }
+
+  function loadFuse(cb) {
+    if (window.Fuse) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js';
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  function loadIndex(cb) {
+    if (indexLoaded) { cb(); return; }
+    fetch('/index.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        indexLoaded = true;
+        fuse = new Fuse(data, {
+          keys: ['title', 'description', 'tags'],
+          threshold: 0.35,
+          minMatchCharLength: 2
+        });
+        cb();
+      })
+      .catch(function () {});
+  }
+
+  function renderResults(results) {
+    resultsEl.innerHTML = '';
+    if (!results || !results.length) {
+      resultsEl.hidden = true;
+      return;
+    }
+    results.slice(0, 7).forEach(function (r) {
+      var item = r.item;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = item.permalink;
+      a.setAttribute('role', 'option');
+      var title = document.createElement('span');
+      title.className = 'nsr-title';
+      title.textContent = item.title;
+      a.appendChild(title);
+      if (item.description) {
+        var desc = document.createElement('span');
+        desc.className = 'nsr-desc';
+        desc.textContent = item.description;
+        a.appendChild(desc);
+      }
+      li.appendChild(a);
+      resultsEl.appendChild(li);
+    });
+    positionResults();
+    resultsEl.hidden = false;
+  }
+
+  input.addEventListener('focus', function () {
+    loadFuse(function () { loadIndex(function () {}); });
+  }, { once: true });
+
+  input.addEventListener('input', function () {
+    var q = input.value.trim();
+    if (!fuse || q.length < 2) { resultsEl.hidden = true; return; }
+    renderResults(fuse.search(q));
+  });
+
+  /* Close on outside click */
+  document.addEventListener('click', function (e) {
+    if (e.target !== input && !resultsEl.contains(e.target)) {
+      resultsEl.hidden = true;
+    }
+  });
+
+  /* Keyboard: Escape clears, arrows navigate */
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      resultsEl.hidden = true;
+      input.value = '';
+      input.blur();
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      var first = resultsEl.querySelector('a');
+      if (first) first.focus();
+    }
+  });
+
+  resultsEl.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      var next = document.activeElement.closest('li') && document.activeElement.closest('li').nextElementSibling;
+      if (next) next.querySelector('a').focus();
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      var prev = document.activeElement.closest('li') && document.activeElement.closest('li').previousElementSibling;
+      if (prev) prev.querySelector('a').focus();
+      else input.focus();
+    }
+    if (e.key === 'Escape') {
+      resultsEl.hidden = true;
+      input.value = '';
+      input.focus();
+    }
+  });
+}());
+</script>

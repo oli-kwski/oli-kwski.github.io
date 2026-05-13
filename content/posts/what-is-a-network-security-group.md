@@ -9,7 +9,7 @@ tags:
   - NSG
   - Security
 series:
-  - NSG
+  - Azure Fundamentals
 
 pinned: true
 
@@ -23,12 +23,11 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 weight: 1
 ---
 
-Once you have a VNet and subnets, the next question is how to control what traffic can flow between them. Network Security Groups (NSGs) are the answer for most scenarios — the lightweight, stateful firewall you attach to subnets or individual NICs to allow or deny traffic.
+Once you have a VNet and subnets, the next question is how to control what traffic can flow between them. Network Security Groups (NSGs) are the answer for most scenarios - the lightweight, stateful firewall you attach to subnets or individual NICs to allow or deny traffic.
 
 ---
 
@@ -36,19 +35,19 @@ Once you have a VNet and subnets, the next question is how to control what traff
 
 Without NSGs, all traffic within a VNet flows freely between subnets. Any VM in one subnet can reach any VM in another subnet on any port. NSGs let you define exactly which traffic is permitted, enforced at the subnet level, the NIC level, or both.
 
-They're not a replacement for Azure Firewall in complex routing scenarios, but for east-west traffic control within a VNet — and for inbound internet access to specific ports — NSGs are the right tool.
+They're not a replacement for Azure Firewall in complex routing scenarios, but for east-west traffic control within a VNet - and for inbound internet access to specific ports - NSGs are the right tool.
 
 ## What is an NSG?
 
 An NSG is a set of security rules evaluated in priority order (100–4096, lower number = higher priority). Each rule specifies:
 
-- **Priority** — determines evaluation order; first matching rule wins
-- **Source / Destination** — IP, CIDR, service tag, or application security group
-- **Port** — single port, range, or `*` for all
-- **Protocol** — TCP, UDP, ICMP, or Any
-- **Action** — Allow or Deny
+- **Priority** - determines evaluation order; first matching rule wins
+- **Source / Destination** - IP, CIDR, service tag, or application security group
+- **Port** - single port, range, or `*` for all
+- **Protocol** - TCP, UDP, ICMP, or Any
+- **Action** - Allow or Deny
 
-NSGs are **stateful** — if an outbound connection is permitted, the return traffic is automatically allowed without a separate inbound rule (and vice versa).
+NSGs are **stateful** - if an outbound connection is permitted, the return traffic is automatically allowed without a separate inbound rule (and vice versa).
 
 ## Default rules
 
@@ -68,7 +67,7 @@ Every NSG ships with three inbound and three outbound default rules that cannot 
 | 65001 | AllowInternetOutbound | All outbound traffic to the internet |
 | 65500 | DenyAllOutbound | Everything else |
 
-The `AllowInternetOutbound` default is notable — VMs in a VNet can reach the internet by default unless you override it. If you're using Azure Firewall or an NVA for egress control, you need to override this with a route table (UDR) that sends internet-bound traffic to the firewall, not just an NSG deny rule.
+The `AllowInternetOutbound` default is notable - VMs in a VNet can reach the internet by default unless you override it. If you're using Azure Firewall or an NVA for egress control, you need to override this with a route table (UDR) that sends internet-bound traffic to the firewall, not just an NSG deny rule.
 
 ## Where to attach an NSG
 
@@ -85,7 +84,7 @@ When both a subnet NSG and a NIC NSG exist, **both** are evaluated. For inbound 
 
 ## Service tags
 
-Instead of hardcoding IP ranges, NSGs support **service tags** — named groups of IP ranges that Microsoft maintains. Common ones:
+Instead of hardcoding IP ranges, NSGs support **service tags** - named groups of IP ranges that Microsoft maintains. Common ones:
 
 | Tag | What it covers |
 |---|---|
@@ -96,7 +95,7 @@ Instead of hardcoding IP ranges, NSGs support **service tags** — named groups 
 | `AzureMonitor` | Azure Monitor endpoints |
 | `GatewayManager` | Azure VPN/Application Gateway management IPs |
 
-Use service tags rather than IP ranges wherever possible — Microsoft updates the IP ranges behind service tags automatically.
+Use service tags rather than IP ranges wherever possible - Microsoft updates the IP ranges behind service tags automatically.
 
 ## Application Security Groups
 
@@ -117,10 +116,10 @@ Until you explicitly enable `privateEndpointNetworkPolicies` on the subnet, NSG 
 The `AllowVnetInbound` default rule covers all traffic from within the VNet, including other subnets. If you want to block traffic between subnets, add an explicit Deny rule with a lower priority number than 65000, specifying the source subnet CIDR.
 
 **3. Effective security rules differ from configured rules**
-When troubleshooting, use **Effective security rules** in the Azure portal (Network Watcher → Effective security rules) or `az network nic list-effective-nsg`. This shows the merged result of subnet + NIC NSGs, which is what's actually enforced — not just what you've configured on each NSG individually.
+When troubleshooting, use **Effective security rules** in the Azure portal (Network Watcher → Effective security rules) or `az network nic list-effective-nsg`. This shows the merged result of subnet + NIC NSGs, which is what's actually enforced - not just what you've configured on each NSG individually.
 
 **4. NSG flow logs are not enabled by default**
-NSG flow logs (for Network Watcher) capture allowed and denied flows — essential for security investigations. They're not enabled by default and have a small cost (storage + optional Traffic Analytics). Enable them from day one in production.
+NSG flow logs (for Network Watcher) capture allowed and denied flows - essential for security investigations. They're not enabled by default and have a small cost (storage + optional Traffic Analytics). Enable them from day one in production.
 
 ---
 

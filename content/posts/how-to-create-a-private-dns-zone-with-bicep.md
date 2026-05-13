@@ -9,16 +9,14 @@ tags:
   - DNS
   - Private DNS
   - Bicep
-  - IaC
 series:
-  - Private DNS
+  - Bicep
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -41,7 +39,7 @@ If you haven't read [What Is an Azure Private DNS Zone and Why Do You Need One?]
 
 ### 1. Create the Private DNS Zone
 
-Private DNS Zones are always deployed to `global` — they're not region-specific resources:
+Private DNS Zones are always deployed to `global` - they're not region-specific resources:
 
 ```bicep
 @description('The private DNS zone name, e.g. privatelink.blob.core.windows.net')
@@ -145,7 +143,7 @@ resource privateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneG
 }
 ```
 
-Azure creates and maintains the A record in the zone automatically — you don't manage it manually.
+Azure creates and maintains the A record in the zone automatically - you don't manage it manually.
 
 ## Deploying
 
@@ -187,16 +185,16 @@ You should see the CNAME chain resolve to a private IP (`10.x.x.x`), not the pub
 Private DNS Zones aren't regional. Using a region string causes a deployment error. Always use `'global'`.
 
 **2. DNS zone group deletes and recreates the A record on redeploy**
-The `privateDnsZoneGroups` resource is idempotent — redeploying it simply updates the record. But if you delete the DNS zone group resource, the A record in the zone is removed. Don't manage the A record manually if you're using a zone group; they'll conflict.
+The `privateDnsZoneGroups` resource is idempotent - redeploying it simply updates the record. But if you delete the DNS zone group resource, the A record in the zone is removed. Don't manage the A record manually if you're using a zone group; they'll conflict.
 
 **3. Multiple VNet links for hub-and-spoke**
-If you have a hub VNet and spoke VNets, link the zone to the hub (where DNS resolution happens). Spokes that route DNS queries through the hub don't need their own link — unless they have their own DNS server or use Azure DNS Private Resolver inbound endpoints in the spoke.
+If you have a hub VNet and spoke VNets, link the zone to the hub (where DNS resolution happens). Spokes that route DNS queries through the hub don't need their own link - unless they have their own DNS server or use Azure DNS Private Resolver inbound endpoints in the spoke.
 
 **4. One zone per service type across all environments in the same subscription**
-You can only have one Private DNS Zone with a given name per subscription. If you're deploying dev and prod in the same subscription, they share the zone — meaning a dev storage account Private Endpoint registers an A record in the same zone as prod. Consider whether that's acceptable, or whether separate subscriptions (as recommended by the CAF landing zone model) are warranted.
+You can only have one Private DNS Zone with a given name per subscription. If you're deploying dev and prod in the same subscription, they share the zone - meaning a dev storage account Private Endpoint registers an A record in the same zone as prod. Consider whether that's acceptable, or whether separate subscriptions (as recommended by the CAF landing zone model) are warranted.
 
 ---
 
 ## Summary
 
-Creating a Private DNS Zone with Bicep is a two-resource job: the zone itself (always `global`) and the VNet link. Make it a module — you'll deploy the same pattern for every service type you expose via Private Endpoints. Wire the zone to each Private Endpoint via a `privateDnsZoneGroups` child resource rather than managing A records manually.
+Creating a Private DNS Zone with Bicep is a two-resource job: the zone itself (always `global`) and the VNet link. Make it a module - you'll deploy the same pattern for every service type you expose via Private Endpoints. Wire the zone to each Private Endpoint via a `privateDnsZoneGroups` child resource rather than managing A records manually.

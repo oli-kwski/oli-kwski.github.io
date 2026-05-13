@@ -15,7 +15,6 @@ ShowToc: false
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
-ShowPostNavLinks: true
 ---
 
 Welcome! This blog covers all things **Microsoft Azure** - from architecture patterns and infrastructure-as-code to DevOps pipelines, security hardening, and cost optimisation.

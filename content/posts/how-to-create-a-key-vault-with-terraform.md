@@ -8,16 +8,14 @@ tags:
   - Security
   - Key Vault
   - Terraform
-  - IaC
 series:
-  - Key Vault
+  - Terraform
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -89,7 +87,7 @@ resource "azurerm_key_vault" "main" {
   soft_delete_retention_days = var.soft_delete_retention_days
   purge_protection_enabled   = true  # Irreversible
 
-  # Network — disable public access
+  # Network - disable public access
   public_network_access_enabled = false
 
   network_acls {
@@ -135,7 +133,7 @@ resource "azurerm_key_vault_secret" "db_connection" {
 }
 ```
 
-Mark variables holding secrets as `sensitive = true` — Terraform will redact them in plan and apply output.
+Mark variables holding secrets as `sensitive = true` - Terraform will redact them in plan and apply output.
 
 ### Granting a managed identity read access
 
@@ -208,7 +206,7 @@ az keyvault show \
 By default in AzureRM provider, `purge_soft_delete_on_destroy = true`. This means running `terraform destroy` will permanently purge the vault immediately, bypassing soft delete. This is useful in dev but dangerous in production. Override it to `false` in production configurations.
 
 **2. `recover_soft_deleted_key_vaults = true` can cause unexpected imports**
-If a vault with the same name exists in soft-deleted state, Terraform will recover and import it rather than creating a new one. This is usually the right behaviour, but be aware that the recovered vault may have different properties than what your config specifies — the provider will then apply your config to update it.
+If a vault with the same name exists in soft-deleted state, Terraform will recover and import it rather than creating a new one. This is usually the right behaviour, but be aware that the recovered vault may have different properties than what your config specifies - the provider will then apply your config to update it.
 
 **3. RBAC propagation delay affects `azurerm_key_vault_secret`**
 When Terraform creates the vault and the admin role assignment in the same apply, there's a race condition: the secret resource may fail if role propagation hasn't completed before Terraform tries to write the secret. The `depends_on = [azurerm_role_assignment.deployer_admin]` in the secret resource helps, but Azure's IAM propagation is eventually consistent and may still occasionally fail on first apply. A retry usually succeeds.

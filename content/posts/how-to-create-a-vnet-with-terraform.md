@@ -8,16 +8,14 @@ tags:
   - Networking
   - VNet
   - Terraform
-  - IaC
 series:
-  - VNet
+  - Terraform
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -56,7 +54,7 @@ provider "azurerm" {
 
 ## The Terraform
 
-A VNet with two subnets — workloads and private endpoints:
+A VNet with two subnets - workloads and private endpoints:
 
 ```hcl
 variable "location" {
@@ -178,13 +176,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
 ## Common gotchas
 
 **1. Subnets as separate resources vs. inline blocks**
-The AzureRM provider supports defining subnets either as `azurerm_subnet` resources (recommended) or as inline `subnet` blocks inside `azurerm_virtual_network`. Don't mix both — the provider will conflict with itself and you'll get intermittent plan drift. Use separate `azurerm_subnet` resources for everything.
+The AzureRM provider supports defining subnets either as `azurerm_subnet` resources (recommended) or as inline `subnet` blocks inside `azurerm_virtual_network`. Don't mix both - the provider will conflict with itself and you'll get intermittent plan drift. Use separate `azurerm_subnet` resources for everything.
 
 **2. `private_endpoint_network_policies` attribute name changed in provider v3.x**
 In older AzureRM provider versions this was `enforce_private_link_endpoint_network_policies`. It was deprecated and replaced with `private_endpoint_network_policies`. Check your provider version if you're seeing unknown attribute errors.
 
 **3. Terraform doesn't protect you from destroying subnets with resources**
-If you remove a subnet resource from your config and apply, Terraform will delete it — even if a VM or Private Endpoint is still in it. The deletion will fail, but the intent is there. Use `prevent_destroy` lifecycle rules on subnets that contain critical resources in production.
+If you remove a subnet resource from your config and apply, Terraform will delete it - even if a VM or Private Endpoint is still in it. The deletion will fail, but the intent is there. Use `prevent_destroy` lifecycle rules on subnets that contain critical resources in production.
 
 ```hcl
 lifecycle {
@@ -193,10 +191,10 @@ lifecycle {
 ```
 
 **4. State file and multiple workspaces**
-If you're managing multiple environments with Terraform workspaces, ensure your VNet address spaces are different per workspace. A common mistake is sharing a `tfvars` file across workspaces without overriding the CIDR — which leads to overlapping address spaces that break peering later.
+If you're managing multiple environments with Terraform workspaces, ensure your VNet address spaces are different per workspace. A common mistake is sharing a `tfvars` file across workspaces without overriding the CIDR - which leads to overlapping address spaces that break peering later.
 
 ---
 
 ## Summary
 
-Deploying a VNet with Terraform is clean and predictable. Use separate `azurerm_subnet` resources rather than inline blocks, pin your provider version, and add `prevent_destroy` to subnets in production. Outputs for the VNet ID and subnet IDs are essential — downstream resources (Private Endpoints, NSGs) will reference them.
+Deploying a VNet with Terraform is clean and predictable. Use separate `azurerm_subnet` resources rather than inline blocks, pin your provider version, and add `prevent_destroy` to subnets in production. Outputs for the VNet ID and subnet IDs are essential - downstream resources (Private Endpoints, NSGs) will reference them.

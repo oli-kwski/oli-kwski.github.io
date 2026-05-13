@@ -8,16 +8,14 @@ tags:
   - Security
   - Key Vault
   - Bicep
-  - IaC
 series:
-  - Key Vault
+  - Bicep
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -73,7 +71,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     softDeleteRetentionInDays: softDeleteRetentionDays
     enablePurgeProtection: true  // Irreversible once set
 
-    // Network — disable public access; use Private Endpoints
+    // Network - disable public access; use Private Endpoints
     publicNetworkAccess: 'Disabled'
     networkAcls: {
       defaultAction: 'Deny'
@@ -222,7 +220,7 @@ nslookup kv-prod-uksouth-001.vault.azure.net
 ## Common gotchas
 
 **1. Key Vault name is globally unique and permanently reserved for ~90 days after deletion**
-Deleted Key Vault names enter a soft-deleted state and remain reserved. If you're iterating on names in dev, use `az keyvault purge` to release the name immediately — or just pick a unique name with a suffix.
+Deleted Key Vault names enter a soft-deleted state and remain reserved. If you're iterating on names in dev, use `az keyvault purge` to release the name immediately - or just pick a unique name with a suffix.
 
 **2. `enablePurgeProtection: true` is irreversible**
 Once purge protection is enabled, you cannot disable it for the vault's lifetime. This is intentional for compliance, but it means a vault name can be reserved for up to 90 days even after deletion. Don't enable it in dev environments where you'll be creating and destroying vaults frequently.

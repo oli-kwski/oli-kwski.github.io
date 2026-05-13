@@ -7,16 +7,14 @@ description: "A practical Terraform configuration for deploying a production-rea
 tags:
   - Storage Account
   - Terraform
-  - IaC
 series:
-  - Storage Accounts
+  - Terraform
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -202,7 +200,7 @@ az storage account show \
 ## Common gotchas
 
 **1. Attribute name changes between AzureRM provider versions**
-The `enable_https_traffic_only` attribute was renamed to `https_traffic_only_enabled` in AzureRM provider v4.x. Similarly `enable_hns` became `is_hns_enabled`. If you're upgrading provider versions, check the changelog — several storage account attributes were renamed or removed. Pin your provider version and review release notes before upgrading.
+The `enable_https_traffic_only` attribute was renamed to `https_traffic_only_enabled` in AzureRM provider v4.x. Similarly `enable_hns` became `is_hns_enabled`. If you're upgrading provider versions, check the changelog - several storage account attributes were renamed or removed. Pin your provider version and review release notes before upgrading.
 
 **2. `shared_access_key_enabled = false` breaks `azurerm_storage_container` data sources**
 Terraform's `azurerm_storage_container` data source and some storage-related data sources use shared key auth internally. With shared key disabled, these data sources may fail during plan or apply. Work around this by referencing container names as variables rather than looking them up via data sources.
@@ -236,4 +234,4 @@ resource "azurerm_storage_management_policy" "main" {
 
 ## Summary
 
-Deploying a storage account with Terraform is clean once you know which attributes map to which portal settings. The security baseline — no public access, shared key disabled, HTTPS enforced, soft delete and versioning on — should be your default for every storage account in production. Pin the AzureRM provider version and read the release notes when upgrading; storage account attributes have been renamed between major versions.
+Deploying a storage account with Terraform is clean once you know which attributes map to which portal settings. The security baseline - no public access, shared key disabled, HTTPS enforced, soft delete and versioning on - should be your default for every storage account in production. Pin the AzureRM provider version and read the release notes when upgrading; storage account attributes have been renamed between major versions.

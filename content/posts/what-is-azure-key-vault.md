@@ -9,7 +9,7 @@ tags:
   - Key Vault
   - Secrets Management
 series:
-  - Key Vault
+  - Azure Fundamentals
 
 pinned: true
 
@@ -23,12 +23,11 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 weight: 1
 ---
 
-At some point, every application needs to store a secret — a database connection string, an API key, a TLS certificate. Storing these in code, environment variables, or config files creates risk. Azure Key Vault is where secrets belong instead.
+At some point, every application needs to store a secret - a database connection string, an API key, a TLS certificate. Storing these in code, environment variables, or config files creates risk. Azure Key Vault is where secrets belong instead.
 
 ---
 
@@ -59,7 +58,7 @@ Keys can optionally be backed by **Hardware Security Modules (HSMs)**. Standard 
 Key Vault supports two access permission models:
 
 **Vault access policies (legacy)**
-A flat permission model that grants permissions at the vault level — all or nothing per object type. Still widely used but being superseded by RBAC.
+A flat permission model that grants permissions at the vault level - all or nothing per object type. Still widely used but being superseded by RBAC.
 
 **Azure RBAC (recommended)**
 Fine-grained access via built-in roles. Key roles:
@@ -73,11 +72,11 @@ Fine-grained access via built-in roles. Key roles:
 | Key Vault Crypto Officer | Create and manage keys |
 | Key Vault Crypto User | Encrypt/decrypt/sign with keys |
 
-Use Azure RBAC. Vault access policies can't be scoped to individual secrets — RBAC can. Assign `Key Vault Secrets User` to managed identities, not broader roles.
+Use Azure RBAC. Vault access policies can't be scoped to individual secrets - RBAC can. Assign `Key Vault Secrets User` to managed identities, not broader roles.
 
 ## Accessing secrets from applications
 
-The right pattern is a **managed identity** — no credentials stored in code:
+The right pattern is a **managed identity** - no credentials stored in code:
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -96,8 +95,8 @@ print(secret.value)
 
 Both should be enabled on every production vault:
 
-- **Soft delete** — deleted secrets/keys/certs are retained for a configurable period (7–90 days) before permanent deletion. A deleted vault is also retained.
-- **Purge protection** — prevents permanent deletion of a soft-deleted vault or object during the retention period, even by an administrator.
+- **Soft delete** - deleted secrets/keys/certs are retained for a configurable period (7–90 days) before permanent deletion. A deleted vault is also retained.
+- **Purge protection** - prevents permanent deletion of a soft-deleted vault or object during the retention period, even by an administrator.
 
 Purge protection is irreversible once enabled. Enable it from day one on production vaults.
 
@@ -111,19 +110,19 @@ By default, Key Vault is reachable over the public internet. For production, dep
 Every update to a secret creates a new version. Applications referencing a secret by name (without a version) get the latest version automatically. Applications that hardcode a specific version ID won't receive rotated secrets. Reference secrets by name only, not by version.
 
 **2. Soft delete cannot be disabled once the vault exists**
-Azure enforced soft delete on all vaults from 2021. You can't opt out. Plan your lifecycle management accordingly — deleted secrets count against your storage quota during the retention period.
+Azure enforced soft delete on all vaults from 2021. You can't opt out. Plan your lifecycle management accordingly - deleted secrets count against your storage quota during the retention period.
 
 **3. Key Vault throttling limits**
 Key Vault has service limits: 2,000 transactions per 10 seconds for secrets (per vault). If you're accessing the same secret from hundreds of instances, you'll hit throttling. Cache the secret value in memory with a short TTL (e.g. 5 minutes) rather than calling Key Vault on every request.
 
 **4. Vault access policies and RBAC don't mix well**
-If you enable Azure RBAC on a vault that previously used access policies, the access policies are ignored. Don't run both models simultaneously on the same vault — it causes confusion about why access is or isn't working.
+If you enable Azure RBAC on a vault that previously used access policies, the access policies are ignored. Don't run both models simultaneously on the same vault - it causes confusion about why access is or isn't working.
 
 **5. Cross-tenant access requires federation**
-If a workload in one tenant needs to access a Key Vault in another tenant (common in multi-tenant ISV scenarios), managed identity won't work directly — you need federated credentials or service principals with explicit cross-tenant permissions. Plan this early.
+If a workload in one tenant needs to access a Key Vault in another tenant (common in multi-tenant ISV scenarios), managed identity won't work directly - you need federated credentials or service principals with explicit cross-tenant permissions. Plan this early.
 
 ---
 
 ## Summary
 
-Key Vault centralises secret, key, and certificate management with audit logging, soft delete, and RBAC. Use managed identities to access it — no credentials in code. Enable soft delete and purge protection on every production vault. Deploy a Private Endpoint and disable public access. Cache secret values in your application rather than calling Key Vault on every operation. And use Azure RBAC o
+Key Vault centralises secret, key, and certificate management with audit logging, soft delete, and RBAC. Use managed identities to access it - no credentials in code. Enable soft delete and purge protection on every production vault. Deploy a Private Endpoint and disable public access. Cache secret values in your application rather than calling Key Vault on every operation. And use Azure RBAC o

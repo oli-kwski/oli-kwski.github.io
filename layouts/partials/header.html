@@ -125,6 +125,18 @@
                 </a>
             </li>
             {{- end }}
+            <li class="nav-search" id="nav-search-wrap">
+              <input
+                type="search"
+                id="nav-search-input"
+                class="nav-search-input"
+                placeholder="Search..."
+                autocomplete="off"
+                aria-label="Search posts"
+                spellcheck="false"
+              >
+              <ul class="nav-search-results" id="nav-search-results" role="listbox" hidden></ul>
+            </li>
         </ul>
     </nav>
     {{- if eq .Kind "page" }}<div id="reading-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"></div>{{- end }}

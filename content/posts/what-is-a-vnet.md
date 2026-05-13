@@ -8,7 +8,7 @@ tags:
   - Networking
   - VNet
 series:
-  - VNet
+  - Azure Fundamentals
 
 pinned: true
 
@@ -22,7 +22,6 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 weight: 1
 ---
@@ -49,7 +48,9 @@ When you create a VNet, you define:
 - **DNS settings** - Azure-provided DNS (default) or custom DNS servers (your own resolver, Azure Firewall with DNS proxy, or DNS servers if AD is still present in your environment).
 - **DDoS protection** - Infrastructure protection (formerly basic) is free. Standard (DDoS Network Protection) is a paid per-plan charge, one plan covers multiple VNets.
 
-> **Important:** Resources don't attach to the VNet directly - they attach to a subnet within the VNet via a network interface card (NIC).
+{{< important >}}
+Resources don't attach to the VNet directly - they attach to a subnet within the VNet via a network interface card (NIC).
+{{< /important >}}
 
 ## Key concepts
 

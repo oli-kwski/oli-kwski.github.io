@@ -9,16 +9,14 @@ tags:
   - Security
   - Private Endpoints
   - Bicep
-  - IaC
 series:
-  - Private Endpoints
+
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
-ShowPostNavLinks: true
 
 cover:
   image: /covers/iac.svg
@@ -79,7 +77,7 @@ resource privateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneG
 }
 ```
 
-### groupIds — picking the right sub-resource
+### groupIds - picking the right sub-resource
 
 The `groupIds` value tells Azure which sub-resource of the service you're connecting to. A single storage account exposes multiple sub-resources, each requiring its own Private Endpoint if you want full private coverage:
 
@@ -110,7 +108,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-Setting `publicNetworkAccess: 'Disabled'` takes precedence over all firewall rules — the public endpoint is completely closed regardless of what IP allowlists or vnet service endpoint rules exist.
+Setting `publicNetworkAccess: 'Disabled'` takes precedence over all firewall rules - the public endpoint is completely closed regardless of what IP allowlists or vnet service endpoint rules exist.
 
 ## Verifying it works
 
@@ -120,7 +118,7 @@ From a VM or other resource inside the linked vnet, check that the storage hostn
 nslookup yourstorageaccount.blob.core.windows.net
 ```
 
-You should see the response chain through `privatelink.blob.core.windows.net` and resolve to a private IP in your subnet — not the public IP. If you still see the public IP, the Private DNS Zone is either not linked to the vnet or the DNS zone group wasn't created correctly.
+You should see the response chain through `privatelink.blob.core.windows.net` and resolve to a private IP in your subnet - not the public IP. If you still see the public IP, the Private DNS Zone is either not linked to the vnet or the DNS zone group wasn't created correctly.
 
 For hub-and-spoke topologies using a centralised DNS server or Azure Firewall DNS proxy, ensure the Private DNS Zone is linked to the **hub** vnet, not just the spoke.
 

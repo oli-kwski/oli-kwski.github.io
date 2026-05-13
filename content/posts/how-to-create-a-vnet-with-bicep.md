@@ -8,16 +8,14 @@ tags:
   - Networking
   - VNet
   - Bicep
-  - IaC
 series:
-  - VNet
+  - Bicep
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -38,6 +36,8 @@ This post assumes you know what a VNet is and focuses on deploying a VNet with B
 - VS Code installed
 - Bicep VS Code extension installed
 
+If you need to set any of these up, see [Setting Up a Bicep Development Environment on Windows](/posts/bicep-environment-setup-windows).
+
 ## The code
 
 The below bicep code will deploy the following:
@@ -45,7 +45,7 @@ The below bicep code will deploy the following:
 - A resource group
 - A VNet with two subnets
 
-The code is split into 2 files, main.bicep and a VNet module named vnet.bicep.
+The code is split into 2 files, `main.bicep` and a VNet module named `vnet.bicep`.
 
 ### main.bicep
 

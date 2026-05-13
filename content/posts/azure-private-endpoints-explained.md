@@ -9,7 +9,7 @@ tags:
   - Security
   - Private Endpoints
 series:
-  - Private Endpoints
+  - Azure Fundamentals
 
 pinned: true
 
@@ -23,7 +23,6 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
-ShowPostNavLinks: true
 weight: 1
 ---
 
@@ -41,9 +40,9 @@ Consider a VM hosted in Azure that needs to read files from a storage account. W
 
 This creates a few issues:
 
-- **Attack surface** — the service is reachable from anywhere on the internet, relying on auth and firewall rules as the only protection.
-- **Data exfiltration risk** — outbound traffic to storage goes to a public endpoint, making it harder to lock down with egress controls.
-- **Compliance** — frameworks like PCI-DSS, ISO 27001, and NHS DSPT often require that sensitive data never traverse public networks.
+- **Attack surface** - the service is reachable from anywhere on the internet, relying on auth and firewall rules as the only protection.
+- **Data exfiltration risk** - outbound traffic to storage goes to a public endpoint, making it harder to lock down with egress controls.
+- **Compliance** - frameworks like PCI-DSS, ISO 27001, and NHS DSPT often require that sensitive data never traverse public networks.
 
 ## What is a Private Endpoint?
 
@@ -53,7 +52,7 @@ When you create a private endpoint for your storage account, Azure allocates a p
 
 Once you've confirmed your PaaS resource is available over its private endpoint you can disable the public endpoint on the storage account, making it completely unreachable from the internet.
 
-## Private DNS — the piece everyone forgets
+## Private DNS - the piece everyone forgets
 
 Here's the part that trips people up. After creating a private endpoint, if you resolve `yourstorageaccount.blob.core.windows.net` from inside the VNet you'll still get the public IP.
 
@@ -81,7 +80,9 @@ The DNS zone contains an A record which maps your storage account's hostname to 
 
 From outside the VNet, the same hostname resolves to the public IP as normal. The magic is that VNet-linked DNS zones take precedence for resources inside the VNet.
 
-> **Important:** If you're using a hub-and-spoke topology with centralised DNS, you need to link the Private DNS Zones to the hub VNet — not just the spoke. Otherwise your spoke VMs, routing through the hub's DNS, won't get the private IP responses.
+{{< important >}}
+If you're using a hub-and-spoke topology with centralised DNS, you need to link the Private DNS Zones to the hub VNet - not just the spoke. Otherwise your spoke VMs, routing through the hub's DNS, won't get the private IP responses.
+{{< /important >}}
 
 ## When to use them
 

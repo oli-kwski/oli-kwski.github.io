@@ -1234,6 +1234,162 @@ a.series-nav-link:hover {
 }
 
 /* =========================================================
+   Post tags in header
+   ========================================================= */
+.post-tags-header {
+  margin-top: 0.6rem;
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   Nav search
+   ========================================================= */
+.nav-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-search-input {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--primary) !important;
+  font-size: 0.82rem;
+  padding: 0 8px;
+  height: 22px;
+  line-height: 22px;
+  box-sizing: border-box;
+  width: 120px;
+  transition: width 0.2s ease, border-color 0.2s ease;
+  outline: none;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.nav-search-input::placeholder {
+  color: var(--secondary);
+  opacity: 0.7;
+}
+
+.nav-search-input:focus {
+  width: 190px;
+  border-color: var(--azure-blue);
+}
+
+.nav-search-results {
+  position: fixed;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  width: 300px;
+  z-index: 9999;
+}
+
+.nav-search-results a {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 14px;
+  text-decoration: none;
+  gap: 2px;
+}
+
+.nav-search-results a:hover,
+.nav-search-results a:focus {
+  background: rgba(0, 120, 212, 0.06);
+  outline: none;
+}
+
+.nsr-title {
+  font-size: 0.875rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.nsr-desc {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .nav-search-results {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .nav-search-input:focus {
+  border-color: var(--azure-cyan);
+}
+
+[data-theme="dark"] .nav-search-results a:hover,
+[data-theme="dark"] .nav-search-results a:focus {
+  background: rgba(80, 230, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+  #nav-search-wrap {
+    width: 100%;
+    padding: 0.5rem 0 0.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-search-input {
+    width: 100% !important;
+    height: 36px;
+    line-height: 36px;
+    font-size: 1rem;
+    padding: 0 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================================================
+   Important callout
+   ========================================================= */
+.callout-important {
+  background: rgba(255, 185, 0, 0.08);
+  border-left: 4px solid #FFB900;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.callout-important .callout-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #FFB900;
+  margin-bottom: 0.4rem;
+}
+
+.callout-important .callout-content p {
+  margin: 0;
+  color: var(--content);
+}
+
+.callout-important .callout-content p + p {
+  margin-top: 0.5rem;
+}
+
+[data-theme="dark"] .callout-important {
+  background: rgba(255, 200, 61, 0.06);
+  border-left-color: #FFC83D;
+}
+
+[data-theme="dark"] .callout-important .callout-label {
+  color: #FFC83D;
+}
+
+/* =========================================================
    Reading progress bar
    ========================================================= */
 #reading-progress {
@@ -1263,7 +1419,7 @@ div.highlight[data-lang]::before {
   font-size: 14px;
   font-family: ui-monospace, Consolas, "Cascadia Code", "Fira Code", monospace;
   color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 0.06em;
   pointer-events: none;
   user-select: none;

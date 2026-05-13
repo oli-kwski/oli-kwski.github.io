@@ -7,7 +7,7 @@ description: "Azure Storage accounts are one of the most versatile services in A
 tags:
   - Storage Account
 series:
-  - Storage Accounts
+  - Azure Fundamentals
 
 pinned: true
 
@@ -21,7 +21,6 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 weight: 1
 ---
@@ -61,8 +60,8 @@ When creating a storage account, you choose the account type:
 
 Performance tiers:
 
-- **Standard** — backed by HDD. Suitable for most workloads.
-- **Premium** — backed by SSD. Lower latency, higher throughput, higher cost. Required for NFS file shares and high-transaction blob workloads.
+- **Standard** - backed by HDD. Suitable for most workloads.
+- **Premium** - backed by SSD. Lower latency, higher throughput, higher cost. Required for NFS file shares and high-transaction blob workloads.
 
 If you're not sure what to pick, the safe option is: **General-purpose V2, Standard**.
 
@@ -101,7 +100,7 @@ There is also **smart tier** - Smart tier automatically moves data between hot, 
 
 **Diagnostic logs and metrics:** Azure Diagnostics, NSG flow logs, and Activity Logs can be sent to a storage account for long-term retention. A dedicated diagnostics storage account per environment keeps billing and access control clean.
 
-**Static website hosting:** General-purpose V2 accounts support static website hosting — HTML, CSS, and JS served directly from Blob storage with a `$web` container. Pair this with Azure CDN or Front Door for custom domains and HTTPS.
+**Static website hosting:** General-purpose V2 accounts support static website hosting - HTML, CSS, and JS served directly from Blob storage with a `$web` container. Pair this with Azure CDN or Front Door for custom domains and HTTPS.
 
 **Data lake:** Enable the **Hierarchical Namespace** option on a General-purpose V2 account and you have Azure Data Lake Storage Gen2, which brings ACLs and real directory operations unlike the simulated directories in blob storage.
 

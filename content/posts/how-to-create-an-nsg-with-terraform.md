@@ -9,16 +9,14 @@ tags:
   - NSG
   - Security
   - Terraform
-  - IaC
 series:
-  - NSG
+  - Terraform
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -111,7 +109,7 @@ resource "azurerm_network_security_group" "main" {
     source_port_range          = "*"
     destination_address_prefix = "Internet"
     destination_port_range     = "*"
-    description                = "Deny direct internet egress — route via firewall."
+    description                = "Deny direct internet egress - route via firewall."
   }
 
   tags = {
@@ -156,7 +154,7 @@ resource "azurerm_network_security_rule" "allow_https" {
 }
 ```
 
-Don't mix inline `security_rule` blocks and separate `azurerm_network_security_rule` resources on the same NSG — Terraform will conflict with itself.
+Don't mix inline `security_rule` blocks and separate `azurerm_network_security_rule` resources on the same NSG - Terraform will conflict with itself.
 
 ### Flow logs
 
@@ -223,13 +221,13 @@ az network watcher test-ip-flow \
 ## Common gotchas
 
 **1. Don't mix inline rules and separate rule resources**
-Using both `security_rule` blocks inside `azurerm_network_security_group` and separate `azurerm_network_security_rule` resources on the same NSG causes permanent plan drift — Terraform will continually try to remove the rules it doesn't "own". Pick one approach and stick to it.
+Using both `security_rule` blocks inside `azurerm_network_security_group` and separate `azurerm_network_security_rule` resources on the same NSG causes permanent plan drift - Terraform will continually try to remove the rules it doesn't "own". Pick one approach and stick to it.
 
 **2. Subnet association creates implicit dependency**
 `azurerm_subnet_network_security_group_association` is a separate resource in state. If you destroy the NSG without first destroying the association, you'll get a dependency error. Terraform handles destruction order automatically, but be aware if you're doing manual state manipulation.
 
 **3. Flow logs resource group is `NetworkWatcherRG` by default**
-Network Watcher (and therefore flow logs) is deployed automatically by Azure into `NetworkWatcherRG`. The Terraform resource for flow logs must reference this — it's not created in your resource group. Check with `az network watcher list` if you're unsure what exists.
+Network Watcher (and therefore flow logs) is deployed automatically by Azure into `NetworkWatcherRG`. The Terraform resource for flow logs must reference this - it's not created in your resource group. Check with `az network watcher list` if you're unsure what exists.
 
 **4. Priority gaps for future rules**
 Leave gaps between priorities (100, 200, 300) so rules can be inserted later without renumbering. Renaming or renumbering existing rules causes Terraform to delete and recreate them, which creates a brief window where the rule is absent.
@@ -238,4 +236,4 @@ Leave gaps between priorities (100, 200, 300) so rules can be inserted later wit
 
 ## Summary
 
-NSGs in Terraform are clean and predictable. Create the NSG, attach it to subnets with `azurerm_subnet_network_security_group_association`, and choose either inline rules or separate `azurerm_network_security_rule` resources — not both. Enable flow logs pointing at a diagnostics storage account from day one. Use `az network nic list-effective-nsg` when rules aren't behaving as expected.
+NSGs in Terraform are clean and predictable. Create the NSG, attach it to subnets with `azurerm_subnet_network_security_group_association`, and choose either inline rules or separate `azurerm_network_security_rule` resources - not both. Enable flow logs pointing at a diagnostics storage account from day one. Use `az network nic list-effective-nsg` when rules aren't behaving as expected.

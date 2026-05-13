@@ -44,7 +44,7 @@ buildExpired = false
   ShowReadingTime = true
 
   # Sharing / post meta
-  ShowPostNavLinks = true
+  ShowPostNavLinks = false
   ShowBreadCrumbs = false
   ShowCodeCopyButtons = true
   ShowWordCount = false
@@ -146,11 +146,6 @@ buildExpired = false
   url = "/archives/"
   weight = 20
 
-[[menu.main]]
-  identifier = "search"
-  name = "Search"
-  url = "/search/"
-  weight = 25
 
 # ---------------------------------------------------------------------------
 # Taxonomy

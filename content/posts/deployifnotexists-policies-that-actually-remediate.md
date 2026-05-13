@@ -20,7 +20,6 @@ ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: false
-ShowPostNavLinks: true
 ---
 
 DeployIfNotExists (DINE) is the most powerful Azure Policy effect. Rather than flagging non-compliance, it automatically deploys the fix - enabling diagnostic settings, attaching Defender plans, adding resource locks. In practice it's also the effect most likely to silently fail. Policy compliance shows non-compliant, a remediation task runs, nothing changes, and the root cause isn't immediately obvious.

@@ -9,16 +9,14 @@ tags:
   - NSG
   - Security
   - Bicep
-  - IaC
 series:
-  - NSG
+  - Bicep
 
 comments: true
 ShowToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
-ShowPostNavLinks: true
 ShowWordCount: false
 
 cover:
@@ -230,10 +228,10 @@ If a NIC NSG denies traffic that the subnet NSG allows, the deny wins. Use Netwo
 The default `AllowAzureLoadBalancerInbound` rule is at priority 65001. If you add a `DenyAllInbound` rule at a lower priority number before that, you block health probes and break load balancing. Keep your deny rules at a priority higher than 65000 or explicitly allow `AzureLoadBalancer` as a source at a lower priority.
 
 **4. Flow log version 2 is recommended**
-Version 1 flow logs record allowed/denied flows but not throughput information. Version 2 adds bytes and packets per flow — more useful for capacity planning and anomaly detection. Always deploy with `version: 2`.
+Version 1 flow logs record allowed/denied flows but not throughput information. Version 2 adds bytes and packets per flow - more useful for capacity planning and anomaly detection. Always deploy with `version: 2`.
 
 ---
 
 ## Summary
 
-NSGs in Bicep are straightforward: define the resource with security rules, output the ID, and reference it in the subnet definition. Leave priority gaps, use service tags rather than raw IPs, and enable flow logs from day one. Use Network Watcher effective security rules when debugging — never assume what you configured is what's being enforced.
+NSGs in Bicep are straightforward: define the resource with security rules, output the ID, and reference it in the subnet definition. Leave priority gaps, use service tags rather than raw IPs, and enable flow logs from day one. Use Network Watcher effective security rules when debugging - never assume what you configured is what's being enforced.
