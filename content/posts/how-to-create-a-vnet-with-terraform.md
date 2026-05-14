@@ -8,8 +8,6 @@ tags:
   - Networking
   - VNet
   - Terraform
-series:
-  - Terraform
 
 comments: true
 ShowToc: true

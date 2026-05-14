@@ -8,7 +8,6 @@ tags:
   - Security
   - Key Vault
   - Secrets Management
-series:
   - Azure Fundamentals
 
 pinned: true

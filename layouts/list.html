@@ -2,7 +2,7 @@
 
 {{- if (and site.Params.profileMode.enabled .IsHome) }}
 {{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
+{{- end }}
 
 {{- if and (not .IsHome) .Title (eq .Kind "term") }}
 <header class="page-header">
@@ -38,10 +38,12 @@
 </div>
 {{- end }}
 
-{{- if and (eq .Kind "section") (eq .Section "posts") }}
+{{- if or (and (eq .Kind "section") (eq .Section "posts")) .IsHome }}
 
-{{/* ---- Tag-filtered posts list (no pagination) ---- */}}
-{{- $allPages := .Pages.ByDate.Reverse }}
+{{/* ---- Tag-filtered + JS-paginated posts grid ---- */}}
+{{- $allPages := cond .IsHome ((where site.RegularPages "Section" "posts").ByDate.Reverse) (.Pages.ByDate.Reverse) }}
+
+{{/* Collect tags from ALL posts for the filter */}}
 {{- $allTags := slice }}
 {{- range $allPages }}
   {{- range .GetTerms "tags" }}
@@ -50,10 +52,19 @@
 {{- end }}
 {{- $allTags = $allTags | uniq | sort }}
 
+<div class="home-search">
+  <svg class="home-search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+  <input type="search" id="home-search-input" class="home-search-input" placeholder="Search posts..." autocomplete="off" aria-label="Search posts" spellcheck="false">
+  <ul class="home-search-results" id="home-search-results" role="listbox" hidden></ul>
+</div>
+
 <div class="tag-filter" id="tag-filter">
-  <button class="tag-filter-btn active" data-tag="all">All</button>
+  <button class="tag-filter-btn active" data-value="all">All</button>
   {{- range $allTags }}
-  <button class="tag-filter-btn" data-tag="{{ . | urlize }}">{{ . }}</button>
+  <button class="tag-filter-btn" data-value="{{ . | urlize }}">{{ . }}</button>
   {{- end }}
 </div>
 
@@ -63,7 +74,7 @@
 {{- range .GetTerms "tags" }}
   {{- $tagSlugs = $tagSlugs | append (.Title | urlize) }}
 {{- end }}
-<article class="post-entry" data-tags="{{ delimit $tagSlugs " " }}">
+<article class="post-entry" data-tags="{{ delimit $tagSlugs " " }}" style="display:none">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
@@ -78,15 +89,27 @@
       {{- end }}
     </h2>
   </header>
+  {{- if .Description }}
+  <div class="entry-content">
+    <p>{{ .Description }}</p>
+  </div>
+  {{- end }}
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}
   </footer>
   {{- end }}
+  {{- with .GetTerms "tags" }}
+  <div class="post-tags-header post-tags">
+    {{- range . }}<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}
+  </div>
+  {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
 {{- end }}
 </div>{{/* end posts-grid */}}
+
+<nav class="posts-pagination" id="posts-pagination" aria-label="Page navigation"></nav>
 
 <div class="tag-filter-empty" id="tag-filter-empty" style="display:none">
   <p>No posts match this filter.</p>
@@ -94,25 +117,72 @@
 
 <script>
 (function () {
-  const btns = document.querySelectorAll('.tag-filter-btn');
-  const posts = document.querySelectorAll('.posts-grid .post-entry');
-  const empty = document.getElementById('tag-filter-empty');
+  var PAGE_SIZE = 10;
+  var currentFilter = 'all';
+  var currentPage = 1;
+
+  var btns = document.querySelectorAll('.tag-filter-btn');
+  var allPosts = Array.from(document.querySelectorAll('.posts-grid .post-entry'));
+  var empty = document.getElementById('tag-filter-empty');
+  var paginationEl = document.getElementById('posts-pagination');
+
+  function getFiltered() {
+    if (currentFilter === 'all') return allPosts;
+    return allPosts.filter(function (post) {
+      var tags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
+      return tags.includes(currentFilter);
+    });
+  }
+
+  function render() {
+    var filtered = getFiltered();
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    var start = (currentPage - 1) * PAGE_SIZE;
+    var pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+    allPosts.forEach(function (p) { p.style.display = 'none'; });
+    pageItems.forEach(function (p) { p.style.display = ''; });
+
+    empty.style.display = filtered.length === 0 ? '' : 'none';
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    paginationEl.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    function makeBtn(label, page) {
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'posts-page-btn' + (page === currentPage ? ' active' : '');
+      a.innerHTML = label;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        currentPage = page;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      return a;
+    }
+
+    if (currentPage > 1) paginationEl.appendChild(makeBtn('&laquo;', currentPage - 1));
+    for (var i = 1; i <= totalPages; i++) paginationEl.appendChild(makeBtn(i, i));
+    if (currentPage < totalPages) paginationEl.appendChild(makeBtn('&raquo;', currentPage + 1));
+  }
 
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       btns.forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      const tag = btn.dataset.tag;
-      let visible = 0;
-      posts.forEach(function (post) {
-        const tags = post.dataset.tags ? post.dataset.tags.split(' ') : [];
-        const show = tag === 'all' || tags.includes(tag);
-        post.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      empty.style.display = visible === 0 ? '' : 'none';
+      currentFilter = btn.dataset.value;
+      currentPage = 1;
+      render();
     });
   });
+
+  render();
 }());
 </script>
 
@@ -197,7 +267,5 @@
 {{- end }}
 
 {{- end }}{{/* end posts section / paginator branch */}}
-
-{{- end }}{{/* end profileMode */}}
 
 {{- end }}{{- /* end main */ -}}

@@ -1,7 +1,7 @@
 ---
 title: "Welcome to Head in the Cloud"
 date: 2026-04-08
-draft: false
+draft: true
 description: "An introduction to the blog and what to expect."
 
 

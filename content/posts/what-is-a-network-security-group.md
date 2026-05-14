@@ -8,7 +8,6 @@ tags:
   - Networking
   - NSG
   - Security
-series:
   - Azure Fundamentals
 
 pinned: true

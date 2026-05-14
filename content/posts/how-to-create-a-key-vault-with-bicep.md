@@ -8,8 +8,6 @@ tags:
   - Security
   - Key Vault
   - Bicep
-series:
-  - Bicep
 
 comments: true
 ShowToc: true

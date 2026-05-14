@@ -7,8 +7,6 @@ description: "A practical Terraform configuration for deploying a production-rea
 tags:
   - Storage Account
   - Terraform
-series:
-  - Terraform
 
 comments: true
 ShowToc: true

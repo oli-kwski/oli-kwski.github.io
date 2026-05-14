@@ -9,8 +9,6 @@ tags:
   - NSG
   - Security
   - Terraform
-series:
-  - Terraform
 
 comments: true
 ShowToc: true

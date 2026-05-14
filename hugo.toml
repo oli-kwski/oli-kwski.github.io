@@ -107,17 +107,10 @@ buildExpired = false
     title    = "Head in the Cloud"
     subtitle = "Azure focused - things built, problems solved, ideas worth sharing."
     imageUrl = "/my_avatar_profile.png"
-    imageWidth  = 200
-    imageHeight = 200
+    imageWidth  = 120
+    imageHeight = 120
     imageTitle  = "Head in the Cloud"
 
-    [[params.profileMode.buttons]]
-      name = "Posts"
-      url  = "/posts/"
-
-    [[params.profileMode.buttons]]
-      name = "About"
-      url  = "/about/"
 
 # ---------------------------------------------------------------------------
 # Navigation menu
@@ -128,31 +121,12 @@ buildExpired = false
   url = "/about/"
   weight = 5
 
-[[menu.main]]
-  identifier = "series"
-  name = "Series"
-  url = "/series/"
-  weight = 10
-
-[[menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  url = "/posts/"
-  weight = 15
-
-[[menu.main]]
-  identifier = "archives"
-  name = "Archives"
-  url = "/archives/"
-  weight = 20
-
 
 # ---------------------------------------------------------------------------
 # Taxonomy
 # ---------------------------------------------------------------------------
 [taxonomies]
   tag = "tags"
-  series = "series"
 
 # ---------------------------------------------------------------------------
 # Related posts — drives the "Related" block PaperMod renders under each post
@@ -163,12 +137,8 @@ buildExpired = false
   toLower = false
 
   [[related.indices]]
-    name = "series"
-    weight = 100
-
-  [[related.indices]]
     name = "tags"
-    weight = 80
+    weight = 100
 
   [[related.indices]]
     name = "categories"

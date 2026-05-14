@@ -17,6 +17,35 @@ body {
 /* Align header nav with main content width */
 .header-nav {
   max-width: calc(var(--main-width) + var(--gap) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap);
+  height: var(--header-height);
+  margin: 0 auto;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header-links a {
+  font-size: 0.85rem;
+  color: var(--secondary) !important;
+  opacity: 0.75;
+  text-decoration: none;
+  transition: color 0.15s, opacity 0.15s;
+}
+
+.header-links a:hover {
+  color: var(--azure-blue) !important;
+  opacity: 1;
+}
+
+[data-theme="dark"] .header-links a:hover {
+  color: var(--azure-cyan) !important;
 }
 
 /* =========================================================
@@ -159,15 +188,15 @@ a:hover {
 .profile img,
 .profile-avatar-wrap img {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   border-radius: 50%;
 }
 
 .profile-avatar-wrap {
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -242,12 +271,12 @@ a:hover {
    ========================================================= */
 /* Tags on individual posts — outlined monospace with # prefix */
 .post-tags a {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--azure-blue) !important;
   background: transparent;
   border: 1px solid rgba(0, 120, 212, 0.4);
-  border-radius: 3px;
-  padding: 2px 8px;
+  border-radius: 999px;
+  padding: 1px 10px;
   transition: background 0.15s, border-color 0.15s;
 }
 
@@ -501,9 +530,7 @@ blockquote {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  text-align: left;
+  justify-content: center;
   background: var(--theme);
   padding: 0 var(--gap);
   height: 44px;
@@ -534,7 +561,6 @@ blockquote {
   font-size: 0.78rem;
   color: var(--secondary);
   opacity: 0.85;
-  flex: 1;
 }
 
 .footer-social-icons {
@@ -595,7 +621,7 @@ blockquote {
 }
 
 /* =========================================================
-   Breadcrumbs
+   Breadcrumbs / Back to posts link
    ========================================================= */
 .breadcrumbs a {
   color: var(--azure-blue);
@@ -603,6 +629,27 @@ blockquote {
 
 [data-theme="dark"] .breadcrumbs a {
   color: var(--azure-cyan);
+}
+
+.post-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--secondary) !important;
+  text-decoration: none !important;
+  opacity: 0.75;
+  transition: opacity 0.15s, color 0.15s;
+  margin-bottom: 0.75rem;
+}
+
+.post-back-link:hover {
+  opacity: 1;
+  color: var(--azure-blue) !important;
+}
+
+[data-theme="dark"] .post-back-link:hover {
+  color: var(--azure-cyan) !important;
 }
 
 /* =========================================================
@@ -1073,7 +1120,7 @@ a.series-nav-link:hover {
    ========================================================= */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap);
   margin-bottom: var(--gap);
 }
@@ -1106,6 +1153,58 @@ a.series-nav-link:hover {
 }
 
 /* =========================================================
+   Posts pagination
+   ========================================================= */
+.posts-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2rem;
+}
+
+.posts-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 120, 212, 0.4);
+  font-size: 0.82rem;
+  color: var(--secondary);
+  text-decoration: none !important;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.posts-page-btn:hover {
+  border-color: var(--azure-blue);
+  color: var(--azure-blue) !important;
+}
+
+.posts-page-btn.active {
+  background: var(--azure-blue);
+  border-color: var(--azure-blue);
+  color: #fff !important;
+}
+
+[data-theme="dark"] .posts-page-btn {
+  border-color: rgba(80, 230, 255, 0.3);
+}
+
+[data-theme="dark"] .posts-page-btn:hover {
+  border-color: var(--azure-cyan);
+  color: var(--azure-cyan) !important;
+}
+
+[data-theme="dark"] .posts-page-btn.active {
+  background: var(--azure-cyan);
+  border-color: var(--azure-cyan);
+  color: var(--azure-navy) !important;
+}
+
+/* =========================================================
    Tag filter — posts page
    ========================================================= */
 .tag-filter {
@@ -1118,7 +1217,7 @@ a.series-nav-link:hover {
 .tag-filter-btn {
   font-size: 0.78rem;
   padding: 3px 12px;
-  border-radius: 3px;
+  border-radius: 999px;
   border: 1px solid rgba(0, 120, 212, 0.4);
   background: transparent;
   color: var(--secondary);
@@ -1157,6 +1256,274 @@ a.series-nav-link:hover {
   font-size: 0.9rem;
   padding: 2rem 0;
   text-align: center;
+}
+
+/* =========================================================
+   Series strip — compact card row above the posts grid
+   ========================================================= */
+.series-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.series-strip-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--azure-border);
+  border-radius: 6px;
+  background: var(--entry);
+  text-decoration: none !important;
+  transition: border-left-color 0.2s, box-shadow 0.2s;
+}
+
+.series-strip-card:hover {
+  border-left-color: var(--azure-blue);
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.1);
+}
+
+[data-theme="dark"] .series-strip-card:hover {
+  border-left-color: var(--azure-cyan);
+  box-shadow: 0 2px 8px rgba(80, 230, 255, 0.08);
+}
+
+.series-strip-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+.series-strip-desc {
+  font-size: 0.76rem;
+  color: var(--secondary);
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.series-strip-count {
+  font-size: 0.7rem;
+  color: var(--azure-blue);
+  font-family: ui-monospace, Consolas, "Cascadia Code", "Fira Code", monospace;
+  margin-top: 0.1rem;
+}
+
+[data-theme="dark"] .series-strip-count {
+  color: var(--azure-cyan);
+}
+
+/* =========================================================
+   Home page — remove full-viewport min-height from profile block
+   ========================================================= */
+.main .profile {
+  min-height: unset;
+  padding-bottom: 1.5rem;
+}
+
+/* =========================================================
+   Home page — recent posts section
+   ========================================================= */
+.home-posts {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.home-posts-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.home-posts-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.home-posts-all {
+  font-size: 0.82rem;
+  color: var(--azure-blue);
+  text-decoration: none;
+}
+
+.home-posts-all:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .home-posts-all {
+  color: var(--azure-cyan);
+}
+
+.home-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+}
+
+.home-post-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--azure-border);
+  border-left: 3px solid var(--azure-border);
+  border-radius: 6px;
+  background: var(--entry);
+  overflow: hidden;
+  transition: border-left-color 0.2s, box-shadow 0.2s;
+}
+
+.home-post-card:hover {
+  border-left-color: var(--azure-blue);
+  box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
+}
+
+[data-theme="dark"] .home-post-card:hover {
+  border-left-color: var(--azure-cyan);
+  box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
+}
+
+.home-post-cover {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+}
+
+.home-post-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-post-body {
+  padding: 1rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.home-post-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--primary);
+  margin: 0;
+}
+
+.home-post-meta {
+  font-size: 0.78rem;
+  color: var(--secondary);
+  font-family: ui-monospace, Consolas, "Cascadia Code", "Fira Code", monospace;
+}
+
+.home-post-desc {
+  font-size: 0.875rem;
+  color: var(--content);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.home-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.home-post-tag {
+  font-size: 0.72rem;
+  color: var(--azure-blue);
+  border: 1px solid rgba(0, 120, 212, 0.4);
+  border-radius: 3px;
+  padding: 1px 7px;
+}
+
+[data-theme="dark"] .home-post-tag {
+  color: var(--azure-cyan);
+  border-color: rgba(80, 230, 255, 0.3);
+}
+
+.home-post-link {
+  position: absolute;
+  inset: 0;
+}
+
+@media (max-width: 640px) {
+  .home-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Series taxonomy page — card grid
+   ========================================================= */
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--gap);
+  margin-top: 1rem;
+}
+
+.series-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--azure-border);
+  border-left: 3px solid var(--azure-border);
+  border-radius: 6px;
+  background: var(--entry);
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: border-color 0.2s, border-left-color 0.2s, box-shadow 0.2s;
+}
+
+.series-card:hover {
+  border-left-color: var(--azure-blue);
+  box-shadow: 0 2px 12px rgba(0, 120, 212, 0.12);
+}
+
+[data-theme="dark"] .series-card:hover {
+  border-left-color: var(--azure-cyan);
+  box-shadow: 0 2px 12px rgba(80, 230, 255, 0.10);
+}
+
+.series-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.series-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.series-card-count {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+.series-card-desc {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* =========================================================
@@ -1239,6 +1606,93 @@ a.series-nav-link:hover {
 .post-tags-header {
   margin-top: 0.6rem;
   margin-bottom: 0;
+}
+
+/* =========================================================
+   Inline search (above posts grid)
+   ========================================================= */
+.home-search {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.home-search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--secondary);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.home-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem 0.5rem 2.25rem;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.home-search-input::placeholder {
+  color: var(--secondary);
+  opacity: 0.7;
+}
+
+.home-search-input:focus {
+  border-color: var(--azure-blue);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+}
+
+[data-theme="dark"] .home-search-input:focus {
+  border-color: var(--azure-cyan);
+  box-shadow: 0 0 0 3px rgba(80, 230, 255, 0.1);
+}
+
+.home-search-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  z-index: 999;
+}
+
+[data-theme="dark"] .home-search-results {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.home-search-results a {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 14px;
+  text-decoration: none;
+  gap: 2px;
+}
+
+.home-search-results a:hover,
+.home-search-results a:focus {
+  background: rgba(0, 120, 212, 0.06);
+  outline: none;
+}
+
+[data-theme="dark"] .home-search-results a:hover,
+[data-theme="dark"] .home-search-results a:focus {
+  background: rgba(80, 230, 255, 0.06);
 }
 
 /* =========================================================

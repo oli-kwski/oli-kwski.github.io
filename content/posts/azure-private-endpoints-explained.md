@@ -8,7 +8,6 @@ tags:
   - Networking
   - Security
   - Private Endpoints
-series:
   - Azure Fundamentals
 
 pinned: true

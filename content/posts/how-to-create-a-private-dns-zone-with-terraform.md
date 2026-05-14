@@ -9,8 +9,6 @@ tags:
   - DNS
   - Private DNS
   - Terraform
-series:
-  - Terraform
 
 comments: true
 ShowToc: true

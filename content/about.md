@@ -35,7 +35,6 @@ hideTitle: true
   <div class="about-text">
     <p>I'm Oli, a cloud consultant specialising in Microsoft Azure.</p>
     <p>This blog is where I document things I've built, problems I've solved, and ideas worth sharing. If something here saves you an hour of head-scratching, it's done its job.</p>
-    <p>Content is organised into <a href="/series/">series</a> - each starts with a <em>What Is...</em> explainer before getting into the practical how-to. A good place to start if you're new to a topic, or jump straight to <a href="/posts/">all posts</a>.</p>
     <p>See my certifications below.</p>
   </div>
 </div>

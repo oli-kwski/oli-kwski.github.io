@@ -1,5 +1,5 @@
 {{- /* Reading progress bar — posts only */}}
-{{- if eq .Kind "page" }}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
 <script>
 (function () {
   var bar = document.getElementById('reading-progress');
@@ -63,25 +63,15 @@ document.addEventListener('keydown', function (e) {
 });
 </script>
 
-{{- /* Nav search — Fuse.js powered inline search against /index.json.
-     Results are appended to <body> and positioned with fixed coords so they
-     escape the nav's overflow/stacking context and render above the page. */}}
+{{- /* Inline search — Fuse.js powered search above the posts grid */}}
+{{- if or (and (eq .Kind "section") (eq .Section "posts")) .IsHome }}
 <script>
 (function () {
-  var input = document.getElementById('nav-search-input');
+  var input = document.getElementById('home-search-input');
   if (!input) return;
 
-  /* Move results list out of the nav and into <body> */
-  var resultsEl = document.getElementById('nav-search-results');
-  document.body.appendChild(resultsEl);
-
+  var resultsEl = document.getElementById('home-search-results');
   var fuse, indexLoaded = false;
-
-  function positionResults() {
-    var rect = input.getBoundingClientRect();
-    resultsEl.style.top  = (rect.bottom + 6) + 'px';
-    resultsEl.style.left = Math.max(0, rect.right - 300) + 'px';
-  }
 
   function loadFuse(cb) {
     if (window.Fuse) { cb(); return; }
@@ -109,11 +99,8 @@ document.addEventListener('keydown', function (e) {
 
   function renderResults(results) {
     resultsEl.innerHTML = '';
-    if (!results || !results.length) {
-      resultsEl.hidden = true;
-      return;
-    }
-    results.slice(0, 7).forEach(function (r) {
+    if (!results || !results.length) { resultsEl.hidden = true; return; }
+    results.slice(0, 8).forEach(function (r) {
       var item = r.item;
       var li = document.createElement('li');
       var a = document.createElement('a');
@@ -132,7 +119,6 @@ document.addEventListener('keydown', function (e) {
       li.appendChild(a);
       resultsEl.appendChild(li);
     });
-    positionResults();
     resultsEl.hidden = false;
   }
 
@@ -146,26 +132,15 @@ document.addEventListener('keydown', function (e) {
     renderResults(fuse.search(q));
   });
 
-  /* Close on outside click */
   document.addEventListener('click', function (e) {
     if (e.target !== input && !resultsEl.contains(e.target)) {
       resultsEl.hidden = true;
     }
   });
 
-  /* Keyboard: Escape clears, arrows navigate */
   input.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      resultsEl.hidden = true;
-      input.value = '';
-      input.blur();
-      return;
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      var first = resultsEl.querySelector('a');
-      if (first) first.focus();
-    }
+    if (e.key === 'Escape') { resultsEl.hidden = true; input.value = ''; input.blur(); return; }
+    if (e.key === 'ArrowDown') { e.preventDefault(); var first = resultsEl.querySelector('a'); if (first) first.focus(); }
   });
 
   resultsEl.addEventListener('keydown', function (e) {
@@ -177,14 +152,10 @@ document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       var prev = document.activeElement.closest('li') && document.activeElement.closest('li').previousElementSibling;
-      if (prev) prev.querySelector('a').focus();
-      else input.focus();
+      if (prev) prev.querySelector('a').focus(); else input.focus();
     }
-    if (e.key === 'Escape') {
-      resultsEl.hidden = true;
-      input.value = '';
-      input.focus();
-    }
+    if (e.key === 'Escape') { resultsEl.hidden = true; input.value = ''; input.focus(); }
   });
 }());
 </script>
+{{- end }}

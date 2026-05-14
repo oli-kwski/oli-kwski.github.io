@@ -7,7 +7,6 @@ description: "Virtual Networks are fundamental to networking in Azure. Here's ho
 tags:
   - Networking
   - VNet
-series:
   - Azure Fundamentals
 
 pinned: true

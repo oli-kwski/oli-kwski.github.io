@@ -9,7 +9,6 @@ tags:
   - DNS
   - Private Endpoints
   - Hub-and-Spoke
-series:
 
 cover:
   image: /covers/networking.svg

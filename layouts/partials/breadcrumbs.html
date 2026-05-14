@@ -1,21 +1,25 @@
-{{- if (.Param "ShowBreadCrumbs") -}}
+{{- if and (eq .Kind "page") (eq .Section "posts") -}}
+<a href="/posts/" class="post-back-link">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  Back to posts
+</a>
+{{- else if (.Param "ShowBreadCrumbs") -}}
 <div class="breadcrumbs">
     {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
     {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
-
     {{- $scratch := newScratch }}
     {{- $first := true }}
     {{- range $index, $element := split $lang_url "/" }}
-
     {{- $scratch.Add "path" (printf "%s/" $element )}}
     {{- $bc_pg := site.GetPage ($scratch.Get "path") -}}
-
     {{- if (and ($bc_pg) (gt (len . ) 0))}}
     {{- if not $first }}{{- print "&nbsp;»&nbsp;" | safeHTML }}{{- end -}}
     <a href="{{ $bc_pg.Permalink }}">{{ $bc_pg.Name }}</a>
     {{- $first = false }}
     {{- end }}
-
     {{- end -}}
 </div>
 {{- end -}}

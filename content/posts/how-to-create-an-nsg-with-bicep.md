@@ -9,8 +9,6 @@ tags:
   - NSG
   - Security
   - Bicep
-series:
-  - Bicep
 
 comments: true
 ShowToc: true

@@ -8,8 +8,6 @@ tags:
   - Security
   - Key Vault
   - Terraform
-series:
-  - Terraform
 
 comments: true
 ShowToc: true

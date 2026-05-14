@@ -9,8 +9,6 @@ tags:
   - DNS
   - Private DNS
   - Bicep
-series:
-  - Bicep
 
 comments: true
 ShowToc: true

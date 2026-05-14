@@ -9,7 +9,6 @@ tags:
   - DNS
   - Private DNS
   - Private Endpoints
-series:
   - Azure Fundamentals
 
 pinned: true
