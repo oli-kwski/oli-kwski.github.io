@@ -1028,7 +1028,7 @@ a.series-nav-link:hover {
    ========================================================= */
 .about-bio {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 2rem;
   margin-bottom: 2.5rem;
 }
@@ -1057,12 +1057,15 @@ a.series-nav-link:hover {
 
 .about-text {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .about-social-icons {
   display: flex;
   justify-content: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   margin-top: 0.75rem;
 }
 
@@ -1088,8 +1091,8 @@ a.series-nav-link:hover {
 }
 
 .about-social-icons svg {
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   display: block;
 }
 
@@ -1611,6 +1614,10 @@ a.series-nav-link:hover {
 /* =========================================================
    Inline search (above posts grid)
    ========================================================= */
+#posts-top {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
 .home-search {
   position: relative;
   margin-bottom: 1rem;

@@ -52,7 +52,7 @@
 {{- end }}
 {{- $allTags = $allTags | uniq | sort }}
 
-<div class="home-search">
+<div class="home-search" id="posts-top">
   <svg class="home-search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <circle cx="11" cy="11" r="8"></circle>
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -101,7 +101,7 @@
   {{- end }}
   {{- with .GetTerms "tags" }}
   <div class="post-tags-header post-tags">
-    {{- range . }}<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}
+    {{- range . }}<a href="/?tag={{ .LinkTitle | urlize }}#posts-top">{{ .LinkTitle }}</a>{{ end }}
   </div>
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
@@ -181,6 +181,17 @@
       render();
     });
   });
+
+  // Pre-select filter from URL ?tag= param (e.g. arriving from a post tag link)
+  var tagParam = new URLSearchParams(window.location.search).get('tag');
+  if (tagParam) {
+    var match = Array.from(btns).find(function (b) { return b.dataset.value === tagParam; });
+    if (match) {
+      btns.forEach(function (b) { b.classList.remove('active'); });
+      match.classList.add('active');
+      currentFilter = tagParam;
+    }
+  }
 
   render();
 }());
