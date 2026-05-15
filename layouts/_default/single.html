@@ -39,7 +39,7 @@
     {{- with ($.GetTerms $tags) }}
     <ul class="post-tags post-tags-header">
       {{- range . }}
-      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      <li><a href="/#tag:{{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
     {{- end }}
