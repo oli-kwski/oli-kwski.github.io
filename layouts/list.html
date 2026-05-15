@@ -101,7 +101,7 @@
   {{- end }}
   {{- with .GetTerms "tags" }}
   <div class="post-tags-header post-tags">
-    {{- range . }}<a href="/?tag={{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a>{{ end }}
+    {{- range . }}<a href="/#tag:{{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a>{{ end }}
   </div>
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
@@ -182,8 +182,9 @@
     });
   });
 
-  // Pre-select filter from URL ?tag= param (e.g. arriving from a post tag link)
-  var tagParam = new URLSearchParams(window.location.search).get('tag');
+  // Pre-select filter from hash e.g. /#tag:bicep (hash is client-side only, works on all static hosts)
+  var hash = window.location.hash;
+  var tagParam = hash.startsWith('#tag:') ? hash.slice(5) : null;
   if (tagParam) {
     var match = Array.from(btns).find(function (b) { return b.dataset.value === tagParam; });
     if (match) {
@@ -195,12 +196,13 @@
 
   render();
 
-  // Scroll to search bar after filter applied
+  // Scroll to search bar and clean up hash after filter applied
   if (tagParam) {
     var postsTop = document.getElementById('posts-top');
     if (postsTop) {
       requestAnimationFrame(function () {
         postsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', window.location.pathname);
       });
     }
   }
