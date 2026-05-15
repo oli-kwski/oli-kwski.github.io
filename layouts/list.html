@@ -101,7 +101,7 @@
   {{- end }}
   {{- with .GetTerms "tags" }}
   <div class="post-tags-header post-tags">
-    {{- range . }}<a href="/?tag={{ .LinkTitle | urlize }}#posts-top">{{ .LinkTitle }}</a>{{ end }}
+    {{- range . }}<a href="/?tag={{ .LinkTitle | urlize }}">{{ .LinkTitle }}</a>{{ end }}
   </div>
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
@@ -194,6 +194,16 @@
   }
 
   render();
+
+  // Scroll to search bar after filter applied
+  if (tagParam) {
+    var postsTop = document.getElementById('posts-top');
+    if (postsTop) {
+      requestAnimationFrame(function () {
+        postsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
 }());
 </script>
 
