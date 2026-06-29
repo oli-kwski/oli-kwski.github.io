@@ -508,6 +508,7 @@ blockquote {
 /* Inner: horizontal scroll only. */
 .table-scroll {
   overflow-x: auto;
+  width: 100%;
 }
 
 .table-wrapper table {
@@ -1812,37 +1813,65 @@ a.series-nav-link:hover {
 }
 
 /* =========================================================
-   Important callout
+   Callouts — shared base
    ========================================================= */
-.callout-important {
-  background: rgba(255, 185, 0, 0.08);
-  border-left: 4px solid #FFB900;
+.callout {
   border-radius: 4px;
   padding: 0.75rem 1.25rem;
   margin: 1.5rem 0;
+  border-left-width: 4px;
+  border-left-style: solid;
 }
 
-.callout-important .callout-label {
+.callout .callout-label {
   display: block;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #FFB900;
+  letter-spacing: 0.07em;
   margin-bottom: 0.4rem;
 }
 
-.callout-important .callout-content p {
+.callout .callout-content p {
   margin: 0;
   color: var(--content);
 }
 
-.callout-important .callout-content p + p {
+.callout .callout-content p + p {
   margin-top: 0.5rem;
 }
 
+/* Note callout — azure blue (informational) */
+.callout-note {
+  background: rgba(0, 120, 212, 0.06);
+  border-left-color: var(--azure-blue);
+}
+
+.callout-note .callout-label {
+  color: var(--azure-blue);
+}
+
+[data-theme="dark"] .callout-note {
+  background: rgba(80, 230, 255, 0.05);
+  border-left-color: var(--azure-cyan);
+}
+
+[data-theme="dark"] .callout-note .callout-label {
+  color: var(--azure-cyan);
+}
+
+/* Important callout — amber (warning) */
+.callout-important {
+  background: rgba(255, 185, 0, 0.08);
+  border-left-color: #FFB900;
+}
+
+.callout-important .callout-label {
+  color: #d97706;
+}
+
 [data-theme="dark"] .callout-important {
-  background: rgba(255, 200, 61, 0.06);
+  background: rgba(255, 200, 61, 0.07);
   border-left-color: #FFC83D;
 }
 

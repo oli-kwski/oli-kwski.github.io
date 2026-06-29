@@ -1,3 +1,45 @@
+{{- /* Promote blockquotes to styled callouts based on their label.
+     Markdown blockquotes starting with **Important:** or **Note:** are
+     detected and replaced with the appropriate .callout div so they pick
+     up the amber / azure-blue callout styles without needing shortcodes. */}}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
+<script>
+(function () {
+  document.querySelectorAll('.post-content blockquote').forEach(function (bq) {
+    var firstP = bq.querySelector('p');
+    if (!firstP) return;
+    var firstStrong = firstP.firstElementChild;
+    if (!firstStrong || firstStrong.tagName !== 'STRONG') return;
+    var label = firstStrong.textContent.replace(/:$/, '').trim();
+    if (label !== 'Important' && label !== 'Note') return;
+
+    // Strip the label node and any trailing whitespace text node
+    firstStrong.remove();
+    var next = firstP.firstChild;
+    if (next && next.nodeType === 3) {
+      next.textContent = next.textContent.replace(/^\s+/, '');
+      if (!next.textContent) next.remove();
+    }
+
+    var div = document.createElement('div');
+    div.className = 'callout callout-' + label.toLowerCase();
+
+    var labelSpan = document.createElement('span');
+    labelSpan.className = 'callout-label';
+    labelSpan.textContent = label;
+
+    var content = document.createElement('div');
+    content.className = 'callout-content';
+    content.innerHTML = bq.innerHTML;
+
+    div.appendChild(labelSpan);
+    div.appendChild(content);
+    bq.parentNode.replaceChild(div, bq);
+  });
+})();
+</script>
+{{- end }}
+
 {{- /* Reading progress bar — posts only */}}
 {{- if and (eq .Kind "page") (eq .Section "posts") }}
 <script>

@@ -1,6 +1,6 @@
 ---
 title: "How to Create a Storage Account with Bicep"
-date: 2026-05-14
+date: 2026-05-28
 draft: false
 description: "A straightforward Bicep template for deploying an Azure Storage account with a blob container."
 

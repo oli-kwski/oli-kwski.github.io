@@ -1,5 +1,5 @@
 ---
-title: "What Is a Virtual Network (VNet)?"
+title: "What is a Virtual Network (VNet)?"
 date: 2026-05-08
 draft: false
 description: "Virtual Networks are fundamental to networking in Azure. Here's how they work, why you need them, and what to watch out for when planning one."
