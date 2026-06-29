@@ -425,7 +425,7 @@ When logging into your AVD for the first time FSLogix will create a VHDX file in
 
 ![FSLogix VHDX](/avd-fslogix-entra-kerberos/fslogix-vhdx.png)
 
-The 2nd thing you can do is when you log in to AVD, create a file on your desktop, make a note of the hostname then sign out and go to your host pool **Mange -> Session hosts** select the VM you were connected to, click **Turn on drain mode** and open up a session to your AVD again, this will if you've deployed multiple VMs take you to another session host, if the file is there when you're connected to a different session host you know FSLogix is working, if its not you've got a temp profile.
+The 2nd thing you can do is when you log in to AVD, create a file on your desktop, make a note of the hostname then sign out and go to your host pool **Mange -> Session hosts** select the VM you were connected to, click **Turn on drain mode** and open up a session to your AVD again, this will if you've deployed multiple VMs take you to another session host, if the file is there when you're connected to a different session host you know FSLogix is working, if its not you've got some troubleshooting to do.
 
 ## Gotchas
 
