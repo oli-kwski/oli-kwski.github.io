@@ -1,5 +1,5 @@
 ---
-title: "What Are Private Endpoints and Why You Should Use Them"
+title: "What Are Private Endpoints and Why You Should Use Them?"
 date: 2026-04-16
 draft: false
 description: "Private Endpoints bring Azure PaaS services onto your virtual network with a private IP address, eliminating exposure to the public internet. Here's how they work and why they matter."
@@ -13,7 +13,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/networking.svg
+  image: /covers/what-are-private-endpoints.png
   alt: Azure Networking
   relative: false
 

@@ -1,5 +1,5 @@
 ---
-title: "What are Azure Storage Accounts and When Should You Use them?"
+title: "What are Storage Accounts and When Should You Use them?"
 date: 2026-05-01
 draft: false
 description: "Azure Storage accounts are one of the most versatile services in Azure. Here's what's inside them, when to use each service, and the gotchas that bite people in production."
@@ -11,7 +11,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/storage.svg
+  image: /covers/what-are-storage-accounts.png
   alt: Azure Storage
   relative: false
 

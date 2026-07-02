@@ -1,5 +1,5 @@
 ---
-title: "What is Azure Bicep and Why Should You Use It?"
+title: "What is Bicep and Why Should You Use It?"
 date: 2026-05-13
 draft: false
 description: "Bicep is Microsoft's domain-specific language for deploying Azure resources. Here's what it is, how it relates to ARM templates, and when to reach for it over Terraform."
@@ -12,7 +12,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/iac.svg
+  image: /covers/what-is-bicep.png
   alt: Infrastructure as Code
   relative: false
 
