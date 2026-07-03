@@ -1,7 +1,7 @@
 ---
 title: "What Is a Network Security Group (NSG)?"
 date: 2026-07-10
-draft: true
+draft: false
 description: "Network Security Groups are the primary access control mechanism for Azure VNets. Here's how they work, where to attach them, and the rules that catch people out."
 
 tags:
