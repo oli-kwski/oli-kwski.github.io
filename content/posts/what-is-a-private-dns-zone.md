@@ -1,20 +1,19 @@
 ---
-title: "What Is an Azure Private DNS Zone and Why Do You Need One?"
-date: 2026-04-30
+title: "What Is a Private DNS Zone and Why Do You Need One?"
+date: 2026-07-17
 draft: true
 description: "Private DNS Zones are the often-overlooked half of Private Endpoint deployments. Here's how they work, why they matter, and the mistakes that trip people up."
 
 tags:
   - Networking
   - DNS
-  - Private DNS
   - Private Endpoints
   - Azure Fundamentals
 
 pinned: true
 
 cover:
-  image: /covers/networking.svg
+  image: /covers/what-is-a-private-dns-zone.jpg
   alt: Azure Networking
   relative: false
 
@@ -27,7 +26,7 @@ ShowWordCount: false
 weight: 1
 ---
 
-If you've deployed a Private Endpoint and wondered why your VM is still hitting the public IP of a storage account, the answer is almost always DNS. Private DNS Zones are the piece that ties Private Endpoints together - and the piece most people get wrong the first time.
+If you've deployed a Private Endpoint and wondered why your VM is still hitting the public IP of a storage account, the answer is almost always DNS. Private DNS Zones are the piece that ties Private Endpoints together.
 
 ---
 
@@ -50,7 +49,7 @@ From outside the VNet, step 3 resolves via public DNS to the storage account's p
 
 ## Which zone do I need?
 
-Each Azure service has its own privatelink DNS zone. The most common ones:
+Each Azure service has its own privatelink DNS zone. The most common ones are:
 
 | Service | Sub-resource | Private DNS Zone |
 |---|---|---|
@@ -59,8 +58,10 @@ Each Azure service has its own privatelink DNS zone. The most common ones:
 | Azure SQL Database | `sqlServer` | `privatelink.database.windows.net` |
 | Azure Key Vault | `vault` | `privatelink.vaultcore.azure.net` |
 | Azure Container Registry | `registry` | `privatelink.azurecr.io` |
-| Azure Monitor (Log Analytics) | `azuremonitor` | `privatelink.monitor.azure.com` |
+| Azure Monitor (Log Analytics) | `azuremonitor` | `privatelink.monitor.azure.com` * |
 | Azure Service Bus | `namespace` | `privatelink.servicebus.windows.net` |
+
+\* Azure Monitor Private Link needs five zones, not one: `privatelink.monitor.azure.com`, `privatelink.oms.opinsights.azure.com`, `privatelink.ods.opinsights.azure.com`, `privatelink.agentsvc.azure-automation.net`, and `privatelink.blob.core.windows.net`. Miss one and you'll get partial functionality - queries work but ingestion or agent connectivity silently falls back to public endpoints.
 
 The full list is in the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns). There are dozens of zones - one per sub-resource type in many cases.
 
@@ -92,10 +93,10 @@ You don't create a new `privatelink.blob.core.windows.net` zone for each storage
 The zone name must be the full privatelink FQDN as listed in the documentation. A typo or slight variation means the zone is never consulted for that hostname.
 
 **4. Auto-registration and Private Endpoints don't mix**
-If you enable auto-registration on a zone that also receives Private Endpoint A records, you'll end up with stale VM registration records sitting alongside endpoint records. Keep auto-registration disabled on zones used for Private Endpoints.
+Auto-registration is designed for VM DNS records, not Private Endpoint records. Enable it on a zone that also receives Private Endpoint A records and you risk a name collision. If a VM's auto-registered hostname matches the name a Private Endpoint's DNS zone group needs to write, the Private Endpoint's record overwrites the VM's. Recreate that VM, or let it renew its lease, and auto-registration writes straight back over the Private Endpoint's record - so resolution flips depending on which one wrote last. Keep auto-registration disabled on zones used for Private Endpoints.
 
 ---
 
 ## Summary
 
-Private DNS Zones are not optional when using Private Endpoints in any serious environment. They intercept name resolution for linked VNets and return the private IP instead of the public one. Create one zone per service type, link it to the right VNets (hub in a hub-and-spoke
+Private DNS Zones are not optional when using Private Endpoints in any serious environment. They intercept name resolution for linked VNets and return the private IP instead of the public one. Create one zone per service type, link it to the right VNets (hub in a hub-and-spoke topology, not just the spokes), and leave auto-registration switched off. Get this right once and every Private Endpoint you deploy afterwards just works. Get it wrong and you'll be back here running `nslookup` from inside a VNet, wondering why traffic still isn't taking the private path.
