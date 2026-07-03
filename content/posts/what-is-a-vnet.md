@@ -12,7 +12,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-a-virtual-network.png
+  image: /covers/what-is-a-virtual-network.jpg
   alt: Azure Networking
   relative: false
 

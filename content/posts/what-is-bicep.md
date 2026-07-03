@@ -12,7 +12,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-bicep.png
+  image: /covers/what-is-bicep.jpg
   alt: Infrastructure as Code
   relative: false
 

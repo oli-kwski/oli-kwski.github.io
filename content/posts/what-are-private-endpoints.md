@@ -13,7 +13,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-are-private-endpoints.png
+  image: /covers/what-are-private-endpoints.jpg
   alt: Azure Networking
   relative: false
 

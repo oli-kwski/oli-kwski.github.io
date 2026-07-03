@@ -12,20 +12,8 @@
        needed. Re-add a conditional <script> here if you ever go back to
        the JS-snippet path for a non-proxied environment. */ -}}
 
-{{- /* --- OG / Twitter card image ----------------------------------------
-       The card is generated at build time per page by og-image.html.
-       The overridden opengraph.html and twitter_cards.html templates
-       (layouts/_partials/templates/) suppress PaperMod's own image tags
-       so only these appear. JSON-LD is handled by PaperMod's schema_json.html.
-*/ -}}
-{{- $card := partial "og-image.html" . -}}
-{{- if $card }}
-  <meta property="og:image" content="{{ $card.Permalink }}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:alt" content="{{ .Title | default .Site.Title }} — {{ .Site.Title }}">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ $card.Permalink }}">
-  <meta name="twitter:image:alt" content="{{ .Title | default .Site.Title }} — {{ .Site.Title }}">
-{{- end }}
+{{- /* OG/Twitter image tags now come from each post's cover.image front
+       matter via the restored opengraph.html and twitter_cards.html
+       overrides (layouts/_partials/templates/). The generated-card system
+       (og-image.html) is no longer wired in — see git history if it needs
+       reviving. JSON-LD is handled by PaperMod's schema_json.html. */ -}}

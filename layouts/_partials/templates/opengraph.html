@@ -1,6 +1,6 @@
 {{- /* Override of PaperMod's opengraph.html.
-       og:image is intentionally omitted here — extend_head.html outputs
-       a generated 1200x630 PNG card instead, avoiding a duplicate SVG tag.
+       Restored to emit og:image from the post's cover.image front matter
+       (previously suppressed in favour of a generated OG card).
        article:author is added for posts.
 */ -}}
 <meta property="og:url" content="{{ .Permalink }}">
@@ -39,6 +39,20 @@
   <meta property="article:author" content="{{ "/about/" | absURL }}">
 {{- else }}
   <meta property="og:type" content="website">
+{{- end }}
+
+{{- if .Params.cover.image -}}
+  {{- if (ne .Params.cover.relative true) }}
+    <meta property="og:image" content="{{ .Params.cover.image | absURL }}">
+  {{- else}}
+    <meta property="og:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}">
+  {{- end}}
+{{- else }}
+  {{- with partial "_funcs/get-page-images" . }}
+    {{- range . | first 6 }}
+      <meta property="og:image" content="{{ .Permalink }}">
+    {{- end }}
+  {{- end }}
 {{- end }}
 
 {{- with .Params.audio }}

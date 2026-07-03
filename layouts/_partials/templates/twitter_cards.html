@@ -1,7 +1,25 @@
 {{- /* Override of PaperMod's twitter_cards.html.
-       twitter:card and twitter:image are intentionally omitted — extend_head.html
-       outputs those tags with the generated PNG card, avoiding a duplicate SVG tag.
+       Restored to emit twitter:card / twitter:image from the post's
+       cover.image front matter (previously suppressed in favour of a
+       generated OG card).
 */ -}}
+
+{{- if .Params.cover.image -}}
+<meta name="twitter:card" content="summary_large_image">
+{{- if (ne $.Params.cover.relative true) }}
+<meta name="twitter:image" content="{{ .Params.cover.image | absURL }}">
+{{- else }}
+<meta name="twitter:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}">
+{{- end}}
+{{- else }}
+{{- $images := partial "templates/_funcs/get-page-images" . }}
+{{- with index $images 0 }}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ .Permalink }}">
+{{- else }}
+  <meta name="twitter:card" content="summary">
+{{- end }}
+{{- end }}
 
 {{- with or .Title site.Title site.Params.title | plainify }}
   <meta name="twitter:title" content="{{ . }}">

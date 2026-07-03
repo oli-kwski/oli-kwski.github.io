@@ -12,7 +12,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-azure-key-vault.png
+  image: /covers/what-is-azure-key-vault.jpg
   alt: Azure Security
   relative: false
 

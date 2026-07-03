@@ -11,7 +11,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-are-storage-accounts.png
+  image: /covers/what-are-storage-accounts.jpg
   alt: Azure Storage
   relative: false
 

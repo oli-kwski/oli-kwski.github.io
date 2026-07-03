@@ -11,7 +11,7 @@ tags:
   - Azure Files
 
 cover:
-  image: /covers/avd-fslogix-entra-kerberos-cover.png
+  image: /covers/avd-fslogix-entra-kerberos-cover.jpg
   alt: FSLogix Entra-only identities
   relative: false
 
