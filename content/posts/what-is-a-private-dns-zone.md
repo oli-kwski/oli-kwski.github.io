@@ -1,7 +1,7 @@
 ---
 title: "What Is a Private DNS Zone and Why Do You Need One?"
 date: 2026-07-17
-draft: true
+draft: false
 description: "Private DNS Zones are the often-overlooked half of Private Endpoint deployments. Here's how they work, why they matter, and the mistakes that trip people up."
 
 tags:
@@ -26,7 +26,7 @@ ShowWordCount: false
 weight: 1
 ---
 
-If you've deployed a Private Endpoint and wondered why your VM is still hitting the public IP of a storage account, the answer is almost always DNS. Private DNS Zones are the piece that ties Private Endpoints together.
+If you've deployed a Private Endpoint and wondered why your VM is still hitting the public IP of a storage account, the answer is almost always DNS. Private DNS Zones are the piece that ties Private Endpoints together. If you haven't deployed a Private Endpoint yet, check out [What Are Private Endpoints and Why You Should Use Them](/posts/azure-private-endpoints-explained) first.
 
 ---
 

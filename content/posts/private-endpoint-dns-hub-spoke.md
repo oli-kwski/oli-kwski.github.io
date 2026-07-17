@@ -101,7 +101,7 @@ If your DNS server forwards unknown queries to `8.8.8.8` or `1.1.1.1` instead of
 
 **3. On-premises DNS missing conditional forwarders**
 
-Machines on-premises query your on-prem DNS server first. Without a conditional forwarder for `*.privatelink.*` pointing at the DNS Private Resolver inbound endpoint (or your custom DNS VM), on-prem clients resolve to the public IP even when Azure VMs resolve correctly.
+Machines on-premises query your on-prem DNS server first. Conditional forwarders work on exact domain suffixes, not wildcards, so you need one per zone - `privatelink.blob.core.windows.net`, `privatelink.vaultcore.azure.net`, and so on for every `privatelink.*` zone in use. Miss one and on-prem clients resolve that service to its public IP even when Azure VMs resolve correctly.
 
 <figure class="diagram">
   <img src="/private-endpoint-dns-hub-spoke/on-prem-forwarding.png" alt="Diagram showing on-premises DNS server with a conditional forwarder for privatelink.blob.core.windows.net pointing to the DNS Private Resolver inbound endpoint in the hub VNet, which then returns the private IP." style="display: block; width: 100%; height: auto;" />
