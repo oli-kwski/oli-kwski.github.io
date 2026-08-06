@@ -11,7 +11,7 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-are-storage-accounts.jpg
+  image: /covers/Hub-and-Spoke-What-Goes-Wrong.jpg
   alt: Azure Storage
   relative: false
 

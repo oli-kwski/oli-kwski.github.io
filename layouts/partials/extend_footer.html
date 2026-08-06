@@ -95,6 +95,50 @@
 </script>
 {{- end }}
 
+{{- /* Diagram lightbox — click a figure.diagram image to view it full-screen
+     in an overlay; click the backdrop or press Escape to close. */}}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
+<script>
+(function () {
+  var images = document.querySelectorAll('.post-content figure.diagram img');
+  if (!images.length) return;
+
+  var overlay = document.createElement('div');
+  overlay.className = 'diagram-lightbox';
+  var overlayImg = document.createElement('img');
+  overlay.appendChild(overlayImg);
+  document.body.appendChild(overlay);
+
+  function open(src, alt) {
+    overlayImg.src = src;
+    overlayImg.alt = alt || '';
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  images.forEach(function (img) {
+    img.addEventListener('click', function () {
+      open(img.currentSrc || img.src, img.alt);
+    });
+  });
+
+  // Clicking the backdrop closes the overlay; clicking the enlarged image
+  // itself should not (that click would otherwise bubble to the overlay).
+  overlayImg.addEventListener('click', function (e) { e.stopPropagation(); });
+  overlay.addEventListener('click', close);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+  });
+})();
+</script>
+{{- end }}
+
 {{- /* Escape key closes mobile hamburger menu */}}
 <script>
 document.addEventListener('keydown', function (e) {
