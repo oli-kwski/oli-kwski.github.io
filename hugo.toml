@@ -38,7 +38,7 @@ buildExpired = false
   # the edge for proxied responses, no token or beacon script required here.
   title = "Head in the Cloud"
   description = "Azure focused - things built, problems solved, ideas worth sharing."
-  keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Bicep", "Terraform", "IaC"]
+  keywords = ["Azure", "Microsoft Azure", "Cloud", "DevOps", "Infrastructure", "Terraform", "IaC"]
   author = "Oli"
   # Reading time
   ShowReadingTime = true

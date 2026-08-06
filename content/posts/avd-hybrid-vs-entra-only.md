@@ -119,4 +119,4 @@ For anything net-new, Entra-only is the right default. You're not carrying AD de
 
 ---
 
-*Next up: deploying an Entra-only AVD environment from scratch with Bicep and Terraform.*
+*Next up: deploying an Entra-only AVD environment from scratch with Terraform.*

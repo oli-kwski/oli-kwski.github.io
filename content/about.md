@@ -2,7 +2,7 @@
 title: "About"
 layout: "page"
 url: "/about/"
-summary: "About Oli — cloud consultant specialising in Microsoft Azure, and the person behind Head in the Cloud."
+summary: "About Oli - Cloud Architect specialising in Microsoft Azure, and the person behind Head in the Cloud."
 ShowReadingTime: false
 ShowBreadCrumbs: true
 ShowToc: false
@@ -33,8 +33,8 @@ hideTitle: true
     </div>
   </div>
   <div class="about-text">
-    <p>I'm Oli, a cloud consultant specialising in Microsoft Azure.</p>
-    <p>This blog is where I document things I've built, problems I've solved, and ideas worth sharing. If something here saves you an hour of head-scratching, it's done its job.</p>
+    <p>I'm Oli, a Cloud Architect specialising in Microsoft Azure - broad across the platform, with particular depth in Azure networking, identity, and governance at landing zone scale.</p>
+    <p>This blog covers Azure problems that don't have a clear answer in the docs, the edge cases and the gotchas.</p>
     <p>See my certifications below.</p>
   </div>
 </div>

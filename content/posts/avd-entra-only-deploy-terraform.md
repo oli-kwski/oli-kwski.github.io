@@ -23,7 +23,7 @@ ShowBreadCrumbs: true
 ShowWordCount: false
 ---
 
-This is the Terraform equivalent of the [Bicep deployment post](../avd-entra-only-deploy-bicep). Same architecture, same gotchas - different toolchain. If you want the why behind the design decisions, read that post first.
+This deploys an Entra-only AVD environment from scratch using Terraform. If you want the why behind the design decisions, read [AVD: Hybrid Join vs Entra-Only](/posts/avd-hybrid-vs-entra-only) first.
 
 ## Project structure
 
@@ -483,7 +483,7 @@ Session hosts are stateful. If Terraform decides to replace a VM (e.g. image upd
 
 ## What to verify
 
-Same checks as the Bicep post:
+Verify the deployment succeeded:
 
 - Session hosts show as **Available** in the host pool
 - Devices visible in Entra ID and Intune

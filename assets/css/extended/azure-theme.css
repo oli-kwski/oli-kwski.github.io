@@ -511,18 +511,44 @@ blockquote {
   width: 100%;
 }
 
+/* The theme reset sets `table { display: block }`, which makes the rows
+   generate an anonymous shrink-to-fit table inside — so width: 100% never
+   reaches the actual table box. Restoring display: table fixes that. */
 .table-wrapper table {
   margin-bottom: 0 !important;
+  display: table;
   width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
 }
 
-/* Strip outer cell borders — wrapper provides them */
-.table-wrapper table thead tr:first-child th { border-top: none !important; }
-.table-wrapper table th:first-child,
-.table-wrapper table td:first-child         { border-left: none !important; }
+/* Row dividers plus vertical column separators. The wrapper supplies the
+   outer border, so the last column drops its right-hand rule (below). */
+.table-wrapper table th,
+.table-wrapper table td {
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-right: 1px solid var(--border) !important;
+  padding: 0.65rem 1rem !important;
+}
+
 .table-wrapper table th:last-child,
-.table-wrapper table td:last-child          { border-right: none !important; }
-.table-wrapper table tr:last-child td       { border-bottom: none !important; }
+.table-wrapper table td:last-child {
+  border-right: none !important;
+}
+
+.table-wrapper table thead th {
+  background: var(--entry);
+  font-weight: 700;
+}
+
+.table-wrapper table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.table-wrapper table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
 
 /* =========================================================
    Footer

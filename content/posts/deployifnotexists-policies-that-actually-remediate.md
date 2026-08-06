@@ -1,6 +1,6 @@
 ---
 title: "DeployIfNotExists Policies That Actually Remediate"
-date: 2026-05-12
+date: 2026-08-14
 draft: true
 description: "DINE is Azure Policy's most powerful effect. It's also the most frequently misconfigured, and when it fails it often does so silently. Here's what has to be right."
 
@@ -32,13 +32,13 @@ This post covers how DINE actually works, the three things that must be correct 
 
 Policy evaluation for a DINE policy follows three phases:
 
-**Phase 1 - Condition check.** The policy engine evaluates the `if` block against the resource. If the resource matches, it moves to phase 2.
+**Phase 1 - Condition check:** The policy engine evaluates the `if` block against the resource. If the resource matches, it moves to phase 2.
 
-**Phase 2 - Existence check.** The engine evaluates the `existenceCondition` in the `then.details` block. It looks for a related resource (a child resource, a resource in a related scope) that represents the desired state. If that resource exists and matches the condition, the resource is **compliant**. If not, it's **non-compliant**.
+**Phase 2 - Existence check:** The engine evaluates the `existenceCondition` in the `then.details` block. It looks for a related resource (a child resource, a resource in a related scope) that represents the desired state. If that resource exists and matches the condition, the resource is **compliant**. If not, it's **non-compliant**.
 
-**Phase 3 - Remediation.** For non-compliant resources, a remediation task can trigger the `deployment` block in the policy definition. That deployment is executed by the managed identity attached to the policy assignment.
+**Phase 3 - Remediation:** For non-compliant resources, a remediation task can trigger the `deployment` block in the policy definition. That deployment is executed by the managed identity attached to the policy assignment.
 
-The critical point: DINE does not retroactively fix existing resources on assignment. Resources created or updated after the assignment are evaluated on deployment. Resources that existed before the assignment sit non-compliant until you explicitly create a remediation task.
+> **Important:** DINE does not retroactively fix existing resources on assignment. Resources created or updated after the assignment are evaluated on deployment. Resources that existed before the assignment sit non-compliant until you explicitly create a remediation task.
 
 ---
 
@@ -46,17 +46,19 @@ The critical point: DINE does not retroactively fix existing resources on assign
 
 ### 1. Managed identity has the right permissions
 
-The policy assignment's managed identity must have the RBAC permissions required to deploy what the `deployment` block specifies. The policy definition's `roleDefinitionIds` array declares which roles the identity should have - Azure assigns these at the scope of the policy assignment when you save it.
+The policy assignment's managed identity must have the RBAC permissions required to deploy what the `deployment` block specifies. The policy definition's `roleDefinitionIds` array declares which roles the identity should have - but whether that role actually gets granted automatically depends entirely on how you assign the policy. See [gotcha 6](#terraform-role-grant) below - it catches almost everyone at least once.
 
 This is the most common failure point. If the managed identity can't write the resource type it's deploying, the remediation task fails with a 403, and the resource stays non-compliant. That failure appears in the remediation task's deployment details, not in the top-level Policy compliance view - so it's easy to miss.
 
-For policies assigned at management group scope, the managed identity needs the relevant roles across every subscription in scope. Check this explicitly; Azure assigns the role at management group level but subscriptions created after the assignment may not inherit it cleanly if you've customised role inheritance.
+For policies assigned at management group scope, grant the role at the management group itself, not at each subscription individually. RBAC inheritance from a management group down to its subscriptions is automatic, so a role granted at the right scope covers subscriptions added later without further work. The failure mode here is granting the role too narrowly in the first place: scoping the `azurerm_role_assignment` to today's subscriptions instead of the management group means tomorrow's subscription never had the grant at all. Check the scope the role was assigned at, not whether inheritance worked.
 
 ### 2. A remediation task exists for pre-existing resources
 
-Assigning a DINE policy fixes future resources, not existing ones. For anything that existed before the assignment, you need a remediation task. You can create one from the Azure portal (Policy > Remediation > New remediation task), via Azure CLI, or as a step in your assignment pipeline.
+Assigning a DINE policy fixes future resources, not existing ones. For anything that existed before the assignment, you need a remediation task. You can create one from the Azure portal (Policy > Remediation > New remediation task), via the Azure CLI or PowerShell, or as a step in your assignment pipeline.
 
-When building landing zone policies, the recommended pattern is to create the remediation task immediately after assignment as part of the same pipeline run. That way, the policy catches both existing non-compliant resources and future ones.
+When building landing zone policies, the pattern to aim for is creating the remediation task immediately after assignment as part of the same pipeline run, so the policy catches both existing non-compliant resources and future ones.
+
+There's a scope caveat worth knowing here. The portal's "create a remediation task" tick box on the assignment wizard is only supported for assignments at subscription scope. For management-group-scoped assignments - which is most landing zone policy - you have to create the remediation task separately, and only after an evaluation cycle has actually determined which resources are non-compliant. Build that ordering into your pipeline rather than assuming assignment and remediation can happen in one step.
 
 ### 3. The existenceCondition accurately reflects compliance
 
@@ -70,7 +72,7 @@ A common mistake with diagnostic settings policies: checking only that *a* diagn
 
 **1. Policy evaluation lag**
 
-After assigning a policy or triggering a remediation task, nothing happens immediately. Compliance evaluation runs on a schedule - up to 24 hours, though you can trigger an on-demand scan. Remediation tasks then queue and execute asynchronously. Wait at least 30 minutes before concluding something is broken, and trigger an on-demand scan before drawing conclusions.
+After assigning a policy or triggering a remediation task, nothing happens immediately. Assignments are automatically re-evaluated once every 24 hours, and remediation tasks then queue and execute asynchronously. Before concluding something is broken, trigger an on-demand scan and give it time to complete - large assignments across many resources can take a while.
 
 **2. Remediation task scope doesn't match non-compliant resources**
 
@@ -82,14 +84,16 @@ If you assign the same DINE policy at both management group and subscription sco
 
 **4. DINE when Modify is the right effect**
 
-DINE is designed for deploying child resources or complex configurations. If you need to set a property directly on the resource - a tag, a boolean setting like `publicNetworkAccess: Disabled` - the **Modify** effect is cleaner. Modify edits the resource in place without spinning up a deployment. Using DINE for simple property changes adds latency and complexity for no benefit.
+DINE is designed for deploying child resources or complex configurations. If you need to set a property directly on the resource - a tag, or a modifiable property like `allowBlobPublicAccess` - the **Modify** effect is cleaner. Modify edits the resource in place without spinning up a deployment. Using DINE for simple property changes adds latency and complexity for no benefit.
+
+One caveat with Modify: it only works on properties whose aliases are marked as modifiable in the request's API version. If the alias isn't modifiable, evaluation falls back to the definition's `conflictEffect`, so it's worth setting that to `audit` rather than letting requests fail outright.
 
 | Use case | Correct effect |
 |---|---|
 | Enable diagnostic settings (child resource) | DeployIfNotExists |
 | Attach Defender plan | DeployIfNotExists |
 | Set a tag on a resource | Modify |
-| Set `publicNetworkAccess: Disabled` | Modify |
+| Set a modifiable property such as `allowBlobPublicAccess` | Modify |
 | Deny resource creation entirely | Deny |
 
 **5. roleDefinitionIds uses wrong format**
@@ -102,9 +106,13 @@ The `roleDefinitionIds` array requires the full resource ID of the role definiti
 
 Not the role display name. If the ID is wrong or refers to a non-existent role, the managed identity is never assigned the correct role and every remediation task silently fails at the 403 stage.
 
-**6. Definition scope vs assignment scope mismatch**
+<a id="terraform-role-grant"></a>**6. IaC deployments don't auto-grant the role**
 
-Custom policy definitions scoped to a management group can only be assigned at that management group or below within the same hierarchy. Attempting to assign a management-group-scoped definition at a subscription outside that hierarchy will fail at assignment time, not at evaluation time.
+In the Azure portal, creating a policy assignment auto-grants the managed identity the roles listed in `roleDefinitionIds`. Through any SDK-based deployment method - Terraform, Bicep, ARM templates, PowerShell, the CLI - it does not. You have to create the role assignment yourself as a separate resource; skip it and the identity exists but has no permissions, so every remediation silently fails at the 403 stage. In Terraform that means an explicit `azurerm_role_assignment` alongside the policy assignment itself - it's easy to assume the portal's auto-grant behaviour is universal until you deploy the same policy through code.
+
+**7. Definition scope vs assignment scope mismatch**
+
+A policy definition's location determines where it can be assigned - resources must sit within the resource hierarchy of that definition location. A definition saved at a management group can be assigned to that management group and any child management group or subscription beneath it, but not to a subscription outside that hierarchy. If you plan to apply a definition across several subscriptions, save it at a management group that contains all of them. Getting this wrong fails at assignment time rather than at evaluation time, so at least it surfaces early.
 
 ---
 
@@ -112,15 +120,15 @@ Custom policy definitions scoped to a management group can only be assigned at t
 
 When a remediation task runs but the resource stays non-compliant, follow this sequence:
 
-**Step 1 - Check remediation task status.** Policy > Remediation > find the task. A `Failed` status exposes a link to the underlying ARM deployment with the specific error.
+**Step 1 - Check remediation task status:** Policy > Remediation > find the task. A `Failed` status exposes a link to the underlying ARM deployment with the specific error.
 
-**Step 2 - Read the deployment error.** The error message is usually precise: a 403 indicates a permissions problem on the managed identity; a 400 or 409 typically indicates a template or conflict issue in the deployment block itself.
+**Step 2 - Read the deployment error:** The error message is usually precise: a 403 indicates a permissions problem on the managed identity; a 400 or 409 typically indicates a template or conflict issue in the deployment block itself.
 
-**Step 3 - Verify the managed identity role assignment.** Policy > Assignments > select the assignment > Managed Identity tab. Confirm the identity has the roles from `roleDefinitionIds` at the right scope. It's worth checking the role assignment directly in IAM on the subscription or management group, not just via the policy blade.
+**Step 3 - Verify the managed identity role assignment:** Policy > Assignments > select the assignment > Managed Identity tab. Confirm the identity has the roles from `roleDefinitionIds` at the right scope. It's worth checking the role assignment directly in IAM on the subscription or management group, not just via the policy blade.
 
-**Step 4 - Trigger an on-demand compliance scan.** Use `az policy state trigger-scan --resource-group <rg>` or the equivalent at subscription/management group scope. This forces a fresh evaluation rather than waiting for the scheduled cycle.
+**Step 4 - Trigger an on-demand compliance scan:** Use `az policy state trigger-scan --resource-group <rg>`, or omit the resource group to scan the whole subscription. This forces a fresh evaluation rather than waiting for the scheduled cycle. Note that on-demand scans only work at subscription or resource group scope - there's no management group equivalent, so for a management-group-scoped assignment you need to loop through the subscriptions underneath it.
 
-**Step 5 - Check Activity Log on the target resource.** Filter by the managed identity's principal ID. You can see the deployment attempts, their timestamps, and any error codes.
+**Step 5 - Check Activity Log on the target resource:** Filter by the managed identity's principal ID. You can see the deployment attempts, their timestamps, and any error codes.
 
 ---
 
