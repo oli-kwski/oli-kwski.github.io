@@ -1,7 +1,7 @@
 ---
 title: "DeployIfNotExists Policies That Actually Remediate"
-date: 2026-08-14
-draft: true
+date: 2026-08-21
+draft: false
 description: "DINE is Azure Policy's most powerful effect. It's also the most frequently misconfigured, and when it fails it often does so silently. Here's what has to be right."
 
 tags:
