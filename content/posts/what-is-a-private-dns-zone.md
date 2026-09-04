@@ -13,8 +13,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-a-private-dns-zone.jpg
-  alt: Azure Networking
+  image: /covers/what-is-a-private-dns-zone-cover.svg
+  alt: What Is a Private DNS Zone and Why Do You Need One
   relative: false
 
 comments: true

@@ -12,8 +12,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-azure-key-vault.jpg
-  alt: Azure Security
+  image: /covers/what-is-azure-key-vault-cover.svg
+  alt: What Is Azure Key Vault and Why Should You Use It
   relative: false
 
 comments: true

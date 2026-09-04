@@ -11,8 +11,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/Hub-and-Spoke-What-Goes-Wrong.jpg
-  alt: Azure Storage
+  image: /covers/what-is-a-storage-account-cover.svg
+  alt: What are Storage Accounts and When Should You Use them
   relative: false
 
 comments: true

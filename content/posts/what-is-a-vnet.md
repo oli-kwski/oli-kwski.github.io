@@ -12,8 +12,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-a-virtual-network.jpg
-  alt: Azure Networking
+  image: /covers/what-is-a-vnet-cover.svg
+  alt: What is a Virtual Network (VNet)
   relative: false
 
 comments: true

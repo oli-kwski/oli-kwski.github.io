@@ -13,8 +13,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-is-a-network-security-group.jpg
-  alt: Azure Networking
+  image: /covers/what-is-a-network-security-group-cover.svg
+  alt: What Is a Network Security Group (NSG)
   relative: false
 
 comments: true

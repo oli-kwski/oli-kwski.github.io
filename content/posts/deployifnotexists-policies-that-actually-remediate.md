@@ -11,8 +11,8 @@ tags:
   - Landing Zones
 
 cover:
-  image: /covers/governance.svg
-  alt: Azure Governance
+  image: /covers/deployifnotexists-cover.svg
+  alt: DeployIfNotExists Policies That Actually Remediate
   relative: false
 
 comments: true

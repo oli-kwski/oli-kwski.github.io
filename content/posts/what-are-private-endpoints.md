@@ -13,8 +13,8 @@ tags:
 pinned: true
 
 cover:
-  image: /covers/what-are-private-endpoints.jpg
-  alt: Azure Networking
+  image: /covers/what-are-private-endpoints-cover.svg
+  alt: What Are Private Endpoints and Why You Should Use Them
   relative: false
 
 comments: true

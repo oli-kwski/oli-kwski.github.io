@@ -11,8 +11,8 @@ tags:
   - Azure Files
 
 cover:
-  image: /covers/avd-fslogix-entra-kerberos-cover.jpg
-  alt: FSLogix Entra-only identities
+  image: /covers/avd-fslogix-entra-kerberos-cover.svg
+  alt: Deploying AVD with FSLogix and Entra-Only Identities - No Domain Controllers Required
   relative: false
 
 comments: true

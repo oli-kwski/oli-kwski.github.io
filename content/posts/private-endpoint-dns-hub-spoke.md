@@ -11,8 +11,8 @@ tags:
   - Hub-and-Spoke
 
 cover:
-  image: /covers/hub-and-spoke-dns.jpg
-  alt: Azure Networking
+  image: /covers/private-endpoint-dns-hub-spoke-cover.svg
+  alt: Private Endpoint DNS in Hub-and-Spoke - What Goes Wrong
   relative: false
 
 comments: true
